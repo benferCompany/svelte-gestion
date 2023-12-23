@@ -4,7 +4,8 @@
   import * as XLSX from "xlsx";
   import { createOrUpdateProduct } from "../../stores/products";
   import Message from "../../message/Message.svelte";
-
+  import mappedProduct from "./importExcel";
+  let productDTOs;
   let excelColumnNames = []; // Almacenará los nombres de las columnas del archivo Excel
   let databaseColumnNames = []; // Almacenará los nombres de las columnas de la base de datos
   let columnMapping = {}; // Almacenará el mapeo de columnas
@@ -47,6 +48,7 @@
         // Almacenar los nombres de las columnas de la base de datos
         databaseColumnNames = data;
         console.log("Datos obtenidos desde la API:", data);
+        data.push("Sin Datos")
       } else {
         console.error("Error en la llamada a la API:", response.statusText);
       }
@@ -87,10 +89,17 @@
 
     // `mappedData` ahora contiene los datos mapeados en el formato deseado
     console.log("Datos mapeados:", mappedData);
+    const mp =async ()=>{
+      return await mappedProduct(mappedData);
+      
+      
+    }
+    productDTOs = await mp();
+     
     const returnExcel = await createOrUpdateProduct(
-      "http://localhost:8080/products/createOrUpdate",
+      "http://localhost:8080/products/importExcel",
       "POST",
-      mappedData
+      productDTOs,
     );
     
     if(returnExcel){
@@ -123,7 +132,7 @@
   {#if excelColumnNames.length > 0}
     <form class="form-control" on:submit|preventDefault={handleSubmit}>
       <h2>Seleccionar columnas</h2>
-      <div class="d-flex justify-content-center">
+      <div class="">
         {#each excelColumnNames as excelColumnName, i}
           <div>
             <!-- svelte-ignore a11y-label-has-associated-control -->

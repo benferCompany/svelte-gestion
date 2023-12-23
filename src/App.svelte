@@ -5,7 +5,7 @@
     import Inventary from "./components/inventary/Inventary.svelte";
     import ImportExcel from "./components/inventary/importExcel/ImportExcel.svelte";
 	import * as XLSX from "xlsx";
-	import Afip from "./components/afip/Afip.svelte"
+	
 </script>
 
 <Router>
@@ -19,7 +19,5 @@
 	<Route path="/excel">
 		<ImportExcel/>
 	</Route>
-	<Route path="/afip">
-		<Afip/>
-	</Route>
+
 </Router>

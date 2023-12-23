@@ -14,7 +14,37 @@ export const handleCreate = async (e, image) => {
         let [key, value] = data; // Desestructura la entrada en clave y valor
         object[key] = value;
     }
-    const createResponse = await createProduct(object);
+    console.log(object)
+    let productDTO = {
+        "title": object.title,
+        "description": object.description,
+        "cost_price": object.cost_price,
+        "selling_price": object.selling_price,
+        "stores": [
+            {
+                "company": JSON.parse(object.company),
+                "stock": object.stock,
+                "stock_min": object.stockMax,
+                "stock_max": object.stockMin,
+                
+            }
+        ],
+        "image": object.image,
+        
+        "storeSuppliers": [
+            {
+                
+                "idInternal": object.idInternal,
+                "idSupplierOne": object.idSupplierOne,
+                "idSupplierTwo": object.idSupplierTwo,
+                "supplier": JSON.parse(object.supplier),
+                
+                
+            }
+        ]
+    }
+    console.log(productDTO)
+    const createResponse = await createProduct(productDTO);
 
    
 };

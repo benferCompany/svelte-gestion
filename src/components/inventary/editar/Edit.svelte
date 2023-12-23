@@ -1,10 +1,11 @@
 <script>
     import StockEditor from "./componentes/stock/StockEditor.svelte";
-    import ImageEditor from "./componentes/image/ImageEditor.svelte";
+    import ImageEditor from "../image/ImageEditor.svelte";
     import CloseButton from "../../tools/close/CloseButton.svelte";
     import Overlay from "../../tools/overlay/Overlay.svelte";
     import { handleEdit } from "./edit";
     import Message from "../../message/Message.svelte";
+    import StoreSupplier from "./componentes/storeSupplier/StoreSupplier.svelte";
     export let booleanEdit = false;
 
     let product = {};
@@ -15,6 +16,7 @@
         booleanEdit = !booleanEdit;
         if (prd.id) {
             image = prd.image;
+            prd.boolean = true;
             product = prd;
         }
        
@@ -60,8 +62,8 @@
                         booleanEdit = false;
                     }
                 }}
-                class="w-75 mb-2"
-            >
+                class="w-75 mb-2">
+                
                 <div class="d-flex">
                     <div class="col-1 me-2">
                         <label for="" class="text-center">ID</label>
@@ -125,6 +127,7 @@
                     </div>
                 </div>
                 <StockEditor {product} />
+                <StoreSupplier {product} booleanCreate ={true}/>
                 <ImageEditor bind:image />
 
                 <div>
@@ -148,6 +151,8 @@
 <style>
     .edit {
         width: 45em;
+        height: 40em;
+        overflow-y:auto;
         position: absolute;
         z-index: 99;
         background: white;

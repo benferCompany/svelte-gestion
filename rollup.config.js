@@ -5,8 +5,7 @@ import terser from '@rollup/plugin-terser';
 import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import css from 'rollup-plugin-css-only';
-import json from '@rollup/plugin-json';
-import nodePolyfills from 'rollup-plugin-node-polyfills';
+
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -37,12 +36,7 @@ export default {
 		sourcemap: true,
 		format: 'iife',
 		name: 'app',
-		file: 'public/build/bundle.js',
-		globals: {
-			'fs': 'require$$0$8',
-			'path': 'require$$1$5',
-			// Otros módulos y nombres globales
-		  }
+		file: 'public/build/bundle.js'
 	},
 	plugins: [
 		svelte({
@@ -52,9 +46,6 @@ export default {
 			},
 			
 		}),
-		json(),
-		nodePolyfills(),
-		
 		
 		// we'll extract any component CSS out into
 		// a separate file - better for performance

@@ -2,8 +2,10 @@
     import Message from "../../../../message/Message.svelte";
     import CloseButton from "../../../../tools/close/CloseButton.svelte";
     import Overlay from "../../../../tools/overlay/Overlay.svelte";
-    import ImageEditor from "../../../editar/componentes/image/ImageEditor.svelte";
+    import ImageEditor from "../../../image/ImageEditor.svelte";
+    import StockEditor from "./stock/StockEditor.svelte";
     import { handleCreate } from "./create";
+    import StoreSupplier from "./storeSupplier/StoreSupplier.svelte";
     let booleanEdit = false;
     export let handleClickCreate = () => {
         booleanEdit = !booleanEdit;
@@ -86,6 +88,8 @@
                     </div>
                 </div>
 
+                <StockEditor/>
+                <StoreSupplier />
                 <ImageEditor bind:image />
                 <div>
                     <input
@@ -109,6 +113,8 @@
 <style>
     .create {
         width: 45em;
+        height: 40em;
+        overflow-y:auto;
         position: absolute;
         z-index: 99;
         background: white;
