@@ -1,6 +1,6 @@
 import { createOrUpdateProduct } from "../../stores/products"
 
-let url = "http://localhost:8080/products"
+let url = "http://54.175.227.120:8080/products"
 
 
 export const handleEdit = async (e, image) => {

@@ -10,7 +10,7 @@
     let dts;
 
     export const debouncedSearch = debounce(async (description) => {
-        products = await searchProduct("http://localhost:8080/products/name", {
+        products = await searchProduct("http://54.175.227.120:8080/products/name", {
             description: description.target.value,
         });
     }, 300);

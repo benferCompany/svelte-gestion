@@ -30,7 +30,7 @@ export const searchProduct = async (URL, datos) => {
 
 export const createProduct = async (dts) => {
     try {
-        const response = await fetch("http://localhost:8080/products", {
+        const response = await fetch("http://54.175.227.120:8080/products", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -51,7 +51,7 @@ export const createProduct = async (dts) => {
 export const showProductView = async () => {
 
     try {
-        const response = await fetch("http://localhost:8080/products");
+        const response = await fetch("http://54.175.227.120:8080/products");
         const data = await response.json();
         return data
 
@@ -62,7 +62,7 @@ export const showProductView = async () => {
 
 export async function deleteProduct(id) {
     try {
-        const response = await fetch(`http://localhost:8080/products/${id}`, {
+        const response = await fetch(`http://54.175.227.120:8080/products/${id}`, {
             method: 'DELETE',
         });
 

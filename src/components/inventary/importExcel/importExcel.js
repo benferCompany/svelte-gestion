@@ -3,12 +3,12 @@ const mappedProduct = async (products) => {
     let supplier;
 
     let getCompany = async () => {
-        let fetchCompany = await fetch("http://localhost:8080/company/1");
+        let fetchCompany = await fetch("http://54.175.227.120:8080/company/1");
         return await fetchCompany.json();
     }
 
     let getSupplier = async()=>{
-        let fetchSupplier = await fetch("http://localhost:8080/supplier/1");
+        let fetchSupplier = await fetch("http://54.175.227.120:8080/supplier/1");
         return await fetchSupplier.json();
     }
 
