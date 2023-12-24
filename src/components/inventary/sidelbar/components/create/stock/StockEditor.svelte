@@ -1,7 +1,7 @@
 <script>
     let company;
     let getCompany = async () => {
-        const comp = await fetch("http://localhost:8080/company");
+        const comp = await fetch("http://54.175.227.120:8080/company");
         company = await comp.json();
     };
     getCompany();

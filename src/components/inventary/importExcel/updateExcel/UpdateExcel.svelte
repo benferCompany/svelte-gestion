@@ -94,7 +94,7 @@
     for (const [i, product] of productDTOs.entries()) {
       booleanProgress = true;
       returnExcel = await createOrUpdateProduct(
-        "http://localhost:8080/products/updatePrice",
+        "http://54.175.227.120:8080/products/updatePrice",
         "POST",
         product,
       );

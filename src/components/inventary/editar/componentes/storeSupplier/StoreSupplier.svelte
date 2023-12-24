@@ -4,7 +4,7 @@
     let suppliers = [];
     async function fetchData() {
         // Haces la llamada asíncrona
-        let datos = await showSupplier("http://localhost:8080/supplier");
+        let datos = await showSupplier("http://54.175.227.120:8080/supplier");
         getSuppliers = datos;
     }
     $: {

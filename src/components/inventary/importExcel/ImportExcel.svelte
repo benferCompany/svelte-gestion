@@ -39,7 +39,7 @@
 
   async function fetchDataFromAPI() {
     // Hacer la solicitud GET a la API para obtener los datos de las columnas
-    const apiUrl = "http://localhost:8080/products/productoColumn";
+    const apiUrl = "http://54.175.227.120:8080/products/productoColumn";
 
     try {
       const response = await fetch(apiUrl);
@@ -97,7 +97,7 @@
     productDTOs = await mp();
      
     const returnExcel = await createOrUpdateProduct(
-      "http://localhost:8080/products/importExcel",
+      "http://54.175.227.120:8080/products/importExcel",
       "POST",
       productDTOs,
     );

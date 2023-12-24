@@ -2,7 +2,7 @@
     let storeSupplier;
     let getStoreSupplier = async () => {
         const fetchSupplier = await fetch(
-            "http://localhost:8080/supplier"
+            "http://54.175.227.120:8080/supplier"
         );
         storeSupplier = await fetchSupplier.json();
     };
