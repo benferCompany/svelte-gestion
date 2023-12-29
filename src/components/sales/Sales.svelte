@@ -6,17 +6,21 @@
     import Pay from "./pay/Pay.svelte";
     import Tablet from "./tablet/Tablet.svelte";
     import { payStore } from "../stores/cart";
-    import InputSearch from "../inputs/search/InputSearch.svelte";
+    import InputSearch from "../searchAndShowProducts/inputSearch/InputSearch.svelte";
     import { searchProduct } from "../stores/products";
+    
     let debouncedSearch;
-
+    
+    //Este variable "desc" es solamente para que no me genere error
+    //ya que estoy usando el mismo componente input desde searchAndShowProducts
+    let desc;
 </script>
 
 <div>
     {#if $payStore}
         <Pay />
     {/if}
-    <InputSearch {debouncedSearch}/>
+    <InputSearch  bind:desc {debouncedSearch}/>
 		<hr />
     <div class="d-flex">
         <Card {searchProduct} bind:debouncedSearch={debouncedSearch} />

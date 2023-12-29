@@ -13,7 +13,7 @@
                 URL+"/products/name",
                 { description: description.target.value }
             );
-        
+            products = products.content
     }, 300); // 300ms de tiempo de espera antes de realizar la búsqueda
 
     
