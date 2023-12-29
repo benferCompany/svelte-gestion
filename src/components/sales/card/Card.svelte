@@ -1,5 +1,6 @@
 <script>
     import { Link } from "svelte-routing";
+    import {URL} from "../../tools/connections/url"
     import { tdsStore } from "../../stores/cart";
     export let searchProduct;
     import debounce from "lodash/debounce";
@@ -9,7 +10,7 @@
     export const debouncedSearch = debounce(async (description) => {
        
             products = await searchProduct(
-                "http://54.175.227.120:8080/products/name",
+                URL+"/products/name",
                 { description: description.target.value }
             );
         

@@ -6,8 +6,10 @@
     import { handleEdit } from "./edit";
     import Message from "../../message/Message.svelte";
     import StoreSupplier from "./componentes/storeSupplier/StoreSupplier.svelte";
+    import Loading from "../../tools/loading/Loading.svelte";
     export let booleanEdit = false;
 
+    let loading = false;
     let product = {};
     let objectFind;
     export let products;
@@ -19,11 +21,8 @@
             prd.boolean = true;
             product = prd;
         }
-       
-        objectFind = products.findIndex(
-            (object) => object.id === product.id
-        );
-        
+
+        objectFind = products.findIndex((object) => object.id === product.id);
     };
     let showAndHideAlert;
     let alertMessage = {
@@ -43,15 +42,15 @@
         <div class="d-flex justify-content-center mt-2">
             <form
                 on:submit|preventDefault={async (e) => {
+                    booleanEdit = false;
+                    loading = true;
                     const responseEdit = await handleEdit(e, image);
 
                     if (responseEdit) {
-                        
-                        
+                        loading = false;
                         products[objectFind] = responseEdit;
                         e.target.reset();
                         showAndHideAlert();
-                        booleanEdit = false;
                     } else {
                         alertMessage = {
                             alertStyle: "alert-danger",
@@ -59,11 +58,10 @@
                                 "Al parecer hubo un error y no pudo crearse el producto",
                         };
                         showAndHideAlert();
-                        booleanEdit = false;
                     }
                 }}
-                class="w-75 mb-2">
-                
+                class="w-75 mb-2"
+            >
                 <div class="d-flex">
                     <div class="col-1 me-2">
                         <label for="" class="text-center">ID</label>
@@ -127,7 +125,7 @@
                     </div>
                 </div>
                 <StockEditor {product} />
-                <StoreSupplier {product} booleanCreate ={true}/>
+                <StoreSupplier {product} booleanCreate={true} />
                 <ImageEditor bind:image />
 
                 <div>
@@ -147,12 +145,13 @@
         </div>
     </div>
 </Overlay>
+<Loading bind:loading/>
 
 <style>
     .edit {
         width: 45em;
         height: 40em;
-        overflow-y:auto;
+        overflow-y: auto;
         position: absolute;
         z-index: 99;
         background: white;
@@ -163,4 +162,5 @@
         color: white;
         padding: 0.5em;
     }
+    
 </style>

@@ -5,6 +5,7 @@
   import { createOrUpdateProduct } from "../../stores/products";
   import Message from "../../message/Message.svelte";
   import mappedProduct from "./importExcel";
+    import { URL } from "../../tools/connections/url";
   let productDTOs;
   let excelColumnNames = []; // Almacenará los nombres de las columnas del archivo Excel
   let databaseColumnNames = []; // Almacenará los nombres de las columnas de la base de datos
@@ -39,7 +40,7 @@
 
   async function fetchDataFromAPI() {
     // Hacer la solicitud GET a la API para obtener los datos de las columnas
-    const apiUrl = "http://54.175.227.120:8080/products/productoColumn";
+    const apiUrl = URL+"/products/productoColumn";
 
     try {
       const response = await fetch(apiUrl);
@@ -97,7 +98,7 @@
     productDTOs = await mp();
      
     const returnExcel = await createOrUpdateProduct(
-      "http://54.175.227.120:8080/products/importExcel",
+      URL+"/products/importExcel",
       "POST",
       productDTOs,
     );
