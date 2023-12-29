@@ -1,7 +1,8 @@
-export const showProduct = async (URL) => {
+import {URL} from "../tools/connections/url"
+export const showProduct = async (url) => {
 
     try {
-        const response = await fetch(URL);
+        const response = await fetch(url);
         const data = await response.json();
         return data
 
@@ -10,9 +11,9 @@ export const showProduct = async (URL) => {
     }
 }
 
-export const searchProduct = async (URL, datos) => {
+export const searchProduct = async (url, datos) => {
     try {
-        const response = await fetch(URL, {
+        const response = await fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -30,7 +31,7 @@ export const searchProduct = async (URL, datos) => {
 
 export const createProduct = async (dts) => {
     try {
-        const response = await fetch("http://54.175.227.120:8080/products", {
+        const response = await fetch(URL+":8080/products", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -51,7 +52,7 @@ export const createProduct = async (dts) => {
 export const showProductView = async () => {
 
     try {
-        const response = await fetch("http://54.175.227.120:8080/products");
+        const response = await fetch(URL+"/products");
         const data = await response.json();
         return data
 
@@ -62,7 +63,7 @@ export const showProductView = async () => {
 
 export async function deleteProduct(id) {
     try {
-        const response = await fetch(`http://54.175.227.120:8080/products/${id}`, {
+        const response = await fetch(`${URL}/products/${id}`, {
             method: 'DELETE',
         });
 

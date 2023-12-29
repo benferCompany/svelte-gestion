@@ -1,4 +1,5 @@
 import * as XLSX from "xlsx";
+import { URL } from "../../../tools/connections/url";
 
 const mappedProduct = async (products) => {
    
@@ -19,7 +20,7 @@ export default mappedProduct;
 
 export  async function fetchDataFromAPI() {
     // Hacer la solicitud GET a la API para obtener los datos de las columnas
-    const apiUrl = "http://54.175.227.120:8080/products/productoColumn";
+    const apiUrl = URL+"/products/productoColumn";
 
     try {
       const response = await fetch(apiUrl);

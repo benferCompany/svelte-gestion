@@ -1,13 +1,16 @@
 <script>
     export let debouncedSearch;
-   let desc
+    let page =0;
+    export let desc;
 </script>
 
 <div>
     <div class="parentInput d-flex">
         <p>&#128269;</p>
         <input
-            on:input={debouncedSearch}
+            on:input={(e) => {
+                debouncedSearch(e,page);
+            }}
             bind:value={desc}
             class="rounded form-control ms-2"
             placeholder="Buscar articulos"

@@ -14,6 +14,8 @@
     let importBoolean;
     let exportBoolean;
     let updateBoolean;
+    let desc;
+    let products
 </script>
 
 <CreateProduct bind:handleClickCreate />
@@ -25,13 +27,13 @@
     <div class="container">
         {#if importBoolean && !exportBoolean}
             <div>
-                <InputSearch {debouncedSearch} />
+                <InputSearch bind:desc {debouncedSearch} />
             </div>
 
             <div>
-                <Tablet {handleClickClose} bind:debouncedSearch />
+                <Tablet bind:products {handleClickClose} bind:debouncedSearch />
                 <div class="d-flex justify-content-center">
-                    <Pagination />
+                    <Pagination bind:products bind:desc {debouncedSearch} />
                 </div>
             </div>
         {:else if !importBoolean && !exportBoolean && !updateBoolean }

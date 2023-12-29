@@ -4,20 +4,25 @@
     import debounce from "lodash/debounce";
     import MessageDelete from "../message/MessageDelete.svelte";
     import Edit from "../editar/Edit.svelte";
+    import { URL } from "../../tools/connections/url";
 
-    let products = [];
+    export let products = [];
     let visible = false;
     let dts;
-
-    export const debouncedSearch = debounce(async (description) => {
-        products = await searchProduct("http://54.175.227.120:8080/products/name", {
-            description: description.target.value,
-        });
+    
+    export const debouncedSearch = debounce(async (description,page) => {
+        products = await searchProduct(
+            `${URL}/products/name?page=${page}&size=5`,
+            {
+                description: description.target.value,
+            },
+        );
     }, 300);
+   $:{products}
 </script>
-
+{#if products.content}
 <MessageDelete bind:products bind:visible {dts} />
-<Edit bind:products bind:handleClickClose />
+<Edit products={products.content} bind:handleClickClose />
 <div>
     <table class="table table-striped">
         <thead>
@@ -34,7 +39,7 @@
         </thead>
 
         <tbody>
-            {#each products as product}
+            {#each products.content as product}
                 <tr class="align-middle">
                     <td>{product.id}</td>
                     <td>{product.description}</td>
@@ -69,3 +74,5 @@
         </tbody>
     </table>
 </div>
+
+{/if}

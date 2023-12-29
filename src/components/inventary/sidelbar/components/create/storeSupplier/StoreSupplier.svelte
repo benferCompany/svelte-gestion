@@ -1,8 +1,9 @@
 <script>
+    import {URL} from "../../../../../tools/connections/url"
     let storeSupplier;
     let getStoreSupplier = async () => {
         const fetchSupplier = await fetch(
-            "http://54.175.227.120:8080/supplier"
+            URL+"/supplier"
         );
         storeSupplier = await fetchSupplier.json();
     };

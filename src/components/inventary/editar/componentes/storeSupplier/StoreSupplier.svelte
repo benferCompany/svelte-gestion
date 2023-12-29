@@ -1,10 +1,11 @@
 <script>
     import { showSupplier } from "../../../../stores/supplier";
+    import {URL} from "../../../../tools/connections/url"
     let getSuppliers = [];
     let suppliers = [];
     async function fetchData() {
         // Haces la llamada asíncrona
-        let datos = await showSupplier("http://54.175.227.120:8080/supplier");
+        let datos = await showSupplier(URL+"/supplier");
         getSuppliers = datos;
     }
     $: {
