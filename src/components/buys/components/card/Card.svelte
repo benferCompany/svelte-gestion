@@ -1,42 +1,42 @@
 <script>
     import { Link } from "svelte-routing";
-    import {URL} from "../../tools/connections/url"
-    import { tdsStore } from "../../stores/cart";
-    export let searchProduct;
+    
+    import { URL } from "../../../tools/connections/url";
     import debounce from "lodash/debounce";
+    import { tdsStore } from "../storage";
+    export let searchProduct;
 
-    let products = [];
+    let storeSuppliers = [];
     let datos = [];
     export const debouncedSearch = debounce(async (description) => {
-       
-            products = await searchProduct(
-                URL+"/products/name",
-                { description: description.target.value }
-            );
-            products = products.content
+        storeSuppliers = await searchProduct(
+            URL + "/storeSuppliers/idSupplier",
+            { idSupplierOne: description.target.value },
+        );
+        storeSuppliers = storeSuppliers.content;
     }, 300); // 300ms de tiempo de espera antes de realizar la búsqueda
 
-    
     let stock;
 
     $: {
+        
         datos = [];
-        if (products.length > 0) {
-            for (const product of products) {
-                if (product.stores[0]) {
-                    stock = product.stores[0].stock;
+        if (storeSuppliers.length > 0) {
+            for (const storeSupplier of storeSuppliers) {
+                if (storeSupplier.product.stores[0]) {
+                    stock = storeSupplier.product.stores[0].stock;
                 } else {
                     stock = 0;
                 }
                 datos = [
                     ...datos,
                     {
-                        imagen: product.image,
-                        id: product.id,
+                        imagen: storeSupplier.product.image,
+                        id: storeSupplier.product.id,
                         stock,
-                        product: product.description,
+                        product: storeSupplier.product.description,
                         count: 1,
-                        pvp: product.selling_price,
+                        pvp: storeSupplier.product.selling_price,
                         discount: 0,
                         subTotal: 0,
                         delete: "&#128465;",
@@ -49,10 +49,10 @@
 
 <div class="d-flex flex-wrap justify-content-around" style="width: 40%;">
     {#each datos as item}
-        <Link style="text-decoration:none" to="/ventas">
+        <Link style="text-decoration:none" to="/buys">
             <div
                 on:mousedown={() => {
-                    tdsStore.handleClick(item);
+                    tdsStore().handleClick(item)
                 }}
                 class="card-link mt-2"
             >
@@ -89,9 +89,7 @@
         border-radius: 0.2em;
         color: rgb(8, 8, 8);
     }
-    .s-product{
+    .s-product {
         font-size: 0.8em;
-        
     }
-    
 </style>

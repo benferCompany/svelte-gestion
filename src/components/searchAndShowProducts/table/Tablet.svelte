@@ -1,15 +1,14 @@
 <script>
     import { searchProduct } from "../../stores/products";
-    export let handleClickClose;
     import debounce from "lodash/debounce";
-    import MessageDelete from "../message/MessageDelete.svelte";
-    import Edit from "../editar/Edit.svelte";
-    import { URL } from "../../tools/connections/url";
-
+    import MessageDelete from "../../inventary/message/MessageDelete.svelte";
+    import Edit from "../../inventary/editar/Edit.svelte";
+    import { URL } from "../../tools/connections/url"
+    export let handleClickClose;
     export let products = [];
     let visible = false;
     let dts;
-    
+
     export const debouncedSearch = debounce(async (description,page) => {
         products = await searchProduct(
             `${URL}/products/name?page=${page}&size=5`,
@@ -19,7 +18,9 @@
         );
     }, 300);
    $:{products}
+
 </script>
+
 {#if products.content}
 <MessageDelete bind:products bind:visible {dts} />
 <Edit products={products.content} bind:handleClickClose />

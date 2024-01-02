@@ -29,15 +29,7 @@
     {/if}
 </div>
 <div class="d-flex justify-content-around text-center">
-    <div class="col-3">
-        <label for="">Id interno</label>
-        <input
-            type="text"
-            class="form-control text-center"
-            name="idInternal"
-            
-        />
-    </div>
+    
     <div class="col-3">
         <label for="">Cod prov 1</label>
         <input

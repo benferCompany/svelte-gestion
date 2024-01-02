@@ -1,16 +1,14 @@
 <script>
-    import SaleInfo from "./saleInfo/SaleInfo.svelte";
-    import SaleInfoEnd from "./saleInfo/SaleInfoEnd.svelte";
-    import Card from "./card/Card.svelte";
-    import PayBox from "./saleInfo/PayBox.svelte";
-    import Pay from "./pay/Pay.svelte";
-    import Tablet from "./tablet/Tablet.svelte";
-    import { payStore } from "../stores/cart";
+    import Pay from "../sales/pay/Pay.svelte";
+    import PayBox from "../sales/saleInfo/PayBox.svelte";
+    import SaleInfo from "../sales/saleInfo/SaleInfo.svelte";
+    import SaleInfoEnd from "../sales/saleInfo/SaleInfoEnd.svelte";
+    import Tablet from "../sales/tablet/Tablet.svelte";
     import InputSearch from "../searchAndShowProducts/inputSearch/InputSearch.svelte";
+    import { payStore } from "../stores/cart";
     import { searchProduct } from "../stores/products";
-    
+    import Card from "./components/card/Card.svelte";
     let debouncedSearch;
-    
     //Este variable "desc" es solamente para que no me genere error
     //ya que estoy usando el mismo componente input desde searchAndShowProducts
     let desc;

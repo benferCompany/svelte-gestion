@@ -79,7 +79,18 @@
                             name="id"
                         />
                     </div>
-                    <div class="col-11">
+                    <div class="col-3 me-2">
+                        <label for="">Id interno</label>
+                        <input
+                            type="text"
+                            class="form-control text-center"
+                            name="idInternal"
+                            value={product.idInternal}
+                            
+                        />
+                    </div>
+                    
+                    <div class="col-8">
                         <label for="" class=" text-center">Titulo</label>
                         <input
                             type="text"

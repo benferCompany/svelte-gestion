@@ -5,7 +5,6 @@
   import { createOrUpdateProduct } from "../../../stores/products";
   import Message from "../../../message/Message.svelte";
   import mappedProduct, { fetchDataFromAPI, fetchEntity } from "./updateExcel";
-  import { each } from "svelte/internal";
     import { URL } from "../../../tools/connections/url";
 
   let excelColumnNames = []; // Almacenará los nombres de las columnas del archivo Excel

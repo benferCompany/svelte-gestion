@@ -18,6 +18,7 @@ export const handleEdit = async (e, image) => {
         "description": object.description,
         "cost_price": object.cost_price,
         "selling_price": object.selling_price,
+        "idInternal": object.idInternal,
         "stores": [
             {
                 "id": object.stock ? object.storeId : 0,
@@ -33,7 +34,6 @@ export const handleEdit = async (e, image) => {
         "storeSuppliers": [
             {
                 "id": object.idInternal ? object.storeSupplierId : 0,
-                "idInternal": object.idInternal,
                 "idSupplierOne": object.idSupplierOne,
                 "idSupplierTwo": object.idSupplierTwo,
                 "supplier": JSON.parse(object.supplier),
