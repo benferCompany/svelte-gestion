@@ -31,7 +31,7 @@ export const searchProduct = async (url, datos) => {
 
 export const createProduct = async (dts) => {
     try {
-        const response = await fetch(URL+":8080/products", {
+        const response = await fetch(URL+"/products", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

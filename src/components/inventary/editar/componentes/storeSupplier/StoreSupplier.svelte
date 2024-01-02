@@ -108,16 +108,6 @@
     <input class="d-none" type="text" name="storeSupplierId" value={storeSupplier.id}>
     <input type="text" name="supplier" class="d-none" value={JSON.stringify(storeSupplier.supplier)}>
     <div class="col-4">
-        <label for="">Id interno</label>
-        <input
-            type="text"
-            class="form-control text-center"
-            name="idInternal"
-            bind:value={storeSupplier.idInternal}
-            disabled={editStock.stockDisabled}
-        />
-    </div>
-    <div class="col-4">
         <label for="">Cod prov 1</label>
         <input
             type="text"

@@ -20,6 +20,7 @@ export const handleCreate = async (e, image) => {
         "description": object.description,
         "cost_price": object.cost_price,
         "selling_price": object.selling_price,
+        "idInternal": object.idInternal,
         "stores": [
             {
                 "company": JSON.parse(object.company),
@@ -34,7 +35,7 @@ export const handleCreate = async (e, image) => {
         "storeSuppliers": [
             {
                 
-                "idInternal": object.idInternal,
+               
                 "idSupplierOne": object.idSupplierOne,
                 "idSupplierTwo": object.idSupplierTwo,
                 "supplier": JSON.parse(object.supplier),

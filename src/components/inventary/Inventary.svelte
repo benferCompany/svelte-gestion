@@ -3,32 +3,25 @@
     import UpdateExcel from "./importExcel/updateExcel/UpdateExcel.svelte";
     import Sidelbar from "./sidelbar/Sidelbar.svelte";
     import CreateProduct from "./sidelbar/components/create/CreateProduct.svelte";
-    import SearchAndShowProducts from "../searchAndShowProducts/SearchAndShowProducts.svelte"
+    import SearchAndShowProducts from "../searchAndShowProducts/SearchAndShowProducts.svelte";
     let height = window.screen.availHeight - 150;
     let handleClickCreate;
-    let exportBoolean;
-    let updateBoolean;
-    
+    let booleanView;
 </script>
 
 <CreateProduct bind:handleClickCreate />
 
 <div class="d-flex">
     <div class="sidelbar bg-secondary pt-5" style="height:{height}px;">
-        <Sidelbar  
-            bind:exportBoolean
-            bind:updateBoolean
-            {handleClickCreate}
-        />
+        <Sidelbar bind:booleanView {handleClickCreate} />
     </div>
     <div class="container">
-        {#if !exportBoolean && !updateBoolean}
-            <SearchAndShowProducts/>
-        
-        {:else if exportBoolean && !updateBoolean}
-            <ExportExcel />
-        {:else if updateBoolean && !exportBoolean}
+        {#if booleanView === 0}
+            <SearchAndShowProducts />
+        {:else if booleanView === 1}
             <UpdateExcel />
+        {:else if booleanView === 2}
+            <ExportExcel />
         {/if}
     </div>
 </div>

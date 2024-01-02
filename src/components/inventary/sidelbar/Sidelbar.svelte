@@ -1,9 +1,7 @@
 <script>
 
     export let handleClickCreate;
-   
-    export let exportBoolean = false;
-    export let updateBoolean = false;
+    export let booleanView = 0;
 
 </script>
 
@@ -11,8 +9,8 @@
     <div>
         <div>
             <button on:click={()=>{
-                exportBoolean = false;
-                updateBoolean = false
+               
+                booleanView =0;
             }} type="button" class="btn btn-success">Inventario</button
             >
         </div>
@@ -22,8 +20,8 @@
         </div>
         <div>
             <button on:click={()=>{
-                exportBoolean = false;
-                updateBoolean = true;
+                
+                booleanView =1;
             }} type="button" class="btn btn-success"
                 >Actualizar precios</button
             >
@@ -31,9 +29,23 @@
         
         <div>
             <button on:click={()=>{
-                exportBoolean = true;
-                updateBoolean = false;
+               
+                booleanView = 2;
             }} type="button" class="btn btn-success">Exportar Excel</button
+            >
+        </div>
+        <div>
+            <button on:click={()=>{
+               
+                booleanView = 3;
+            }} type="button" class="btn btn-success">Actualizar Stock</button
+            >
+        </div>
+        <div>
+            <button on:click={()=>{
+               
+                booleanView = 4;
+            }} type="button" class="btn btn-success">Act. alm. proveedor</button
             >
         </div>
     </div>

@@ -1,6 +1,6 @@
 <script>
     import { Link } from "svelte-routing";
-    import { tdsStore  } from "../../stores/cart";
+    import {tdsStore} from "../storage";
     let ths = [
         "id",
         "stock",
@@ -18,7 +18,8 @@
     }
 
     $: {
-        $tdsStore.forEach((td) => {
+        console.log(tdsStore())
+        tdsStore().getData.forEach((td) => {
             if (td.count > 0) {
                 updateSubtotal(td);
             }
@@ -27,8 +28,8 @@
 
     const handleLink = (e) => {
         let id = parseInt(e.target.getAttribute("value"));
-        $tdsStore = $tdsStore.filter((item) => item.id !== id);
-        sessionStorage.setItem("tdsStore", JSON.stringify($tdsStore));
+        tdsStore().getData = tdsStore().getData.filter((item) => item.id !== id);
+        sessionStorage.setItem("supplierProductStore", JSON.stringify(tdsStore().getData));
     };
 </script>
 
@@ -42,8 +43,8 @@
             </tr>
         </thead>
         <tbody>
-            {#if $tdsStore.length > 0}
-                {#each $tdsStore as item}
+            {#if tdsStore().getData.length > 0}
+                {#each tdsStore().getData as item}
                     <tr>
                         <td>{item.id}</td>
                         <td>{item.stock - item.count}</td>
@@ -85,7 +86,7 @@
                         text-decoration:none;
                         
                         "
-                                to="/ventas"
+                                to="/buys"
                                 ><p on:mousedown={handleLink} value={item.id}>
                                     {@html item.delete}
                                 </p>

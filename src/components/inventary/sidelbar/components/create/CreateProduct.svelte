@@ -37,16 +37,25 @@
                     } else {
                         alertMessage = {
                             alertStyle: "alert-danger",
-                            message: "Al parecer hubo un error y no pudo crearse el producto",
+                            message:
+                                "Al parecer hubo un error y no pudo crearse el producto",
                         };
-                         showAndHideAlert();
-                         booleanEdit = false;
+                        showAndHideAlert();
+                        booleanEdit = false;
                     }
                 }}
                 class="w-75 mb-2"
             >
                 <div class="d-flex">
-                    <div class="col-12">
+                    <div class="col-3 me-2">
+                        <label for="">Id interno</label>
+                        <input
+                            type="text"
+                            class="form-control text-center"
+                            name="idInternal"
+                        />
+                    </div>
+                    <div class="col-9">
                         <label for="" class=" text-center">Titulo</label>
                         <input
                             required
@@ -88,7 +97,7 @@
                     </div>
                 </div>
 
-                <StockEditor/>
+                <StockEditor />
                 <StoreSupplier />
                 <ImageEditor bind:image />
                 <div>
@@ -114,7 +123,7 @@
     .create {
         width: 45em;
         height: 40em;
-        overflow-y:auto;
+        overflow-y: auto;
         position: absolute;
         z-index: 99;
         background: white;
