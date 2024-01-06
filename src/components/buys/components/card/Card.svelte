@@ -1,25 +1,24 @@
 <script>
-    import { Link } from "svelte-routing";
-    
-    import { URL } from "../../../tools/connections/url";
+    import {Link} from "svelte-routing"
+    import {tdsStore} from "../cart";
     import debounce from "lodash/debounce";
-    import { tdsStore } from "../storage";
+    import { URL } from "../../../tools/connections/url";
     export let searchProduct;
-
     let storeSuppliers = [];
     let datos = [];
     export const debouncedSearch = debounce(async (description) => {
+       
         storeSuppliers = await searchProduct(
-            URL + "/storeSuppliers/idSupplier",
-            { idSupplierOne: description.target.value },
-        );
-        storeSuppliers = storeSuppliers.content;
+                URL+"/storeSuppliers/idSupplier",
+                { idSupplierOne: description.target.value }
+            );
+            storeSuppliers = storeSuppliers.content
     }, 300); // 300ms de tiempo de espera antes de realizar la búsqueda
 
+    
     let stock;
 
     $: {
-        
         datos = [];
         if (storeSuppliers.length > 0) {
             for (const storeSupplier of storeSuppliers) {
@@ -36,7 +35,7 @@
                         stock,
                         product: storeSupplier.product.description,
                         count: 1,
-                        pvp: storeSupplier.product.selling_price,
+                        costo: storeSupplier.product.cost_price,
                         discount: 0,
                         subTotal: 0,
                         delete: "&#128465;",
@@ -52,7 +51,7 @@
         <Link style="text-decoration:none" to="/buys">
             <div
                 on:mousedown={() => {
-                    tdsStore().handleClick(item)
+                    tdsStore.handleClick(item);
                 }}
                 class="card-link mt-2"
             >
@@ -60,7 +59,7 @@
                     class="card"
                     style="width: 8rem; height:12em; overflow:hidden;"
                 >
-                    <p class="pvp">${item.pvp}</p>
+                    <p class="costo">${item.costo}</p>
                     <img src={item.imagen} alt="" />
                     <div class="card-body rounded p-product">
                         <p class="s-product">{item.product}</p>
@@ -80,7 +79,7 @@
         margin: auto;
         margin-top: 1em;
     }
-    .pvp {
+    .costo {
         background: rgba(133, 216, 231, 0.8);
         position: absolute;
         left: 0.3em;
@@ -89,7 +88,9 @@
         border-radius: 0.2em;
         color: rgb(8, 8, 8);
     }
-    .s-product {
+    .s-product{
         font-size: 0.8em;
+        
     }
+    
 </style>

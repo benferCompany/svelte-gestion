@@ -5,6 +5,7 @@
     import Inventary from "./components/inventary/Inventary.svelte";
     import ImportExcel from "./components/inventary/importExcel/ImportExcel.svelte";
 	import Buys from "./components/buys/Buys.svelte";	
+    import Customers from "./components/customers/Customers.svelte";
 </script>
 
 <Router>
@@ -20,6 +21,9 @@
 	</Route>
 	<Route path="/excel">
 		<ImportExcel/>
+	</Route>
+	<Route path="/customers">
+		<Customers/>
 	</Route>
 
 </Router>
