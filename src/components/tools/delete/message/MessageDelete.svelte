@@ -1,18 +1,18 @@
 <script>
-    import Overlay from "../../tools/overlay/Overlay.svelte";
-    import { deleteProduct} from "../../stores/products";
-    import Message from "../../message/Message.svelte";
+    import Message from "../../../message/Message.svelte";
+    import Overlay from "../../overlay/Overlay.svelte";
+    
     export let visible; 
-    export let dts;
-    export let products;
+    export let objectId;
+    export let objects;
+    export let deleteObject;
     export let text = "¿Estas seguro que deseas elimnar este producto?";
     let showAndHideAlert;
 
-    const deleteProductById = async (id) => {
-        const response = await deleteProduct(id);
-        products = products.filter(product => product.id !== id);
-        console.log(response.success)
-        if(response.success){
+    const deleteObjectById = async (id) => {
+        const response = await deleteObject(id);
+        objects = objects.filter(object => object.id !== id);
+        if(response.ok){
             showAndHideAlert();
         }
     
@@ -34,7 +34,7 @@
                         class="btn btn-success"
                         on:click={()=>{
                             visible=false;
-                            deleteProductById(dts.product.id)
+                            deleteObjectById(objectId)
                         }}
                     />
                     <input

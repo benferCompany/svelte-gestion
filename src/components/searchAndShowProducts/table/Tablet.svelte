@@ -1,13 +1,15 @@
 <script>
     import { searchProduct } from "../../stores/products";
     import debounce from "lodash/debounce";
-    import MessageDelete from "../../inventary/message/MessageDelete.svelte";
+    import MessageDelete from "../../tools/delete/message/MessageDelete.svelte";
     import Edit from "../../inventary/editar/Edit.svelte";
     import { URL } from "../../tools/connections/url"
+    import {deleteProduct} from "../../stores/products";
     export let handleClickClose;
     export let products = [];
-    let visible = false;
-    let dts;
+    let visible;
+    let objectId;
+
 
     export const debouncedSearch = debounce(async (description,page) => {
         products = await searchProduct(
@@ -22,7 +24,7 @@
 </script>
 
 {#if products.content}
-<MessageDelete bind:products bind:visible {dts} />
+<MessageDelete bind:visible bind:objects ={products.content} bind:objectId deleteObject={deleteProduct} />
 <Edit products={products.content} bind:handleClickClose />
 <div>
     <table class="table table-striped">
@@ -63,9 +65,7 @@
                                 class="btn btn-danger btn-sm ms-1"
                                 on:click={(e) => {
                                     visible = true;
-                                    dts = {
-                                        product,
-                                    };
+                                    objectId = product.id;
                                 }}>Eliminar</button
                             >
                         </div>

@@ -1,12 +1,12 @@
 <script>
     import { Link } from "svelte-routing";
-    import {tdsStore} from "../storage";
+    import { tdsStore  } from "../cart";
     let ths = [
         "id",
         "stock",
         "Producto",
         "Cantidad",
-        "PVP",
+        "Costo",
         "Desc",
         "SubTotal",
         "delete",
@@ -14,12 +14,11 @@
     //export let $tdsStore= [];
 
     function updateSubtotal(item) {
-        item.subTotal = item.count * item.pvp * (1 - item.discount / 100);
+        item.subTotal = item.count * item.costo * (1 - item.discount / 100);
     }
 
     $: {
-        console.log(tdsStore())
-        tdsStore().getData.forEach((td) => {
+        $tdsStore.forEach((td) => {
             if (td.count > 0) {
                 updateSubtotal(td);
             }
@@ -28,8 +27,8 @@
 
     const handleLink = (e) => {
         let id = parseInt(e.target.getAttribute("value"));
-        tdsStore().getData = tdsStore().getData.filter((item) => item.id !== id);
-        sessionStorage.setItem("supplierProductStore", JSON.stringify(tdsStore().getData));
+        $tdsStore = $tdsStore.filter((item) => item.id !== id);
+        sessionStorage.setItem("tdsStore", JSON.stringify($tdsStore));
     };
 </script>
 
@@ -43,11 +42,11 @@
             </tr>
         </thead>
         <tbody>
-            {#if tdsStore().getData.length > 0}
-                {#each tdsStore().getData as item}
+            {#if $tdsStore.length > 0}
+                {#each $tdsStore as item}
                     <tr>
                         <td>{item.id}</td>
-                        <td>{item.stock - item.count}</td>
+                        <td>{item.stock + item.count}</td>
                         <td>{item.product}</td>
                         <td class="col-1"
                             ><input
@@ -66,7 +65,7 @@
                             ><input
                                 class="col-12 text-center"
                                 type="text"
-                                bind:value={item.pvp}
+                                bind:value={item.costo}
                                 style="margin:auto"
                             /></td
                         >

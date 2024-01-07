@@ -69,7 +69,7 @@ export async function deleteProduct(id) {
 
         if (response.ok) {
             // La eliminación fue exitosa
-            return { success: true };
+            return { ok: true };
         } else {
             // La eliminación falló, puedes manejar el error aquí
             return { success: false, error: 'No se pudo eliminar el producto.' };

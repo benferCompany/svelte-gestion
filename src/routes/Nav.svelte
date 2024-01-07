@@ -10,6 +10,7 @@
         <li ><Link to="/inventary" class="{classLink}">Inventario</Link></li>
         <li ><Link to="/buys" class="{classLink}">Compras</Link></li>
         <li ><Link to="/customers" class="{classLink}">Clientes</Link></li>
+        <li ><Link to="/suppliers" class="{classLink}">Proveedores</Link></li>
         <li ><Link to="/saleOff"class="{classLink}">Gastos/Egresos</Link></li>
         <li ><Link to="sales" class="{classLink}">Ventas</Link></li>
     </ul>
