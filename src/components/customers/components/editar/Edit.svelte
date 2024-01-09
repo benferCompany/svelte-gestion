@@ -1,23 +1,52 @@
 <script>
     import Overlay from "../../../tools/overlay/Overlay.svelte";
     import CloseButton from "../../../tools/close/CloseButton.svelte";
+    import { handleSubmit } from "./edit";
+    import Loading from "../../../tools/loading/Loading.svelte";
+    export let showAndHideAlert;
+    export let alertMessage;
+    export let customers;
+    let customerEdit;
     let visible = false;
     let customer;
+    let loading = false;
+
     export let handleClickClose = (getCustomer) => {
         customer = getCustomer;
         visible = !visible;
-        console.log(customer);
     };
 </script>
 
+<Loading bind:loading />
 <Overlay bind:visible>
     <div class="edit">
-        <div class="header bg-primary">
+        <div class="header bg-warning">
             <h1 class="text-center">Editar</h1>
             <CloseButton onClose={handleClickClose} />
         </div>
         {#if customer}
-            <form action="">
+            <form
+                on:submit|preventDefault={async (e) => {
+                    loading = true;
+                    handleClickClose(e);
+                    customerEdit = await handleSubmit(e);
+
+                    if (customerEdit) {
+                        alertMessage = {
+                            alertStyle: "alert-success",
+                            message: "El cliente se actualizo con éxito",
+                        };
+                        showAndHideAlert();
+                    }
+
+                    customers.content = customers.content.map((ct) =>
+                        ct.id === customerEdit.id ? customerEdit : ct,
+                    );
+                    console.log(customers.content);
+                    loading = false;
+                }}
+                action=""
+            >
                 <div>
                     <div class="d-flex">
                         <div style={"width:30%; margin-right:0.5em;"}>
@@ -25,18 +54,23 @@
 
                             <input
                                 type="text"
-                                name="id"
                                 value={customer.id}
                                 disabled
                                 class="form-control"
+                            />
+                            <input
+                                type="text"
+                                class="d-none"
+                                value={customer.id}
+                                name="id"
                             />
                         </div>
                         <div style={"width:100%;"}>
                             <label for="">Cuit/DNI</label>
                             <input
                                 type="text"
-                                name="cuil"
-                                value={customer.cuil}
+                                name="idPersonal"
+                                value={customer.idPersonal}
                                 class="form-control"
                             />
                         </div>
@@ -88,8 +122,8 @@
                     <div class="d-flex">
                         <input
                             type="text"
-                            name="adrress"
-                            value={customer.adrress}
+                            name="address"
+                            value={customer.address}
                             class="form-control form-control me-2"
                         />
                         <input
@@ -108,8 +142,8 @@
                     <div class="d-flex">
                         <input
                             type="text"
-                            name="movil_phone"
-                            value={customer.movil_phone}
+                            name="mobile_phone"
+                            value={customer.mobile_phone}
                             class="form-control me-2"
                         />
                         <input
@@ -124,8 +158,8 @@
                     <div class="me-2">
                         <input
                             type="submit"
-                            value="Actualizar"
-                            class="btn btn-primary"
+                            value="Editar"
+                            class="btn btn-warning"
                         />
                     </div>
                     <div>
@@ -133,6 +167,7 @@
                             type="button"
                             value="Cancelar"
                             class="btn btn-danger"
+                            on:click={handleClickClose}
                         />
                     </div>
                 </div>

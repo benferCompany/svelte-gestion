@@ -1,4 +1,7 @@
 import { URL } from "../tools/connections/url";
+import { writable } from 'svelte/store';
+
+export const customers = writable([]);
 
 export const deleteCustomer = async (id) => {
   try {

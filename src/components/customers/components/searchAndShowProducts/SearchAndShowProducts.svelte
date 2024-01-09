@@ -4,9 +4,10 @@
     import Pagination from "./pagination/Pagination.svelte";
     
     let debouncedSearch;
-    let customers;
+    export let customers;
     let desc;
     export let handleClickClose
+    
     
 </script>
 

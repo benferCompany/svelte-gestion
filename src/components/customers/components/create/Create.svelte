@@ -13,7 +13,7 @@
 <Overlay bind:visible>
     <div class="cretae">
         <div class="header bg-primary">
-            <h1 class="text-center">Editar</h1>
+            <h1 class="text-center">Crear cliente</h1>
             <CloseButton onClose={handleClickClose} />
         </div>
             <form on:submit|preventDefault={(e)=>{
@@ -27,7 +27,7 @@
                             <label for="">Cuit/DNI</label>
                             <input
                                 type="text"
-                                name="cuil"
+                                name="idPersonal"
                                 class="form-control"
                                 required
                             />
@@ -100,7 +100,7 @@
                     <div class="d-flex">
                         <input
                             type="text"
-                            name="movil_phone"
+                            name="mobile_phone"
                             class="form-control me-2"
                         />
                         <input
@@ -114,7 +114,7 @@
                     <div class="me-2">
                         <input
                             type="submit"
-                            value="Actualizar"
+                            value="Crear"
                             class="btn btn-primary"
                         />
                     </div>
