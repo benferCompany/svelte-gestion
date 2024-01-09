@@ -6,6 +6,8 @@
     import ImportExcel from "./components/inventary/importExcel/ImportExcel.svelte";
 	import Buys from "./components/buys/Buys.svelte";	
     import Customers from "./components/customers/Customers.svelte";
+    import Suppliers from "./components/suppliers/Suppliers.svelte";
+    
 </script>
 
 <Router>
@@ -24,6 +26,9 @@
 	</Route>
 	<Route path="/customers">
 		<Customers/>
+	</Route>
+	<Route path="/suppliers">
+		<Suppliers/>
 	</Route>
 
 </Router>

@@ -11,7 +11,7 @@
 
     const deleteObjectById = async (id) => {
         const response = await deleteObject(id);
-        objects = objects.filter(object => object.id !== id);
+        objects.content = objects.content.filter(object => object.id !== id);
         if(response.ok){
             showAndHideAlert();
         }

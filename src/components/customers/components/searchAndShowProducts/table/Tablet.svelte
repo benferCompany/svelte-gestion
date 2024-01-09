@@ -22,7 +22,7 @@
         customers;
     }
 </script>
-<MessageDelete {text} bind:objects={customers.content} bind:visible bind:objectId deleteObject={deleteCustomer}/>
+<MessageDelete {text} bind:objects={customers} bind:visible bind:objectId deleteObject={deleteCustomer}/>
 {#if customers}
     <table class="table">
         <thead>
@@ -46,7 +46,7 @@
                             {customer.last_name}
                         </td>
                         <td>
-                            {customer.adrress}
+                            {customer.address}
                         </td>
                         <td>
                             {#if customer.phone}

@@ -4,6 +4,7 @@
     import Edit from "./components/editar/Edit.svelte";
     import SearchAndShowProducts from "./components/searchAndShowProducts/SearchAndShowProducts.svelte";
     let handleClickClose;
+    let customers;
     let visible = false;
     let showAndHideAlert;
     let alertMessage = {
@@ -14,7 +15,7 @@
 
 <hr />
     <Message {alertMessage} bind:showAndHideAlert/>
-    <Edit bind:handleClickClose />
+    <Edit bind:customers bind:showAndHideAlert bind:alertMessage bind:handleClickClose />
     <Create bind:visible bind:showAndHideAlert/>
 
 <div>
@@ -38,5 +39,5 @@
         </div>
     </div>
     <hr />
-    <SearchAndShowProducts bind:handleClickClose />
+    <SearchAndShowProducts bind:customers bind:handleClickClose />
 </div>
