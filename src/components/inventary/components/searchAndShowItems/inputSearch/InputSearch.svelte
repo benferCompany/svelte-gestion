@@ -1,7 +1,5 @@
 <script>
-    export let debouncedSearch;
-    let page =0;
-    export let desc;
+   export let handleChange;
 </script>
 
 <div>
@@ -9,11 +7,12 @@
         <p>&#128269;</p>
         <input
             on:input={(e) => {
-                debouncedSearch(e,page);
+                handleChange(e.target.value)
+               
             }}
-            bind:value={desc}
+            
             class="rounded form-control ms-2"
-            placeholder="Buscar proveedor"
+            placeholder="Buscar articulos"
             type="text"
         />
     </div>

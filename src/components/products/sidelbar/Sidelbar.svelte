@@ -11,7 +11,7 @@
             <button on:click={()=>{
                
                 booleanView =0;
-            }} type="button" class="btn btn-success">Inventario</button
+            }} type="button" class="btn btn-success">Productos</button
             >
         </div>
         <div>

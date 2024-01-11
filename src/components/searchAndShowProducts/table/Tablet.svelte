@@ -2,7 +2,7 @@
     import { searchProduct } from "../../stores/products";
     import debounce from "lodash/debounce";
     import MessageDelete from "../../tools/delete/message/MessageDelete.svelte";
-    import Edit from "../../inventary/editar/Edit.svelte";
+    import Edit from "../../Products/editar/Edit.svelte";
     import { URL } from "../../tools/connections/url"
     import {deleteProduct} from "../../stores/products";
     export let handleClickClose;

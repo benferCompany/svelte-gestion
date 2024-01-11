@@ -4,9 +4,10 @@
     import Pagination from "./pagination/Pagination.svelte";
     
     let debouncedSearch;
-    let customers;
+    export let suppliers;
     let desc;
-    let handleClickClose
+    export let handleClickClose
+    
     
 </script>
 
@@ -15,8 +16,8 @@
 </div>
 
 <div>
-    <Tablet bind:customers bind:debouncedSearch />
+    <Tablet bind:handleClickClose bind:suppliers bind:debouncedSearch />
     <div class="d-flex justify-content-center">
-        <Pagination bind:customers bind:desc {debouncedSearch} />
+        <Pagination bind:suppliers bind:desc {debouncedSearch} />
     </div>
 </div>
