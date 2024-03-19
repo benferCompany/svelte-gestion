@@ -24,7 +24,7 @@
             <input
                 type="button"
                 value="Crear proveedor"
-                class="btn btn-success"
+                class="btn btn-success"  
                 on:click={()=>{
                     visible = true;
                 }}
