@@ -1,11 +1,11 @@
-import {URL} from "../../../tools/connections/url";
-export const getStores=async()=>{
-    let fetchStore = await fetch(URL+"/company")
+import { URL } from "../../../tools/connections/url";
+export const getStores = async () => {
+    let fetchStore = await fetch(URL + "/company")
     let stores = await fetchStore.json();
     return stores;
 }
 
-export const searchByText = async(text, url)=>{
+export const searchByText = async (text, url) => {
     try {
         const response = await fetch(url, {
             method: "POST",
@@ -15,71 +15,113 @@ export const searchByText = async(text, url)=>{
             body: JSON.stringify(text),
         });
         return await response.json();
-        
+
     } catch (error) {
         console.log(error);
         console.error("Error fetching data:", error);
     }
-} 
+}
 
+export let thead = [
+    "id",
+    "Nombre",
+    "Nombre de compañia",
+    "Cuit",
+    "Dirección",
+    "Ultima modifiación",
+    "Acción",
+];
 
-export const convertObject = (store) => {
-    let keys = Object.keys(store);
-    console.log(keys);
-    let convertStore = {
-        id: [store.id, keys[0], "col-3 text-center"],
-        Nombre: [store.name, keys[1], "col-9 text-center"],
-        Empresa: [store.business_name, keys[2], "col-6 text-center"],
-        Cuit: [store.cuit, keys[3], "col-6 text-center"],
-        Dirección: [store.address, keys[4], "col-8 text-center"],
-        Fecha: [store.business_activity, keys[5], "col-4 text-center"],
-        Acción: ["Editar","Cancelar","btn btn-warning me-2","btn btn-danger"],
-    };
-    return convertStore;
-};
+export const handleDelete = async(id)=>{
+    try {
+        const response = await fetch(`${URL}/company/${id}`, {
+            method: 'DELETE',
+        });
 
-
-export const handleSubmit =async(e)=>{
-    let formData = new FormData(e.target);
-
-    formData.set("business_activity", getDate());
-    let object = {};
-    for (let data of formData.entries()) {
-        let [key, value] = data; // Desestructura la entrada en clave y valor
-        object[key] = value;
+        if (response.ok) {
+            // La eliminación fue exitosa
+            return { ok: true };
+        } else {
+            // La eliminación falló, puedes manejar el error aquí
+            return { success: false, error: 'No se pudo eliminar la compañia.' };
+        }
+    } catch (error) {
+        // Error en la solicitud
+        return { success: false, error: 'Error de conexión.' };
     }
-    
-    let response = await  updateStore(object);
-    console.log(response)
-    return response;
-    
 }
 
 
-const getDate=()=>{
-    let date = new Date();
-    let day = date.getDate();
-    let month = date.getMonth() + 1;
-    let year = date.getFullYear();
-    let dateFormat = `${day}/${month}/${year}`;
-    return dateFormat;   
-}
 
-export const updateStore=async (object)=>{
+export let handleChange =  async (text,methods) => {
+    let object =[]
+    let data=[];
+    let page =0;
+    await new Promise(resolve => setTimeout(resolve, 300));
+   
+    data = await searchByText(
+        { name: text },
+        `${URL}/company/name?page=${page}&size=5`,
+    );
     
-        try {
-            const response = await fetch(URL+"/company",{
-                method:"PUT",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(object)
-    
-            });
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.log(error);
-            console.log("Error al crear cliente");
-        }    
-  
-    
-}
+    for (var i = 0; i < data.content.length; i++) {
+        object.push({
+            id: {
+                value: data.content[i].id,
+                name: data.content[i].id,
+                type: "text",
+                class: "col-2",
+            },
+            name: {
+                value: data.content[i].name,
+                name: data.content[i].name,
+                type: "text",
+                class: "col-2",
+            },
+            business_name: {
+                value: data.content[i].business_name,
+                name: data.content[i].business_name,
+                type: "text",
+                class: "col-2",
+            },
+            cuit: {
+                value: data.content[i].cuit,
+                name: data.content[i].cuit,
+                type: "text",
+                class: "col-3",
+            },
+            address: {
+                value: data.content[i].address,
+                name: data.content[i].address,
+                type: "text",
+                class: "col-3",
+            },
+            business_activity: {
+                value: data.content[i].business_activity,
+                name: data.content[i].business_activity,
+                type: "date",
+                class: "col-3",
+            },
+            accion: [
+                {
+                    value: "Editar",
+                    name: "send",
+                    type: "button",
+                    class: "btn btn-warning btn-sm me-2",
+                    onclick: methods.handleClickClose,
+                    delete: false,
+                },
+                {
+                    value: "Eliminar",
+                    name: "delete",
+                    type: "button",
+                    class: "btn btn-danger btn-sm",
+                    onclick: "",
+                    delete: true,
+                },
+            ],
+        });
+    }
+
+    return object;
+};

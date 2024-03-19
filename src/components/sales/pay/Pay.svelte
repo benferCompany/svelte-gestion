@@ -1,18 +1,29 @@
 <script>
-    import { Link } from "svelte-routing";
-    import {payStore, tdsStore,total} from "../../stores/cart"
-    
+    import { Link, navigate } from "svelte-routing";
+    import { payStore, tdsStore, total } from "../../stores/cart";
+    import ParentSelectByText from "../../tools/selectetByText/parentSelectByText.svelte";
+    import { options, salePdf } from "./pay";
     let pago = 0;
-    console.log($total)
+    let customer;
+    let fiscalstatus = "";
+    let paymentType;
+    let typeOfPayment = ["Efectivo", "Tarjeta de credito", "Debito", "Transferencia"]
+    let fiscalStatus = ["Consumidor Final", "Responsable Monotributo", "Responsable Inscripto", "Excento"]
+    $:{
+        fiscalstatus = customer && customer.fiscal_status? customer.fiscal_status:"";        
+    }
     
 </script>
 
 <div class="overlay">
     <div class="pay">
         <div class="header bg-primary">
-            <div on:mousedown={()=>{
-                payStore.handleClickPay($tdsStore)
-            }} class="close">
+            <div
+                on:mousedown={() => {
+                    payStore.handleClickPay($tdsStore);
+                }}
+                class="close"
+            >
                 <Link class="text-decoration-none" to="/ventas">&#128473;</Link>
             </div>
             <h4>Información de pago</h4>
@@ -20,34 +31,43 @@
         <div class="d-flex justify-content-around">
             <div class="text-center">
                 <label for="">Cliente</label>
-                <select
-                    class="form-control"
-                    style="
-                    width:20em;
-                "
-                >
-                    <option>Consumidor final</option>
+                <ParentSelectByText bind:select={customer} {options} />
+                <label for="">Condición fiscal</label>
+                <select bind:value={fiscalstatus} class="form-control" name="" id="">
+                    {#each  fiscalStatus as status}
+                        <option value={status}>{status}</option>
+                    {/each}
                 </select>
             </div>
-            <div style="align-self:end;">
+            <div class="mb-2" style="align-self:end;">
                 <div>
-                    <button class="btn btn-secondary" style="width:20em;"
-                        >Crear Cliente</button
+                    <Link
+                        to="/customers"
+                        class="btn btn-secondary text-decoration-none"
+                        style="width:20em;">Crear Cliente</Link
                     >
                 </div>
             </div>
         </div>
         <div>
-            <div class="d-flex justify-content-around">
-                <select
-                    style="
-                    width:20em;
-                "
-                    class="form-control"
-                >
-                    <option value="">Efectivo</option>
-                </select>
+            <div class="d-flex justify-content-around text-center">
                 <div>
+                    <label for="">Tipo de pago</label>
+                    <select
+                        bind:value={paymentType}
+                        style="
+                        width:20em;
+                    "
+                        class="form-control"
+                    >
+                        {#each typeOfPayment as item}
+                            <option value={item}>{item}</option>
+                        {/each}
+                    </select>
+                    
+                </div>
+                <div>
+                    <label for="">Ingrese Monto</label>
                     <input
                         class="form-control"
                         type="text"
@@ -57,16 +77,32 @@
                     />
                 </div>
             </div>
-
+            
             <div class="d-flex justify-content-center">
                 <div>
                     <h3>Total a pagar</h3>
-                    <h1 class="text-center">${$total-pago}</h1>
+                    <h1 class="text-center">${$total - pago}</h1>
                 </div>
             </div>
         </div>
         <div>
             <button
+                on:click={() => {
+                    let object = {
+                        Nombre: customer.name,
+                        cuit: customer.idPersonal,
+                        Direccion: customer.address,
+                        TipoDePago: paymentType,
+                        TipoFiscal: fiscalstatus,
+                        Productos: $tdsStore,
+                        total: $total,
+                    };
+                    console.log(object);
+                    $salePdf = object;
+                    if (customer) {
+                        navigate("/factura");
+                    }
+                }}
                 style="
                     margin-left:80%;
                 "
@@ -108,5 +144,4 @@
         bottom: 0;
         right: 0;
     }
-    
 </style>

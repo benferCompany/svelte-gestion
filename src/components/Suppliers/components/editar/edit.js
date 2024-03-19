@@ -12,7 +12,6 @@ export const handleSubmit =async (e)=>{
         let [key, value] = data; // Desestructura la entrada en clave y valor
         object[key] = value;
     }
-    console.log(object);
     return editSupplier(object);
 }
 

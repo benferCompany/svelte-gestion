@@ -10,11 +10,19 @@
     let visible = false;
     let customer;
     let loading = false;
+    let selectFiscalStatus;
 
     export let handleClickClose = (getCustomer) => {
         customer = getCustomer;
         visible = !visible;
+        selectFiscalStatus = customer.fiscal_status;
     };
+    let fiscalStatus = [
+        "Consumidor Final",
+        "Responsable Monotributo",
+        "Responsable Inscripto",
+        "Excento",
+    ];
 </script>
 
 <Loading bind:loading />
@@ -42,14 +50,13 @@
                     customers.content = customers.content.map((ct) =>
                         ct.id === customerEdit.id ? customerEdit : ct,
                     );
-                    console.log(customers.content);
                     loading = false;
                 }}
                 action=""
             >
                 <div>
                     <div class="d-flex">
-                        <div style={"width:30%; margin-right:0.5em;"}>
+                        <div style={"width:10%; margin-right:0.5em;"}>
                             <label for="">ID</label>
 
                             <input
@@ -65,7 +72,7 @@
                                 name="id"
                             />
                         </div>
-                        <div style={"width:100%;"}>
+                        <div style={"width:45%;"}>
                             <label for="">Cuit/DNI</label>
                             <input
                                 type="text"
@@ -73,6 +80,14 @@
                                 value={customer.idPersonal}
                                 class="form-control"
                             />
+                        </div>
+                        <div style={"width:45%; margin-left:0.5em;"}>
+                            <label for="">Condición fiscal</label>
+                            <select value={selectFiscalStatus} name="fiscal_status" class="form-control">
+                                {#each fiscalStatus as item}
+                                    <option value={item}>{item}</option>
+                                {/each}
+                            </select>
                         </div>
                     </div>
                 </div>

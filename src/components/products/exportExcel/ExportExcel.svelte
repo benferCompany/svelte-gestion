@@ -86,7 +86,7 @@
             URL+"/products/exportExcel",
         );
         promiseProducts = await fetchProducts.json();
-        console.log(promiseProducts);
+       
         loading = false;
     };
 </script>

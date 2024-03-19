@@ -1,5 +1,6 @@
 <script>
     import {URL} from "../../../../../tools/connections/url"
+    export let cod2;
     let storeSupplier;
     let getStoreSupplier = async () => {
         const fetchSupplier = await fetch(
@@ -45,6 +46,7 @@
             type="text"
             class="form-control text-center"
             name="idSupplierTwo"
+            bind:value={cod2}
             
         />
     </div>

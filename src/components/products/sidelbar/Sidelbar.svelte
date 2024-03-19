@@ -34,20 +34,6 @@
             }} type="button" class="btn btn-success">Exportar Excel</button
             >
         </div>
-        <div>
-            <button on:click={()=>{
-               
-                booleanView = 3;
-            }} type="button" class="btn btn-success">Actualizar Stock</button
-            >
-        </div>
-        <div>
-            <button on:click={()=>{
-               
-                booleanView = 4;
-            }} type="button" class="btn btn-success">Act. alm. proveedor</button
-            >
-        </div>
     </div>
 </div>
 

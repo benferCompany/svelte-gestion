@@ -1,39 +1,65 @@
 <script>
     import { Link } from "svelte-routing";
-    import {URL} from "../../tools/connections/url"
+    import { URL } from "../../tools/connections/url";
     import { tdsStore } from "../../stores/cart";
+    import { selectCompany, filterStock } from "../../stores/company";
     export let searchProduct;
     import debounce from "lodash/debounce";
 
     let products = [];
     let datos = [];
     export const debouncedSearch = debounce(async (description) => {
-       
-            products = await searchProduct(
-                URL+"/products/name",
-                { description: description.target.value }
-            );
-            products = products.content
+        products = await searchProduct(URL + "/products/name", {
+            description: description.target.value,
+        });
+        products = products.content;
     }, 300); // 300ms de tiempo de espera antes de realizar la búsqueda
 
-    
     let stock;
+    let stock_min;
+    let stock_max;
+    let stock_id;
 
     $: {
         datos = [];
         if (products.length > 0) {
             for (const product of products) {
-                if (product.stores[0]) {
-                    stock = product.stores[0].stock;
-                } else {
-                    stock = 0;
-                }
+                console.log(product.stores);
+                console.log(filterStock(product.stores, $selectCompany.name));
+                stock =
+                    product.stores[0] &&
+                    filterStock(product.stores, $selectCompany.name)[0]
+                        ? filterStock(product.stores, $selectCompany.name)[0]
+                              .stock
+                        : 0;
+                stock_min =
+                    product.stores[0] &&
+                    filterStock(product.stores, $selectCompany.name)[0]
+                        ? filterStock(product.stores, $selectCompany.name)[0]
+                              .stock_min
+                        : 0;
+                stock_max =
+                    product.stores[0] &&
+                    filterStock(product.stores, $selectCompany.name)[0]
+                        ? filterStock(product.stores, $selectCompany.name)[0]
+                              .stock_max
+                        : 0;
+                stock_id =
+                    product.stores[0] &&
+                    filterStock(product.stores, $selectCompany.name)[0]
+                        ? filterStock(product.stores, $selectCompany.name)[0]
+                              .id
+                        : 0;
+
                 datos = [
                     ...datos,
                     {
                         imagen: product.image,
                         id: product.id,
                         stock,
+                        stock_min,
+                        stock_max,
+                        stock_id,
                         product: product.description,
                         count: 1,
                         pvp: product.selling_price,
@@ -58,12 +84,21 @@
             >
                 <div
                     class="card"
-                    style="width: 8rem; height:12em; overflow:hidden;"
+                    style="width: 8rem; overflow:hidden;"
                 >
                     <p class="pvp">${item.pvp}</p>
                     <img src={item.imagen} alt="" />
                     <div class="card-body rounded p-product">
                         <p class="s-product">{item.product}</p>
+                        {#if item.stock < item.stock_min || item.stock == 0}
+                            <strong class="s-product text-danger">
+                                Stock: {item.stock}
+                            </strong>
+                        {:else}
+                            <strong class="s-product text-info"
+                                >Stock: {item.stock}</strong
+                            >
+                        {/if}
                     </div>
                 </div>
             </div>
@@ -89,9 +124,9 @@
         border-radius: 0.2em;
         color: rgb(8, 8, 8);
     }
-    .s-product{
+    .s-product {
+        margin: 0;
+        padding: 0;
         font-size: 0.8em;
-        
     }
-    
 </style>

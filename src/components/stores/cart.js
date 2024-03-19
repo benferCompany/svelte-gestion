@@ -23,6 +23,9 @@ const store = () => {
                         {
                             id: item.id,
                             stock: item.stock,
+                            stock_min: item.stock_min,
+                            stock_max: item.stock_max,
+                            stock_id: item.stock_id,
                             product: item.product,
                             count: item.count,
                             pvp: item.pvp,

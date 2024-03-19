@@ -1,6 +1,6 @@
 <script>
     import { Link } from "svelte-routing";
-    import { tdsStore  } from "../../stores/cart";
+    import { tdsStore } from "../../stores/cart";
     let ths = [
         "id",
         "stock",
@@ -23,6 +23,7 @@
                 updateSubtotal(td);
             }
         });
+        console.log($tdsStore);
     }
 
     const handleLink = (e) => {
@@ -46,7 +47,15 @@
                 {#each $tdsStore as item}
                     <tr>
                         <td>{item.id}</td>
-                        <td>{item.stock - item.count}</td>
+                        {#if item.stock - item.count < item.stock_min}
+                            <td class="bg-danger text-white"
+                                ><strong>{item.stock - item.count}</strong></td
+                            >
+                        {:else}
+                            <td class="bg-info text-white"
+                                ><strong>{item.stock - item.count}</strong></td
+                            >
+                        {/if}
                         <td>{item.product}</td>
                         <td class="col-1"
                             ><input

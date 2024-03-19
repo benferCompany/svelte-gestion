@@ -2,23 +2,29 @@
     import Overlay from "../../../tools/overlay/Overlay.svelte";
     import CloseButton from "../../../tools/close/CloseButton.svelte";
     import Loading from "../../../tools/loading/Loading.svelte";
-    let data = {};
+    import Message from "../../../message/Message.svelte"
+
+    //Atributos de Message
+    export let alertMessage;
+    export let showAndHideAlert;
+    //////////////////////
+
+    let paramData = {};
     let keys;
     let visible = false;
     let loading = false
+    export let data = [];
     export let convertObject;
     export let handleClickClose = (e) => {
-        console.log(convertObject(e));
-        data = convertObject(e);
-        keys = Object.keys(data);
+        paramData = convertObject(e);
+        keys = Object.keys(paramData);
         visible = !visible;
     };
     export let handleSubmit = (e) => {
         console.log(e.target);
     };
-    console.log(data)
-
 </script>
+<Message {alertMessage} bind:showAndHideAlert />
 <Loading bind:loading/>
 <Overlay bind:visible>
     {#if keys}
@@ -28,10 +34,14 @@
                 <CloseButton onClose={handleClickClose} />
             </div>
             <form on:submit|preventDefault={async (e)=>{
+                
                 visible = !visible;
                 loading = true;
-                handleSubmit(e)
+                let response= await handleSubmit(e)
+                response
+                data = []
                 loading =false;
+                showAndHideAlert();
                 
                 
                 
@@ -39,31 +49,31 @@
                 <div class="row container">
                     {#each keys as key (key)}
                         {#if key != "Acción"}
-                            <div class={data[key][2]}>
+                            <div class={paramData[key][2]}>
                                 <label for="">{key}</label>
                                 <div>
                                     {#if key == "id"}
                                         <input
                                             disabled
-                                            type="text"
+                                            type={paramData[key][3]}
                                             id=""
                                             class="form-control"
-                                            value={data[key][0]}
+                                            value={paramData[key][0]}
                                         />
                                         <input
-                                            type="text"
-                                            name={data[key][1]}
+                                            type={paramData[key][3]}
+                                            name={paramData[key][1]}
                                             id=""
                                             class="form-control d-none"
-                                            value={data[key][0]}
+                                            value={paramData[key][0]}
                                         />
                                     {:else}
                                         <input
-                                            type="text"
-                                            name={data[key][1]}
+                                            type={paramData[key][3]}
+                                            name={paramData[key][1]}
                                             id=""
                                             class="form-control"
-                                            value={data[key][0]}
+                                            value={paramData[key][0]}
                                         />
                                     {/if}
                                 </div>
@@ -75,8 +85,8 @@
                                         type="submit"
                                         
                                         id=""
-                                        class={data[key][2]}
-                                        value={data[key][0]}
+                                        class={paramData[key][2]}
+                                        value={paramData[key][0]}
                                     />
 
                                     <input
@@ -84,8 +94,8 @@
                                         type="button"
                                         
                                         id=""
-                                        class={data[key][3]}
-                                        value={data[key][1]}
+                                        class={paramData[key][3]}
+                                        value={paramData[key][1]}
                                     />
                                 </div>
                             </div>

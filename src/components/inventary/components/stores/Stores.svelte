@@ -1,48 +1,46 @@
 <script>
-    import { URL } from "../../../tools/connections/url";
+    import Create from "../create/Create.svelte";
     import Edit from "../editar/Edit.svelte";
     import SearchAndShowItems from "../searchAndShowItems/SearchAndShowItems.svelte";
-    import { searchByText, convertObject, handleSubmit } from "./stores";
+    import { thead, handleDelete, handleChange } from "./stores";
+    import { convertObject, handleSubmit } from "../editar/edit";
+    import { objectCreate, submitStoreCreate } from "../create/create";
 
+    //Atributos de message
+     let alertMessage = {
+        alertStyle: "alert-success",
+        message: "La compañia se actualizo con éxito",
+    };
+    
+    let showAndHideAlert;
+         ////////////////////
     let handleClickClose;
-    let thead = [
-        "id",
-        "Nombre",
-        "Nombre de compañia",
-        "Cuit",
-        "Dirección",
-        "Fecha",
-        "Acción",
-    ];
-
     let data = [];
     let page = 0;
-    const handleChange = async (text) => {
-        data = await searchByText(
-            { name: text },
-            `${URL}/company/name?page=${page}&size=5`,
-        );
-
-        for (var i = 0; i < data.content.length; i++) {
-            data.content[i].accion = true;
-        }
-        data.content = data.content.map((objeto) => {
-            const { stores, ...resto } = objeto;
-            return resto;
-        });
-        data = data.content;
-    };
-
+    let visible = false;
     
-
     
 </script>
 
-<h1>Depositos</h1>
+<h3>Depositos</h3>
 <hr />
 <div>
-    <input type="button" value="Crear deposito" class="btn btn-secondary" />
+    <input
+        on:click={() => {
+            visible = true;
+        }}
+        type="button"
+        value="Crear deposito"
+        class="btn btn-secondary"
+    />
 </div>
 <hr />
-<Edit {convertObject} {handleSubmit} bind:handleClickClose />
-<SearchAndShowItems {thead} {data} {handleChange} {handleClickClose} />
+<Create handleSubmit={submitStoreCreate} bind:visible data={objectCreate} />
+<Edit {convertObject} {handleSubmit} bind:handleClickClose bind:data {alertMessage} {showAndHideAlert} />
+<SearchAndShowItems
+    {handleDelete}
+    {thead}
+    {data}
+    {handleChange}
+    bind:handleClickClose
+/>

@@ -1,8 +1,9 @@
 <script>
     import { Link } from "svelte-routing";
+    import User from "./User.svelte";
     let classLink = "btn btn-primary text-decoration-none text-white";
 </script>
-
+<User/>
 <nav class="">
     <ul
         class="d-flex ul justify-content-around list-unstyled bg-primary p-2 shadow rounded"

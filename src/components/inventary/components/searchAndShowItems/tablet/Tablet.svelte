@@ -1,21 +1,29 @@
 <script>
-    // Supongamos que tienes un array de objetos con propiedades comunes
+    import MessageDelete from "../../../../tools/delete/message/MessageDelete.svelte";
+
+    let objectId;
+    let visible = false;
     export let data = [];
     export let thead = [];
-    export let handleClickClose;
-    export let handleDelete = (e)=>{
-        console.log(e)
-    }
-    // Obtén las claves del primer objeto para usarlas como encabezados
+    export let handleDelete = (e) => {
+       console.log(e);
+    };
+    let alertMessage;
     let keys = Object.keys(data[0]);
-   
 </script>
 
+<MessageDelete
+    {objectId}
+    {alertMessage}
+    bind:objects={data}
+    bind:deleteObject={handleDelete}
+    bind:visible
+/>
 {#if data.length > 0}
     <div>
         <table class="table table-striped">
             <thead>
-                <tr>
+                <tr class="text-center">
                     {#each thead as th}
                         <th>{th}</th>
                     {/each}
@@ -23,30 +31,38 @@
             </thead>
 
             <tbody>
-                {#each data as item}
+                {#each data as item,i}
                     <tr class="align-middle">
                         {#each keys as key}
-                            {#if key === "accion"}
-                                <td>
-                                    <input
-                                        on:click={()=>{
-                                            handleClickClose(item)
-                                        }}
-                                        type="button"
-                                        value="Editar"
-                                        class="btn btn-warning btn-sm"
-                                    />
-                                    <input
-                                        on:click={()=>{
-                                            handleDelete(item.id)
-                                        }}
-                                        type="button"
-                                        value="Eliminar"
-                                        class="btn btn-danger btn-sm"
-                                    />
-                                </td>
+                            {#if key !== "accion"}
+                                <td class="text-center">{item[key].name}</td>
                             {:else}
-                                <td>{item[key]}</td>
+                                <td class="text-center">
+                                    {#each item[key] as itemAccion}
+                                        <input
+                                            on:click={() => {
+                                                 let object = {};
+                                                 console.log(item)
+                                                    let itemKeys =
+                                                        Object.keys(item);
+                                                    itemKeys.forEach((keyI) => {
+                                                            object[keyI] =
+                                                            data[i][keyI].value;
+                                                    });
+                                                if(!itemAccion.delete){
+                                                    itemAccion.onclick(object);
+                                                }else{
+                                                    objectId= object.id
+                                                    visible =true
+                                                    
+                                                }
+                                            }}
+                                            type={itemAccion.type}
+                                            value={itemAccion.value}
+                                            class={itemAccion.class}
+                                        />
+                                    {/each}
+                                </td>
                             {/if}
                         {/each}
                     </tr>

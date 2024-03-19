@@ -1,11 +1,11 @@
 <script>
     import { showSupplier } from "../../../../stores/supplier";
-    import {URL} from "../../../../tools/connections/url"
+    import { URL } from "../../../../tools/connections/url";
     let getSuppliers = [];
     let suppliers = [];
     async function fetchData() {
         // Haces la llamada asíncrona
-        let datos = await showSupplier(URL+"/supplier");
+        let datos = await showSupplier(URL + "/supplier");
         getSuppliers = datos;
     }
     $: {
@@ -36,7 +36,7 @@
                 },
             },
         ],
-        boolean:false
+        boolean: false,
     };
     storeSupplier = product.storeSuppliers[0];
 
@@ -82,38 +82,68 @@
             class="form-control text-center"
             name="storeSupplier"
             disabled={editStock.stockDisabled}
-            bind:value={storeSupplier}
+            on:change={(e) => {
+                storeSupplier = JSON.parse(e.target.value);
+            }}
         >
             {#each suppliers as stSup}
-                <option value={product.storeSuppliers[0]} selected
-                    >{stSup.name}</option
+                <option
+                    value={JSON.stringify(product.storeSuppliers[0])}
+                    selected>{stSup.name}</option
                 >
             {/each}
         </select>
-        
     {:else}
         <select
             class="form-control text-center"
             name="storeSupplier"
             disabled={editStock.stockDisabled}
-            bind:value={storeSupplier}
+            on:change={(e) => {
+                storeSupplier = JSON.parse(e.target.value);
+            }}
         >
-            {#each product.storeSuppliers as stSup}
-                <option value={stSup} selected>{stSup.supplier.name}</option>
+            {#each suppliers as supplier, index}
+                    {#if !product.storeSuppliers[index]}
+                        <option
+                            value={JSON.stringify({
+                                id: 0,
+                                idInternal: 0,
+                                idSupplierOne: 0,
+                                idSupplierTwo: 0,
+                                supplier: supplier,
+                                product:product,
+                            })}>{supplier.name}</option
+                        >
+                    {:else}
+                        <option value={JSON.stringify(product.storeSuppliers[index])}
+                            >{product.storeSuppliers[index].supplier.name}</option
+                        >
+                    {/if}
+                
             {/each}
         </select>
     {/if}
 </div>
 <div class="d-flex justify-content-around text-center">
-    <input class="d-none" type="text" name="storeSupplierId" value={storeSupplier.id}>
-    <input type="text" name="supplier" class="d-none" value={JSON.stringify(storeSupplier.supplier)}>
+    <input
+        class="d-none"
+        type="text"
+        name="storeSupplierId"
+        value={storeSupplier?storeSupplier.id:0}
+    />
+    <input
+        type="text"
+        name="supplier"
+        class="d-none"
+        value={JSON.stringify(storeSupplier?storeSupplier.supplier:suppliers[0])}
+    />
     <div class="col-4">
         <label for="">Cod prov 1</label>
         <input
             type="text"
             class="form-control text-center"
             name="idSupplierOne"
-            value={storeSupplier.idSupplierOne}
+            value={storeSupplier?storeSupplier.idSupplierOne:0}
             disabled={editStock.stockDisabled}
         />
     </div>
@@ -123,7 +153,7 @@
             type="text"
             class="form-control text-center"
             name="idSupplierTwo"
-            value={storeSupplier.idSupplierTwo}
+            value={storeSupplier?storeSupplier.idSupplierTwo:0}
             disabled={editStock.stockDisabled}
         />
     </div>

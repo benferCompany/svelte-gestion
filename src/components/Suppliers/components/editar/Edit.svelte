@@ -42,7 +42,7 @@
                     suppliers.content = suppliers.content.map((ct) =>
                         ct.id === supplierEdit.id ? supplierEdit : ct,
                     );
-                    console.log(suppliers.content);
+
                     loading = false;
                 }}
                 action=""

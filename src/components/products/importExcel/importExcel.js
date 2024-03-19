@@ -18,7 +18,7 @@ const mappedProduct = async (products) => {
     company = await getCompany();
     supplier = await getSupplier();
     
-    console.log(company);
+    
 
     let productDTOs = [];
     for (const object of products) {

@@ -1,15 +1,10 @@
 <script>
     import { Link } from "svelte-routing";
     import { payStore, tdsStore, total } from "../cart";
-    import { showSupplier } from "../../../stores/supplier";
-    import { URL } from "../../../tools/connections/url";
-    let suppliers;
-    let getSuppliers = async () => {
-        suppliers = await showSupplier(URL + "/supplier");
-    };
-    getSuppliers();
+    import { options } from "./pay";
+    import ParentSelectByText from "../../../tools/selectetByText/parentSelectByText.svelte";
+
     let pago = 0;
-    
 </script>
 
 <div class="overlay">
@@ -30,23 +25,14 @@
         <div class="d-flex justify-content-around">
             <div class="text-center">
                 <label for="">Proveedor</label>
-                <select
-                    class="form-control"
-                    style="
-                    width:20em;
-                "
-                >
-                    {#if suppliers}
-                        {#each suppliers as supplier}
-                            <option value={supplier}>{supplier.name}</option>
-                        {/each}
-                    {/if}
-                </select>
+                <ParentSelectByText {options} />
             </div>
             <div style="align-self:end;">
                 <div>
-                    <button class="btn btn-secondary" style="width:20em;"
-                        >Crear Proveedor</button
+                    <Link
+                        to="/suppliers"
+                        class="btn btn-secondary text-black text-decoration-none"
+                        style="width:20em;">Crear Proveedor</Link
                     >
                 </div>
             </div>

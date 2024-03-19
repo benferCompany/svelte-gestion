@@ -7,6 +7,7 @@
     import Message from "../../message/Message.svelte";
     import StoreSupplier from "./componentes/storeSupplier/StoreSupplier.svelte";
     import Loading from "../../tools/loading/Loading.svelte";
+    import {productsTablet} from "../../searchAndShowProducts/table/tablet";
     export let booleanEdit = false;
 
     let loading = false;
@@ -45,10 +46,9 @@
                     booleanEdit = false;
                     loading = true;
                     const responseEdit = await handleEdit(e, image);
-
                     if (responseEdit) {
                         loading = false;
-                        products[objectFind] = responseEdit;
+                        $productsTablet.content[objectFind] = responseEdit;
                         e.target.reset();
                         showAndHideAlert();
                     } else {

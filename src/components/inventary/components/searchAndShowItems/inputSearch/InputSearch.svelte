@@ -1,13 +1,16 @@
 <script>
    export let handleChange;
+   export let data =[];
+   export let handleClickClose
 </script>
 
 <div>
     <div class="parentInput d-flex">
         <p>&#128269;</p>
         <input
-            on:input={(e) => {
-                handleChange(e.target.value)
+            on:input={async(e) => {
+                
+              data= await handleChange(e.target.value,{handleClickClose})
                
             }}
             

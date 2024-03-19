@@ -44,7 +44,7 @@ export const handleCreate = async (e, image) => {
             }
         ]
     }
-    console.log(productDTO)
+    
     const createResponse = await createProduct(productDTO);
 
    

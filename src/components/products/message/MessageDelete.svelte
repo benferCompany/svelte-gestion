@@ -11,7 +11,6 @@
     const deleteProductById = async (id) => {
         const response = await deleteProduct(id);
         products = products.filter(product => product.id !== id);
-        console.log(response.success)
         if(response.success){
             showAndHideAlert();
         }

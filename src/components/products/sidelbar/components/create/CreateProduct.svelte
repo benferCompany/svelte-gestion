@@ -6,7 +6,13 @@
     import StockEditor from "./stock/StockEditor.svelte";
     import { handleCreate } from "./create";
     import StoreSupplier from "./storeSupplier/StoreSupplier.svelte";
+    import {lastElement} from "../../../../stores/products";
+    import { onMount } from "svelte";
     let booleanEdit = false;
+    let addInternal = "1235";
+    let cod2 ="";
+    let idInternal;
+    $:{ idInternal= cod2+addInternal}
     export let handleClickCreate = () => {
         booleanEdit = !booleanEdit;
     };
@@ -17,6 +23,12 @@
     };
 
     let image = "imgs/1.jpg";
+
+    onMount(async()=>{
+        addInternal = await lastElement()+1;
+        
+    })
+    
 </script>
 
 <Message {alertMessage} bind:showAndHideAlert />
@@ -51,8 +63,15 @@
                         <label for="">Id interno</label>
                         <input
                             type="text"
-                            class="form-control text-center"
+                            class="form-control text-center bg-white text-dark"
+                            bind:value={idInternal}
+                            disabled
+                        />
+                        <input
+                            type="text"
+                            class="d-none"
                             name="idInternal"
+                            bind:value={idInternal}
                         />
                     </div>
                     <div class="col-9">
@@ -97,8 +116,8 @@
                     </div>
                 </div>
 
-                <StockEditor />
-                <StoreSupplier />
+                <StockEditor/>
+                <StoreSupplier bind:cod2/>
                 <ImageEditor bind:image />
                 <div>
                     <input

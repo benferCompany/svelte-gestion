@@ -102,3 +102,14 @@ export const createOrUpdateProduct = async (url, method, data) => {
         console.error("Error fetching data:", error);
     }
 };
+
+export const lastElement = async()=>{
+    try {
+        const response = await fetch(`${URL}/products/lastElement`);
+        const data = await response.json();
+        return data
+
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+}
