@@ -5,7 +5,7 @@ import terser from '@rollup/plugin-terser';
 import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import css from 'rollup-plugin-css-only';
-
+import pdfPreview from "vite-plugin-pdf-preview";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -46,6 +46,10 @@ export default {
 			},
 			
 		}),
+		pdfPreview({
+			pages: ["page.html"],
+			watch: ["**/*.html", "**/*.css"],
+		  }),
 		
 		// we'll extract any component CSS out into
 		// a separate file - better for performance

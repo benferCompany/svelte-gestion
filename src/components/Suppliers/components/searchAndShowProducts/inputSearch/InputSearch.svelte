@@ -13,7 +13,7 @@
             }}
             bind:value={desc}
             class="rounded form-control ms-2"
-            placeholder="Buscar cliente"
+            placeholder="Buscar proveedor"
             type="text"
         />
     </div>

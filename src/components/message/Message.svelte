@@ -31,6 +31,7 @@
 
 <style>
     div {
+        z-index: 99;
         position: fixed;
         bottom: 0;
         left: 30%;

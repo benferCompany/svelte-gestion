@@ -1,3 +1,5 @@
+import { readable, writable } from "svelte/store";
+import {URL} from "./../tools/connections/url";
 export const showCompany = async (URL) => {
 
     try {
@@ -9,3 +11,19 @@ export const showCompany = async (URL) => {
         console.error("Error fetching data:", error);
     }
 }
+
+export const readCompanies = readable(async () => {
+    let fetchCompany = await fetch(URL + "/company");
+    let companies = await fetchCompany.json()
+    
+    return companies;
+
+})
+
+export function filterStock(stores, searchTerm) {
+    return stores.filter((item) => {
+        return item.company.name.includes(searchTerm);
+    });
+}
+
+export const selectCompany = writable({});

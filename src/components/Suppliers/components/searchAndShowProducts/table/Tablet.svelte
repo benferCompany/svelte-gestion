@@ -2,55 +2,73 @@
     import { searchProduct } from "../../../../stores/products";
     import debounce from "lodash/debounce";
     import { URL } from "../../../../tools/connections/url";
-    export let customers = [];
+    import { deleteSupplier } from "../../../suppliers";
+    import MessageDelete from "../../../../tools/delete/message/MessageDelete.svelte";
+    export let suppliers = [];
+    export let handleClickClose;
+    let text = "¿Estas seguro que quieres eliminar este proveedor?"
+    let visible;
+    let objectId;
 
     export const debouncedSearch = debounce(async (name, page) => {
-        customers = await searchProduct(
-            `${URL}/customer/name?page=${page}&size=5`,
+        suppliers = await searchProduct(
+            `${URL}/supplier/name?page=${page}&size=5`,
             {
                 name: name.target.value,
             },
         );
     }, 300);
     $: {
-        console.log(customers);
+        suppliers;
     }
 </script>
-
-{#if customers}
+<MessageDelete {text} bind:objects={suppliers} bind:visible bind:objectId deleteObject={deleteSupplier}/>
+{#if suppliers}
     <table class="table">
         <thead>
-            <tr>
+            <tr> 
                 <th>Nombre</th>
                 <th>Apellido</th>
-                <th>Dirección</th>
+                <th>Nombre de empresa</th>
                 <th>Telefono</th>
                 <th>Cuit</th>
                 <th>Acción</th>
             </tr>
         </thead>
         <tbody>
-            {#if customers.content}
-                {#each customers.content as customer}
+            {#if suppliers.content}
+                {#each suppliers.content as supplier}
                     <tr>
                         <td>
-                            {customer.name}
+                            {supplier.name}
                         </td>
                         <td>
-                            {customer.last_name}
+                            {supplier.last_name}
                         </td>
                         <td>
-                            {customer.adrress}
+                            {supplier.name_bussiness}
                         </td>
                         <td>
-                            {#if customer.phone}
-                            {customer.phone}
+                            {#if supplier.phone}
+                                {supplier.phone}
                             {/if}
                         </td>
                         <td> 11-11111111-11 </td>
                         <td>
-                            <button class="btn btn-warning btn-sm me-1">Editar</button>
-                            <button class="btn btn-danger btn-sm">Eliminar</button>
+                            <button
+                                on:click={() => {
+                                    handleClickClose(supplier);
+                                }}
+                                class="btn btn-warning btn-sm me-1"
+                                >Editar</button
+                            >
+                            <button
+                                on:click={() => {
+                                    visible= true;
+                                    objectId = supplier.id;
+                                }}
+                                class="btn btn-danger btn-sm">Eliminar</button
+                            >
                         </td>
                     </tr>
                 {/each}

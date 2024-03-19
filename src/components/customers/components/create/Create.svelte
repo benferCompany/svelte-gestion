@@ -7,7 +7,7 @@
     let handleClickClose = (e) => {
         visible = !visible;
     };
-    
+    let fiscalStatus = ["Consumidor Final", "Responsable Monotributo", "Responsable Inscripto", "Excento"]
 </script>
 
 <Overlay bind:visible>
@@ -22,8 +22,8 @@
                 handleSubmit(e)
             }}>
                 <div>
-                    <div class="d-flex">
-                        <div style={"width:100%;"}>
+                    <div class="d-flex text-center">
+                        <div style={"width:50%; margin-right:0.25em;"}>
                             <label for="">Cuit/DNI</label>
                             <input
                                 type="text"
@@ -31,6 +31,14 @@
                                 class="form-control"
                                 required
                             />
+                        </div>
+                        <div style={"width:50%; margin-left:0.25em;"}>
+                            <label for="">Condición fiscal</label>
+                            <select name="fiscal_status" class="form-control" id="">
+                                {#each fiscalStatus as item}
+                                    <option value={item}>{item}</option>
+                                {/each}
+                            </select>
                         </div>
                     </div>
                 </div>

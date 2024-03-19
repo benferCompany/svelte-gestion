@@ -1,38 +1,91 @@
 <script>
-    import {Link} from "svelte-routing"
-    import {tdsStore} from "../cart";
+    import { Link } from "svelte-routing";
+    import { tdsStore } from "../cart";
     import debounce from "lodash/debounce";
     import { URL } from "../../../tools/connections/url";
+    import { selectCompany, filterStock } from "../../../stores/company";
     export let searchProduct;
     let storeSuppliers = [];
     let datos = [];
     export const debouncedSearch = debounce(async (description) => {
-       
         storeSuppliers = await searchProduct(
-                URL+"/storeSuppliers/idSupplier",
-                { idSupplierOne: description.target.value }
-            );
-            storeSuppliers = storeSuppliers.content
+            URL + "/storeSuppliers/idSupplier",
+            { idSupplierOne: description.target.value },
+        );
+        storeSuppliers = storeSuppliers.content;
     }, 300); // 300ms de tiempo de espera antes de realizar la búsqueda
 
-    
     let stock;
+    let stock_min;
+    let stock_max;
+    let stock_id;
 
     $: {
         datos = [];
         if (storeSuppliers.length > 0) {
             for (const storeSupplier of storeSuppliers) {
-                if (storeSupplier.product.stores[0]) {
-                    stock = storeSupplier.product.stores[0].stock;
-                } else {
-                    stock = 0;
-                }
+                console.log(
+                    filterStock(
+                        storeSupplier.product.stores,
+                        $selectCompany.name,
+                    ),
+                );
+
+                stock =
+                    storeSupplier.product.stores[0] &&
+                    filterStock(
+                        storeSupplier.product.stores,
+                        $selectCompany.name,
+                    )[0]
+                        ? filterStock(
+                              storeSupplier.product.stores,
+                              $selectCompany.name,
+                          )[0].stock
+                        : 0;
+                stock_min =
+                    storeSupplier.product.stores[0] &&
+                    filterStock(
+                        storeSupplier.product.stores,
+                        $selectCompany.name,
+                    )[0]
+                        ? filterStock(
+                              storeSupplier.product.stores,
+                              $selectCompany.name,
+                          )[0].stock_min
+                        : 0;
+                stock_max =
+                    storeSupplier.product.stores[0] &&
+                    filterStock(
+                        storeSupplier.product.stores,
+                        $selectCompany.name,
+                    )[0]
+                        ? filterStock(
+                              storeSupplier.product.stores,
+                              $selectCompany.name,
+                          )[0].stock_max
+                        : 0;
+
+                stock_id =
+                    storeSupplier.product.stores[0] &&
+                    filterStock(
+                        storeSupplier.product.stores,
+                        $selectCompany.name,
+                    )[0]
+                        ? filterStock(
+                              storeSupplier.product.stores,
+                              $selectCompany.name,
+                          )[0].id
+                        : 0;
+
                 datos = [
                     ...datos,
                     {
                         imagen: storeSupplier.product.image,
                         id: storeSupplier.product.id,
                         stock,
+                        stock_min,
+                        stock_max,
+                        stock_id,
                         product: storeSupplier.product.description,
                         count: 1,
                         costo: storeSupplier.product.cost_price,
@@ -55,14 +108,22 @@
                 }}
                 class="card-link mt-2"
             >
-                <div
-                    class="card"
-                    style="width: 8rem; height:12em; overflow:hidden;"
-                >
+                <div class="card" style="width: 8rem; overflow:hidden;">
                     <p class="costo">${item.costo}</p>
                     <img src={item.imagen} alt="" />
                     <div class="card-body rounded p-product">
                         <p class="s-product">{item.product}</p>
+                        {#if item.stock < item.stock_min || item.stock == 0}
+                            <strong class="s-product text-danger">
+                                Stock: {item.stock}
+                            </strong>
+                        {:else}
+                            <strong class="s-product text-info"
+                                >Stock: {item.stock}</strong
+                            >
+                        {/if}
+                        <p class="s-product">Stock Min: {item.stock_min}</p>
+                        <p class="s-product">Stock Max: {item.stock_max}</p>
                     </div>
                 </div>
             </div>
@@ -88,9 +149,9 @@
         border-radius: 0.2em;
         color: rgb(8, 8, 8);
     }
-    .s-product{
+    .s-product {
+        margin:0;
+        padding:0;
         font-size: 0.8em;
-        
     }
-    
 </style>

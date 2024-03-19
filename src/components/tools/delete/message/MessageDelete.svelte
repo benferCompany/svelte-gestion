@@ -11,15 +11,17 @@
 
     const deleteObjectById = async (id) => {
         const response = await deleteObject(id);
-        objects.content = objects.content.filter(object => object.id !== id);
+        objects = objects.filter(object => object.id.value !== id);
+        console.log(objects)
+        
         if(response.ok){
             showAndHideAlert();
         }
     
     };
-
+    export let alertMessage;
 </script>
-<Message bind:showAndHideAlert={showAndHideAlert}/>
+<Message {alertMessage} bind:showAndHideAlert={showAndHideAlert}/>
 <Overlay {visible}>
     <div class="confirm rounded">
         <div class="p-5">

@@ -3,26 +3,25 @@
     import debounce from "lodash/debounce";
     import { URL } from "../../../../tools/connections/url";
     import { deleteCustomer } from "../../../customers";
-    import MessageDelete from "../../../../tools/delete/message/MessageDelete.svelte";
+    import {customersTable} from "./table";
+    import MessageDelete from "../message/MessageDelete.svelte";
     export let customers = [];
     export let handleClickClose;
     let text = "¿Estas seguro que quieres eliminar este cliente?"
     let visible;
     let objectId;
-
+    let alertMessage;
     export const debouncedSearch = debounce(async (name, page) => {
-        customers = await searchProduct(
+        $customersTable = await searchProduct(
             `${URL}/customer/name?page=${page}&size=5`,
             {
                 name: name.target.value,
             },
         );
     }, 300);
-    $: {
-        customers;
-    }
+   $: customers = $customersTable;
 </script>
-<MessageDelete {text} bind:objects={customers} bind:visible bind:objectId deleteObject={deleteCustomer}/>
+<MessageDelete {alertMessage} {text} bind:objects={$customersTable.content} bind:visible bind:objectId deleteObject={deleteCustomer}/>
 {#if customers}
     <table class="table">
         <thead>

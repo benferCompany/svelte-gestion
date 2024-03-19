@@ -1,0 +1,6 @@
+@media print {
+    body {
+      color: black; /* Cambia 'black' al color deseado para el texto */
+      background-color: white; /* Cambia 'white' al color deseado para el fondo */
+    }
+  }
