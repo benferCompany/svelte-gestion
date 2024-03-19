@@ -20,7 +20,7 @@
 
 <div>
     <div class="d-flex">
-        <div class="me-2">
+        <div class="me-2"> 
             <input
                 type="button"
                 value="Crear proveedor"
