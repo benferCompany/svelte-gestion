@@ -3,7 +3,7 @@
     import debounce from "lodash/debounce";
     import MessageDelete from "../../tools/delete/message/MessageDelete.svelte";
     import { selectCompany, filterStock } from "../../stores/company";
-    import Edit from "../../Products/editar/Edit.svelte";
+    import Edit from "../../products/editar/Edit.svelte";
     import { URL } from "../../tools/connections/url";
     import { deleteProduct } from "../../stores/products";
     import { productsTablet } from "./tablet";
