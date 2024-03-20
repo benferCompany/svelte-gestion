@@ -2,7 +2,7 @@
 	import { Router, Link, Route } from "svelte-routing";
 	import Nav from "./routes/Nav.svelte";
 	import Sales from "./components/sales/Sales.svelte";
-	import ImportExcel from "./components/Products/importExcel/ImportExcel.svelte";
+	import ImportExcel from "./components/products/importExcel/ImportExcel.svelte";
 	import Buys from "./components/buys/Buys.svelte";
 	import Customers from "./components/customers/Customers.svelte";
 	import Suppliers from "./components/suppliers/Suppliers.svelte";
