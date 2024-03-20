@@ -2,7 +2,7 @@
     import { Link } from "svelte-routing";
     import { payStore, tdsStore, total } from "../cart";
     import { options } from "./pay";
-    import ParentSelectByText from "../../../tools/selectetByText/parentSelectByText.svelte";
+    import ParentSelectByText from "../../../tools/selectetByText/ParentSelectByText.svelte";
 
     let pago = 0;
 </script>
