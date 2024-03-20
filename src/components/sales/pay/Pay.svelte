@@ -1,7 +1,7 @@
 <script>
     import { Link, navigate } from "svelte-routing";
     import { payStore, tdsStore, total } from "../../stores/cart";
-    import ParentSelectByText from "../../tools/selectetByText/parentSelectByText.svelte";
+    import ParentSelectByText from "../../tools/selectetByText/ParentSelectByText.svelte";
     import { options, salePdf } from "./pay";
     let pago = 0;
     let customer;
