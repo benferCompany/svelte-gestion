@@ -11,8 +11,10 @@
         let flattenedData;
         let fileName = "";
         if (booleanProducts && !booleanStoreSuppliers && !booleanStores) {
+            console.log(jsonData)
             flattenedData = jsonData.map((product) => ({
                 id: product.id,
+                idInternal: product.idInternal,
                 titulo: product.title,
                 descripcion: product.description,
                 costo: product.cost_price,
@@ -50,12 +52,14 @@
                 acc.push(
                     ...product.storeSuppliers.map((storeSupplier) => ({
                         almacen_proveedor_id: storeSupplier?.id || "",
-                        codigo: storeSupplier?.idInternal || "",
                         codigo_proveedor: storeSupplier?.idSupplierOne || "",
                         codigo_proveedor2: storeSupplier?.idSupplierTwo || "",
                         proveedor_nombre: storeSupplier?.supplier?.name || "",
                         proveedor_id: storeSupplier?.supplier?.id || "",
-                        codigo_producto: storeSupplier?.idProduct || "",
+                        codigo_producto: storeSupplier?.product?.id || "",
+                        precio_costo: storeSupplier?.product?.cost_price ||"",
+                        precio_venta: storeSupplier?.product?.selling_price ||""
+                        
                     })),
                 );
                 return acc;

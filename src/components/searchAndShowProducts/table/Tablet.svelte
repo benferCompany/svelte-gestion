@@ -22,6 +22,7 @@
             `${URL}/products/name?page=${page}&size=5`,
             {
                 description: description.target.value,
+
             },
         );
     }, 300);
@@ -31,7 +32,7 @@
         stores = [];
         if (products.content) {
             for (const product of products.content) {
-                console.log(product.stores);
+                console.log($selectCompany);
                 console.log(filterStock(product.stores, $selectCompany.name));
                 stock =
                     product.stores[0] &&

@@ -22,7 +22,7 @@
 
     $: {
         datos = [];
-        if (products.length > 0) {
+        if (products.length > 0 && $selectCompany) {
             for (const product of products) {
                 console.log(product.stores);
                 console.log(filterStock(product.stores, $selectCompany.name));
