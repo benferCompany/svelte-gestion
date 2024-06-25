@@ -6,13 +6,15 @@
     import StockEditor from "./stock/StockEditor.svelte";
     import { handleCreate } from "./create";
     import StoreSupplier from "./storeSupplier/StoreSupplier.svelte";
-    import {lastElement} from "../../../../stores/products";
+    import { lastElement } from "../../../../stores/products";
     import { onMount } from "svelte";
     let booleanEdit = false;
-    let addInternal = "1235";
-    let cod2 ="";
+    let addInternal = 1;
+    let cod2 = "";
     let idInternal;
-    $:{ idInternal= cod2+addInternal}
+    $: {
+        idInternal = addInternal + cod2;
+    }
     export let handleClickCreate = () => {
         booleanEdit = !booleanEdit;
     };
@@ -24,11 +26,20 @@
 
     let image = "imgs/1.jpg";
 
-    onMount(async()=>{
-        addInternal = await lastElement()+1;
+    onMount(async () => {
+        try {
+            let response = await lastElement();
+            if(response.status ==200){
+                console.log("todo salio bien")
+                addInternal = response+1;
+            }else{
+                console.log("algo salio mal")
+            }
         
-    })
-    
+        } catch (error) {
+            console.log(error);
+        }
+    });
 </script>
 
 <Message {alertMessage} bind:showAndHideAlert />
@@ -116,8 +127,8 @@
                     </div>
                 </div>
 
-                <StockEditor/>
-                <StoreSupplier bind:cod2/>
+                <StockEditor />
+                <StoreSupplier bind:cod2 />
                 <ImageEditor bind:image />
                 <div>
                     <input

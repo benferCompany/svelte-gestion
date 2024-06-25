@@ -1,15 +1,20 @@
 <script>
-    import { Link, navigate } from "svelte-routing";
+    import { Link } from "svelte-routing";
     import { payStore, tdsStore, total } from "../../stores/cart";
     import ParentSelectByText from "../../tools/selectetByText/ParentSelectByText.svelte";
-    import { options, salePdf } from "./pay";
+    import { convertToReadableDate, createInvoice, getCAE, options, salePdf } from "./pay";
+    import {globalSalePerson} from "../../../routes/user";
+    import {selectCompany} from "../../stores/company";
     let pago = 0;
     let customer;
     let fiscalstatus = "";
     let paymentType;
+    let salePerson;
     let typeOfPayment = ["Efectivo", "Tarjeta de credito", "Debito", "Transferencia"]
     let fiscalStatus = ["Consumidor Final", "Responsable Monotributo", "Responsable Inscripto", "Excento"]
+    export let viewInvoice;
     $:{
+        salePerson  = $globalSalePerson;
         fiscalstatus = customer && customer.fiscal_status? customer.fiscal_status:"";        
     }
     
@@ -86,21 +91,30 @@
             </div>
         </div>
         <div>
+            <!-- svelte-ignore missing-declaration -->
             <button
-                on:click={() => {
+                on:click={async () => {
                     let object = {
-                        Nombre: customer.name,
-                        cuit: customer.idPersonal,
-                        Direccion: customer.address,
-                        TipoDePago: paymentType,
-                        TipoFiscal: fiscalstatus,
-                        Productos: $tdsStore,
+                        customer,
+                        salePerson,
+                        paymentType,
+                        fiscalstatus,
+                        products: $tdsStore,
+                        company: $selectCompany,
                         total: $total,
                     };
-                    console.log(object);
                     $salePdf = object;
                     if (customer) {
-                        navigate("/factura");
+                            let CAE = await getCAE(object)
+                             
+                             object.CAE = CAE.CAE;
+                             object.CAEFchVto = convertToReadableDate(CAE.CAEFchVto+"");
+                             if(CAE){
+                                let responseCreateInvoce = await createInvoice(object);
+                                console.log(responseCreateInvoce);
+                                 viewInvoice(object);
+
+                             }
                     }
                 }}
                 style="
@@ -123,7 +137,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 98;
+        z-index: 10;
     }
     .pay {
         width: 45em;

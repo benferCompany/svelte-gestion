@@ -21,6 +21,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 98;
+        z-index: 10;
     }
 </style>

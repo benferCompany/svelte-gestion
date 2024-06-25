@@ -2,7 +2,6 @@
 	import { Router, Link, Route } from "svelte-routing";
 	import Nav from "./routes/Nav.svelte";
 	import Sales from "./components/sales/Sales.svelte";
-	import ImportExcel from "./components/products/importExcel/ImportExcel.svelte";
 	import Buys from "./components/buys/Buys.svelte";
 	import Customers from "./components/customers/Customers.svelte";
 	import Suppliers from "./components/suppliers/Suppliers.svelte";
@@ -10,6 +9,10 @@
 	import Inventary from "./components/inventary/Inventary.svelte";
 	import PaymentReceipt from "./components/sales/pay/paymentReceipt/PaymentReceipt.svelte";
 	import {booleanPathName} from "./components/tools/pathName/pathName";
+    import SalesActivity from "./components/salesActivity/SalesActivity.svelte";
+    import Firebase from "./routes/image/Firebase/Firebase.svelte";
+    import ImportExcel from "./components/products/importExcel/ImportExcel.svelte";
+    import Print from "./routes/prueba/Print.svelte";
 
 	let booleanNav;
 	$: booleanNav= $booleanPathName;
@@ -28,9 +31,6 @@
 	<Route path="/buys">
 		<Buys />
 	</Route>
-	<Route path="/excel">
-		<ImportExcel />
-	</Route>
 	<Route path="/customers">
 		<Customers />
 	</Route>
@@ -42,5 +42,18 @@
 	</Route>
 	<Route path="/factura">
 		<PaymentReceipt />
+	</Route>
+	<Route path="/salesActivity">
+		<SalesActivity/>
+	</Route>
+	
+	<Route path ="/firebase">
+		<Firebase/>
+	</Route>
+	<Route path = "/importExcel">
+		<ImportExcel/>
+	</Route>
+	<Route path ="print">
+		<Print/>
 	</Route>
 </Router>
