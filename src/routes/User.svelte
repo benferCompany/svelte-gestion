@@ -11,7 +11,7 @@
         companies = await $readCompanies();
     });
     $: {$selectCompany = compSelect
-        console.log(salePerson)
+       
     };
 </script>
 

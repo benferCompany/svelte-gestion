@@ -61,7 +61,6 @@
                         );
                         image = response.entity.value;
                         message = response.message;
-                        console.log(response);
                         if(!response.error){
                             booleanFinally = !booleanFinally;
                             if (booleanFinally) {

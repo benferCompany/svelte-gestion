@@ -9,7 +9,6 @@
     let select = 0;
     let booleanBreak =false;
     const fileSubmit = async () => {
-        console.log(datos);
         select = 1;
         for (const dt of datos) {
             try {

@@ -27,10 +27,12 @@ const store = () => {
                             stock_max: item.stock_max,
                             stock_id: item.stock_id,
                             product: item.product,
+                            costo: item.costo,
                             count: item.count,
                             pvp: item.pvp,
                             discount: item.discount,
                             subTotal: item.subTotal,
+                            subCostTotal: item.costo*item.count,
                             delete: "&#128465;",
                         },
                     ];
@@ -63,5 +65,6 @@ const pay = () => {
 export const payStore = pay();
 
 export const total = writable(0)
+export const costTotal = writable(0)
 
 

@@ -1,5 +1,5 @@
 <script>
-    export let details = [];7
+    export let details = [];
     export let viewInvoice;
 </script>
 <table class="table">

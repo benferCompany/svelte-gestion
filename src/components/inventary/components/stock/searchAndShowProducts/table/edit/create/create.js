@@ -52,13 +52,12 @@ export const validaData = (e, getData) => {
         object[key] = value;
     }
 
-    console.log(JSON.parse(object.company))
     let company = JSON.parse(object.company)
     console.log(getData.stores)
     getData.stores?.forEach((st) => {
         if (st.company.id == company.id) {
             boolean = false
-            console.log(st)
+            
         }
     })
 

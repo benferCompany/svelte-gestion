@@ -28,7 +28,7 @@
             editStock.color = "danger";
             editStock.string = "Cancelar";
         }
-        console.log(companies);
+        
         company = product.stores[0]
             ? product.stores[0]
             : companies && companies[0]

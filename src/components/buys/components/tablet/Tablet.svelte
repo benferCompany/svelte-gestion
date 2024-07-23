@@ -23,7 +23,7 @@
                 updateSubtotal(td);
             }
         });
-        console.log($tdsStore);
+       
     }
 
     const handleLink = (e) => {

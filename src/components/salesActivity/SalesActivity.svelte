@@ -1,5 +1,6 @@
 <script>
-    import Invoices from "./invoices/Invoices.svelte";
+    import DailySales from "./dailySales/DailySales.svelte";
+import Invoices from "./invoices/Invoices.svelte";
     let select = 0;
     const selection = (s) => {
         select = s;
@@ -43,7 +44,7 @@
 <hr />
 
 {#if select == 0}
-    <h1>Caja del día</h1>
+    <DailySales/>
 {:else if select == 1}
     <h1>Ventas</h1>
 {:else if select == 2}

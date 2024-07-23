@@ -1,23 +1,35 @@
 <script>
+    //Imports
     import { Link } from "svelte-routing";
-    import { payStore, tdsStore, total } from "../../stores/cart";
+    import { costTotal, payStore, tdsStore, total } from "../../stores/cart";
     import ParentSelectByText from "../../tools/selectetByText/ParentSelectByText.svelte";
-    import { convertToReadableDate, createInvoice, getCAE, options, salePdf } from "./pay";
-    import {globalSalePerson} from "../../../routes/user";
-    import {selectCompany} from "../../stores/company";
+    import {
+        typeInvoice,
+        fiscalStatus,
+        typeOfPayment,
+        clickBoton,
+    } from "./pay";
+    import { options, salePdf } from "./pay";
+    import { globalSalePerson } from "../../../routes/user";
+    import { selectCompany } from "../../stores/company";
+
+    //variables
     let pago = 0;
     let customer;
     let fiscalstatus = "";
     let paymentType;
     let salePerson;
-    let typeOfPayment = ["Efectivo", "Tarjeta de credito", "Debito", "Transferencia"]
-    let fiscalStatus = ["Consumidor Final", "Responsable Monotributo", "Responsable Inscripto", "Excento"]
+    let tpInv;
+
+    //exports
     export let viewInvoice;
-    $:{
-        salePerson  = $globalSalePerson;
-        fiscalstatus = customer && customer.fiscal_status? customer.fiscal_status:"";        
+
+    $: {
+        console.log($tdsStore)
+        salePerson = $globalSalePerson;
+        fiscalstatus =
+            customer && customer.fiscal_status ? customer.fiscal_status : "";
     }
-    
 </script>
 
 <div class="overlay">
@@ -33,13 +45,26 @@
             </div>
             <h4>Información de pago</h4>
         </div>
-        <div class="d-flex justify-content-around">
-            <div class="text-center">
+        <div class="d-flex">
+            <div class="ps-3 pe-1">
                 <label for="">Cliente</label>
                 <ParentSelectByText bind:select={customer} {options} />
+            </div>
+            <div class="w-100 pe-3 ps-1">
+                <label for="">Tipo de facturación</label>
+                <select bind:value={tpInv} class="form-control" name="" id="">
+                    {#each typeInvoice as item}
+                        <option value={item}>{item.name}</option>
+                    {/each}
+                </select>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-around">
+            <div class="text-center">
                 <label for="">Condición fiscal</label>
-                <select bind:value={fiscalstatus} class="form-control" name="" id="">
-                    {#each  fiscalStatus as status}
+                <select bind:value={fiscalstatus} class="form-control">
+                    {#each fiscalStatus as status}
                         <option value={status}>{status}</option>
                     {/each}
                 </select>
@@ -69,7 +94,6 @@
                             <option value={item}>{item}</option>
                         {/each}
                     </select>
-                    
                 </div>
                 <div>
                     <label for="">Ingrese Monto</label>
@@ -82,10 +106,10 @@
                     />
                 </div>
             </div>
-            
+
             <div class="d-flex justify-content-center">
                 <div>
-                    <h3>Total a pagar</h3>
+                    <h3>Total</h3>
                     <h1 class="text-center">${$total - pago}</h1>
                 </div>
             </div>
@@ -101,21 +125,12 @@
                         fiscalstatus,
                         products: $tdsStore,
                         company: $selectCompany,
+                        typeInvoice: tpInv,
                         total: $total,
+                        costTotal: $costTotal
                     };
                     $salePdf = object;
-                    if (customer) {
-                            let CAE = await getCAE(object)
-                             
-                             object.CAE = CAE.CAE;
-                             object.CAEFchVto = convertToReadableDate(CAE.CAEFchVto+"");
-                             if(CAE){
-                                let responseCreateInvoce = await createInvoice(object);
-                                console.log(responseCreateInvoce);
-                                 viewInvoice(object);
-
-                             }
-                    }
+                    await clickBoton(object, viewInvoice);
                 }}
                 style="
                     margin-left:80%;

@@ -42,7 +42,6 @@
                                         <input
                                             on:click={() => {
                                                  let object = {};
-                                                 console.log(item)
                                                     let itemKeys =
                                                         Object.keys(item);
                                                     itemKeys.forEach((keyI) => {

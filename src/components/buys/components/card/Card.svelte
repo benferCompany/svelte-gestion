@@ -24,13 +24,7 @@
         datos = [];
         if (storeSuppliers.length > 0) {
             for (const storeSupplier of storeSuppliers) {
-                console.log(
-                    filterStock(
-                        storeSupplier.product.stores,
-                        $selectCompany.name,
-                    ),
-                );
-
+             
                 stock =
                     storeSupplier.product.stores[0] &&
                     filterStock(
