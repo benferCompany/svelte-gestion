@@ -1,15 +1,18 @@
 <script>
     
-    import {tdsStore, total} from "../../stores/cart";
+    import {costTotal, tdsStore, total} from "../../stores/cart";
     let subtotal = 0;
+    let subCostTotal = 0;
     let discount = 0;
    
     $: {
         subtotal = 0; // Reinicializar subtotal en cada reevaluación
         $tdsStore.forEach((td) => {
             subtotal += td.subTotal;
+            subCostTotal += td.subCostTotal;
         });
         $total = (subtotal * (1 - discount / 100)).toFixed(2);
+        $costTotal = (subCostTotal * (1 - discount / 100)).toFixed(2);
         
     }
 </script>

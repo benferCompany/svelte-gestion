@@ -11,7 +11,6 @@
         let flattenedData;
         let fileName = "";
         if (booleanProducts && !booleanStoreSuppliers && !booleanStores) {
-            console.log(jsonData)
             flattenedData = jsonData.map((product) => ({
                 id: product.id,
                 idInternal: product.idInternal,

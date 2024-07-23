@@ -6,11 +6,7 @@ const dateNow = () => {
     return currentDate;
 }
 export const convertObject = (store) => {
-    console.log(store.business_activity)
     let keys = Object.keys(store);
-    console.log(keys)
-
-    console.log(store)
     let convertStore = {
         id: [store.id, keys[0], "col-3 text-center", "text"],
         Nombre: [store.name, keys[1], "col-9 text-center", "text"],
@@ -33,13 +29,11 @@ export const handleSubmit = async (e) => {
     }
     let ba = object.business_activity.split("-");
     object.business_activity = `${ba[2]}/${ba[1]}/${ba[0]}`
-    console.log(object)
     return await updateStore(object);
 
 }
 
 export const convertObjectStoreSupplier = (storeSupplier) => {
-    console.log(storeSupplier)
     let keys = Object.keys(storeSupplier);
     let convertStore = {
         id: [storeSupplier.id, keys[0], "col-3 text-center", "text"],

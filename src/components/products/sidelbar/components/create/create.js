@@ -14,7 +14,6 @@ export const handleCreate = async (e, image) => {
         let [key, value] = data; // Desestructura la entrada en clave y valor
         object[key] = value;
     }
-    console.log(object)
     let productDTO = {
         "title": object.title,
         "description": object.description,

@@ -75,7 +75,6 @@
                                         })
                                         return ob;
                                     })
-                                    console.log(response)
                                     
                                 }
                             } else {

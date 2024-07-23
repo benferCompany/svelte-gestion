@@ -16,10 +16,9 @@
         );
 
         total = [];
-        console.log(arraysProducts);
         arraysProducts.map((arraP) => {
             let t = 0;
-            arraP.map((p) => (t += p.total));
+            arraP.map((p) => (t += p.totalPrice));
             total.push(t);
         });
     }
@@ -78,7 +77,7 @@
                             <div class="d-flex">
                                 <div style="margin-left:2em;">
                                     <h3>Factura</h3>
-                                    <h6>Nro. Comprobante: 0001</h6>
+                                    <h6>Nro. Comprobante: {detailInvoice.numberInvoice}</h6>
                                     <h6>Fecha de emisicón: 29-01-2024</h6>
                                     <div style="display:flex;">
                                         <p>Responsable Monotributo</p>
@@ -137,14 +136,14 @@
                             {#each arrayProduct as item (item.id)}
                                 <tr>
                                     <td class="text-center"
-                                        >{item.product.id}</td
+                                        >{item.id}</td
                                     >
-                                    <td>{item.product.title}</td>
+                                    <td>{item.description}</td>
                                     <td class="text-center">{item.quality}</td>
                                     <td class="text-center"
-                                        >${item.product.selling_price}</td
+                                        >${item.price}</td
                                     >
-                                    <td class="text-center">${item.total}</td>
+                                    <td class="text-center">${item.totalPrice}</td>
                                 </tr>
                             {/each}
                         </tbody>

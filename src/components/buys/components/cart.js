@@ -31,6 +31,7 @@ const store = () => {
                             costo: item.costo,
                             discount: item.discount,
                             subTotal: item.subTotal,
+                            subCostTotal : item.costo*item.count,
                             delete: "&#128465;",
                         },
                     ];
@@ -63,5 +64,6 @@ const pay = () => {
 export const payStore = pay();
 
 export const total = writable(0)
+export const costTotal= writable(0);
 
 

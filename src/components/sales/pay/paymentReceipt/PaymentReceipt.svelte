@@ -14,7 +14,6 @@
         );
 
         total = [];
-        console.log(arraysProducts);
         arraysProducts.map((arraP) => {
             let t = 0;
             arraP.map((p) => (t += p.subTotal));
@@ -62,7 +61,7 @@
             <div class="childrenInvoice">
                 <div class="d-flex">
                     <div class="type card border-black">
-                        <h1>C</h1>
+                        <h1>{detailInvoice.typeInvoice.type}</h1>
                     </div>
                     <div style="width:50%;" class="card border-black">
                         <div class="d-flex justify-content-center">
@@ -77,8 +76,8 @@
                     <div style="width:50%;" class="card border-black">
                         <div class="d-flex">
                             <div style="margin-left:2em;">
-                                <h3>Factura</h3>
-                                <h6>Nro. Comprobante: 0001</h6>
+                                <h3>{detailInvoice.typeInvoice.name}</h3>
+                                <h6>Nro. Comprobante: {detailInvoice.CbteDesde}</h6>
                                 <h6>Fecha de emisicón: 29-01-2024</h6>
                                 <div style="display:flex;">
                                     <p>Responsable Monotributo</p>

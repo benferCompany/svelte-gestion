@@ -32,8 +32,6 @@
         stores = [];
         if (products.content) {
             for (const product of products.content) {
-                console.log($selectCompany);
-                console.log(filterStock(product.stores, $selectCompany.name));
                 stock =
                     product.stores[0] &&
                     filterStock(product.stores, $selectCompany.name)[0]

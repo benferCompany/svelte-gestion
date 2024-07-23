@@ -26,7 +26,6 @@ export const postDetails = async (data) => {
         "paymentType": data.TipoDePago
     }
 
-    console.log(object)
     let fetchDetails = fetch(`${URL}/details`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

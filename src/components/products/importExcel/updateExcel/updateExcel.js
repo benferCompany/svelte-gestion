@@ -3,7 +3,6 @@ import { URL } from "../../../tools/connections/url";
 
 const mappedProduct = async (products) => {
    
-    console.log(products)
     let productDTOs = [];
     for (const object of products) {
         productDTOs.push({

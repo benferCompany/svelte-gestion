@@ -21,7 +21,7 @@
             image = prd.image;
             prd.boolean = true;
             product = prd;
-            console.log(product)
+         
         }
 
         objectFind = products.findIndex((object) => object.id === product.id);

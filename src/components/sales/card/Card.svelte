@@ -24,8 +24,6 @@
         datos = [];
         if (products.length > 0 && $selectCompany) {
             for (const product of products) {
-                console.log(product.stores);
-                console.log(filterStock(product.stores, $selectCompany.name));
                 stock =
                     product.stores[0] &&
                     filterStock(product.stores, $selectCompany.name)[0]
@@ -61,6 +59,7 @@
                         stock_max,
                         stock_id,
                         product: product.description,
+                        costo: product.cost_price,
                         count: 1,
                         pvp: product.selling_price,
                         discount: 0,

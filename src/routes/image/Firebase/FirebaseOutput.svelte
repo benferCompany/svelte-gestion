@@ -6,7 +6,6 @@
     export let toggleImage;
     const search = async (value) => {
         await new Promise((resolve) => setTimeout(resolve, 300));
-        console.log(value.target.value);
         let fetchSearch = await fetch(
             `${URL}/images/name?name=${value.target.value}&page=0&size=5`,
         );
@@ -38,7 +37,6 @@
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <div
                     on:click={() => {
-                        console.log("es");
                         image = item.value;
                         toggleImage();
                     }}

@@ -6,7 +6,6 @@
     let datos = [];
 
     const fileSubmit = async () => {
-        console.log(datos);
         for (const dt of datos) {
             try {
                 let response = await fetch(`${URL}/storeSuppliers/createOrUpdate`, {
@@ -16,7 +15,7 @@
                 });
 
                 let responseJson = await response.json();
-                console.log(responseJson);
+                
             } catch (error) {
                 console.error("Error processing data:", dt, error);
             }

@@ -6,8 +6,7 @@
     let datos = [];
     let progress =0;
     const fileSubmit = async () => {
-        console.log(datos);
-
+       
         for (const dt of datos) {
             try {
                 let response = await fetch(`${URL}/stores/createOrUpdate`, {
@@ -17,7 +16,6 @@
                 });
 
                 let responseJson = await response.json();
-                console.log(responseJson);
                 progress +=1;
             } catch (error) {
                 console.error("Error processing data:", dt, error);

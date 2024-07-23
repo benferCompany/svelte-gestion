@@ -81,7 +81,7 @@
         if (Object.keys(obj).length > 0) {
           productDTOs.push(obj);
         }
-        console.log(objeto);
+        
       }
     }
     // `mappedData` ahora contiene los datos mapeados en el formato deseado
@@ -101,7 +101,7 @@
       index = i;
       if (i == productDTOs.length - 1) {
         showAndHideAlert();
-        console.log(returnExcel);
+        
       }
     }
 

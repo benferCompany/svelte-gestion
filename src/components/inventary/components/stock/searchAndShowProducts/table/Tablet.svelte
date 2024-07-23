@@ -22,7 +22,6 @@
         products = $productsTable;
         if(products){
             if(products.content){
-                console.log($selectCompany)
                 products.content.map(p=>{
                     stores = [...stores, filterStock(p.stores,$selectCompany.name)[0]]
                     
@@ -31,8 +30,7 @@
                 });
             }
         }
-        console.log(stores)
-    }
+       }
 </script>
 
 {#if products.content}

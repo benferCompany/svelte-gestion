@@ -1,5 +1,6 @@
 import { writable } from "svelte/store";
 import { URL } from "../../tools/connections/url";
+import { getCurrentDate } from "../../tools/dataNow/DataNow";
 export let options = {
     headAndKey: [
         { head: "Id", key: "id" },
@@ -17,7 +18,6 @@ export let options = {
 export const salePdf = writable({});
 
 export const getCAE = async (object) => {
-    console.log(object.customer.fiscal_status);
     let customer = object.customer;
     let docTipo
     if (object.customer.fiscal_status == "Consumidor Final") {
@@ -57,7 +57,6 @@ export const getCAE = async (object) => {
             body: JSON.stringify(solicitudCAE),
         })
         let json = await send.json();
-
         return json.FECAESolicitarResponse.FECAESolicitarResult.FeDetResp.FECAEDetResponse;
     } catch (error) {
 
@@ -97,7 +96,6 @@ export function convertToReadableDate(dateString) {
 }
 
 export const createInvoice = async (invoice) => {
-    console.log(jsonInvoice(invoice))
     let jsonReponse = {
         body: "",
         status: false,
@@ -123,16 +121,20 @@ export const createInvoice = async (invoice) => {
 
 
 const jsonInvoice = (invoice) => {
+    console.log(invoice)
     return {
         "cae": invoice.CAE,
         "caeFchVto": invoice.CAEFchVto,
+        "numberInvoice": invoice.CbteDesde,
         "salesPerson": invoice.salePerson,
         "customer": invoice.customer,
         "company": invoice.company,
         "paymentType": invoice.paymentType,
         "fiscalStatus": invoice.fiscalstatus,
         "detailProductList": jsonInvoceProduct(invoice),
-        "total": invoice.total
+        "total": invoice.total,
+        "costTotal": invoice.costTotal,
+        "date": getCurrentDate(),
     }
 }
 
@@ -143,12 +145,12 @@ const jsonInvoceProduct = (invoice) => {
 
         let arrayJson =
         {
-            "product": {
-                "id": product.id,
-            },
+            "productId": product.id,
             "quality": product.count,
-            "total": product.subTotal
+            "discount": product.discount,
+
         }
+
 
         arrayObject.push(arrayJson);
 
@@ -157,4 +159,46 @@ const jsonInvoceProduct = (invoice) => {
     return arrayObject;
 
 
+}
+
+
+export let typeOfPayment = [
+    "Efectivo",
+    "Tarjeta de credito",
+    "Debito",
+    "Transferencia",
+];
+export let fiscalStatus = [
+    "Consumidor Final",
+    "Responsable Monotributo",
+    "Responsable Inscripto",
+    "Excento",
+];
+export let typeInvoice = [{ "type": "T", "name": "Ticket" }, { "type": "C", "name": "Factura C" }, { "type": "X", "name": "Presupuesto" }]
+
+export const clickBoton = async (object, viewInvoice) => {
+
+    if (object.customer && object.typeInvoice.type == "C") {
+        let CAE = await getCAE(object);
+
+        object.CAE = CAE.CAE;
+        object.CAEFchVto = convertToReadableDate(
+            CAE.CAEFchVto + "",
+        );
+        object.CbteDesde = "FE-" + object.typeInvoice.type + " " + CAE.CbteDesde;
+
+        if (CAE) {
+
+            await createInvoice(object);
+            viewInvoice(object);
+            return;
+        }
+    }
+    console.log("pas")
+    object.CAE = ""
+    object.CAEFchVto = ""
+    object.CbteDesde = "F-" + object.typeInvoice.type + " 12"
+    await createInvoice(object);
+    viewInvoice(object);
+    
 }
