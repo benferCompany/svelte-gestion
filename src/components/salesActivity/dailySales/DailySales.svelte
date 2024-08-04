@@ -1,12 +1,15 @@
 <script>
     import { onMount } from "svelte";
-    import { getClosingNow } from "./dailySale";
+    import { closing } from "./dailySale";
     import Alert from "./alert/Alert.svelte";
     let visible;
     let closingNow;
+    let total = 0;
     onMount(async () => {
-        closingNow = await getClosingNow();
-        console.log(closingNow);
+        closingNow = await closing();
+        total =
+            closingNow.active.total -
+            (closingNow.capital.total + closingNow.passive.total);
     });
 </script>
 
@@ -45,7 +48,6 @@
                     </tbody>
                 </table>
             </div>
-            
         </div>
         <div style="width:48%">
             <h4>Entrada</h4>
@@ -69,7 +71,6 @@
                     </tbody>
                 </table>
             </div>
-            
         </div>
     </div>
     <hr />
@@ -93,10 +94,8 @@
             <h5 class="text-info">
                 Cuenta proveedor ${closingNow.passive.account_suppliers}
             </h5>
-            <h5 class="text-info">Gastos: ${closingNow.passive.outFlows}</h5>
-            <h5 class="text-info">
-                Pagos a proveedores: ${closingNow.passive.supplierPayment}
-            </h5>
+    
+            <hr />
             <h5 class="text-success">Total: ${closingNow.passive.total}</h5>
             <div style="">
                 <h3>Capital</h3>
@@ -104,13 +103,19 @@
                     Capital Social ${closingNow.capital.capital_social}
                 </h5>
                 <h5 class="text-info">
-                    Resultado: ${closingNow.active.total-(closingNow.passive.total+closingNow.capital.total)}
+                    Ganancia: ${closingNow.capital.profit}
                 </h5>
+                <hr />
                 <h5 class="text-success">Total: ${closingNow.capital.total}</h5>
             </div>
         </div>
     </div>
     <div></div>
+    <hr />
+    <div class="w-50">
+        <h3>Resultado del Ejercicio {total}</h3>
+
+    </div>
 
     <div class="d-flex justify-content-center">
         <input

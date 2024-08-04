@@ -7,6 +7,7 @@
    
     $: {
         subtotal = 0; // Reinicializar subtotal en cada reevaluación
+        subCostTotal = 0;
         $tdsStore.forEach((td) => {
             subtotal += td.subTotal;
             subCostTotal += td.subCostTotal;

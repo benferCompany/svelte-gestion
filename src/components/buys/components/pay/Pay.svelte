@@ -1,10 +1,15 @@
 <script>
     import { Link } from "svelte-routing";
     import { payStore, tdsStore, total } from "../cart";
-    import { options } from "./pay";
+    import { options, objectInvoice } from "./pay";
     import ParentSelectByText from "../../../tools/selectetByText/ParentSelectByText.svelte";
-
+    import { globalSalePerson } from "../../../../routes/user";
+    import {selectCompany} from "../../../stores/company";
+    let select;
     let pago = 0;
+    let object
+    
+    $:object = { salesPerson: $globalSalePerson, select,detailProductInvoiceSuppliers:$tdsStore,company:$selectCompany};
 </script>
 
 <div class="overlay">
@@ -25,7 +30,7 @@
         <div class="d-flex justify-content-around">
             <div class="text-center">
                 <label for="">Proveedor</label>
-                <ParentSelectByText {options} />
+                <ParentSelectByText bind:select {options} />
             </div>
             <div style="align-self:end;">
                 <div>
@@ -70,7 +75,10 @@
                 style="
                     margin-left:80%;
                 "
-                class="btn btn-warning">Procesar</button
+                class="btn btn-warning"
+                on:click={() => {
+                    console.log(object);
+                }}>Procesar</button
             >
         </div>
     </div>

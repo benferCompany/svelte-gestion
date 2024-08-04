@@ -12,8 +12,8 @@
     import SalesActivity from "./components/salesActivity/SalesActivity.svelte";
     import Firebase from "./routes/image/Firebase/Firebase.svelte";
     import ImportExcel from "./components/products/importExcel/ImportExcel.svelte";
-    import Print from "./routes/prueba/Print.svelte";
     import Input from "./components/acces/inputs/Input.svelte";
+    import SaleOff from "./components/saleOff/SaleOff.svelte";
 
 	let booleanNav;
 	$: booleanNav= $booleanPathName;
@@ -54,7 +54,9 @@
 	<Route path = "/importExcel">
 		<ImportExcel/>
 	</Route>
-	<Route path ="print">
-		<Input/>
+	<Route path = "/saleOff">
+		<SaleOff/>
 	</Route>
+		
+	
 </Router>
