@@ -13,7 +13,7 @@
     import Firebase from "./routes/image/Firebase/Firebase.svelte";
     import ImportExcel from "./components/products/importExcel/ImportExcel.svelte";
     import Input from "./components/acces/inputs/Input.svelte";
-    import Shop from "./shop/Shop.svelte";
+    import Shop from "./shop/Shop.svelte"
 
 	let booleanNav;
 	$: booleanNav= $booleanPathName;
@@ -57,7 +57,7 @@
 	<Route path ="print">
 		<Input/>
 	</Route>
-	<Route path = "shop">
+	<Route path = "/shop">
 		<Shop/>
 	</Route>
 </Router>
