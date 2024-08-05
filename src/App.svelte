@@ -14,15 +14,16 @@
     import ImportExcel from "./components/products/importExcel/ImportExcel.svelte";
     import Input from "./components/acces/inputs/Input.svelte";
     import SaleOff from "./components/saleOff/SaleOff.svelte";
+    import Shop from "./shop/Shop.svelte";
 
 	let booleanNav;
 	$: booleanNav= $booleanPathName;
 </script>
 
 <Router>
-	{#if booleanNav}
+	<!--{#if booleanNav}
 		<Nav />
-	{/if}
+	{/if}-->
 	<Route path="/ventas">
 		<Sales />
 	</Route>
@@ -57,6 +58,8 @@
 	<Route path = "/saleOff">
 		<SaleOff/>
 	</Route>
-		
+	<Route path ="/shop">
+		<Shop/>
+	</Route>
 	
 </Router>
