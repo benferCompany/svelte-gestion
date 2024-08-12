@@ -15,6 +15,8 @@
     import Input from "./components/acces/inputs/Input.svelte";
     import SaleOff from "./components/saleOff/SaleOff.svelte";
     import Shop from "./shop/Shop.svelte";
+	import Form from "./shop/contenidoTienda/form/Form.svelte";
+
 
 	let booleanNav;
 	$: booleanNav= $booleanPathName;
@@ -61,5 +63,7 @@
 	<Route path ="/shop">
 		<Shop/>
 	</Route>
-	
+	<Route path ="/login">
+		<Form/>
+	</Route>
 </Router>
