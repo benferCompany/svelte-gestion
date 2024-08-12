@@ -32,7 +32,7 @@ const store = () => {
                             pvp: item.pvp,
                             discount: item.discount,
                             subTotal: item.subTotal,
-                            subCostTotal: item.costo*item.count,
+                            subCostTotal: item.costo,
                             delete: "&#128465;",
                         },
                     ];

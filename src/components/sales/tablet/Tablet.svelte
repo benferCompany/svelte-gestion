@@ -7,14 +7,19 @@
         "Producto",
         "Cantidad",
         "PVP",
+        "Cost",
         "Desc",
         "SubTotal",
+        "SubCostTotal",
         "delete",
     ];
     //export let $tdsStore= [];
 
     function updateSubtotal(item) {
+       
         item.subTotal = item.count * item.pvp * (1 - item.discount / 100);
+        item.subCostTotal = item.count * item.costo * (1 - item.discount / 100)
+        console.log(item);
     }
 
     $: {

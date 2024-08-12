@@ -1,7 +1,8 @@
 <script>
-    import {booleanPathName} from "../components/tools/pathName/pathName";
-    import Contenido from "./contenidoTienda/Contenido.svelte";
+    import {booleanPathName} from "../components/tools/pathName/pathName"
+    import Index from "./contenidoTienda/Index.svelte";
+    
     $booleanPathName = false;
 </script>
 
-<Contenido/>
+<Index/>

@@ -129,6 +129,7 @@
                         total: $total,
                         costTotal: $costTotal
                     };
+                    console.log(object)
                     $salePdf = object;
                     await clickBoton(object, viewInvoice);
                 }}
