@@ -3,7 +3,8 @@
     import EditPendingPayments from "./editPendingPayments/EditPendingPayments.svelte";
     import Filter from "./filter/Filter.svelte";
     import Table from "./table/Table.svelte";
-    import Message from "../../message/Message.svelte"
+    import Message from "../../message/Message.svelte";
+    import MessageOptimized from "../../tools/delete/message/MessageOptimized.svelte";
     let pendingPayments;
     let visible;
     let handleFormHead;
@@ -13,14 +14,30 @@
     //Variables elementos del Message
     let showAndHideAlert;
     let elementsMessage = {
-        alertMessage:{},
+        alertMessage: {},
         showAndHideAlert,
-    }
+    };
+
+    let elementsMessageOptimized;
 </script>
 
-<Message bind:alertMessage={elementsMessage.alertMessage} bind:showAndHideAlert ={elementsMessage.showAndHideAlert} />
-<CreatePendingPayments bind:pendingPayments bind:elementsMessage bind:visible bind:handleFormHead />
-<EditPendingPayments bind:elementsMessage bind:visible={visibleEdit} bind:getPosition bind:pendingPayments />
+<MessageOptimized bind:elementsMessage={elementsMessageOptimized} />
+<Message
+    bind:alertMessage={elementsMessage.alertMessage}
+    bind:showAndHideAlert={elementsMessage.showAndHideAlert}
+/>
+<CreatePendingPayments
+    bind:pendingPayments
+    bind:elementsMessage
+    bind:visible
+    bind:handleFormHead
+/>
+<EditPendingPayments
+    bind:elementsMessage
+    bind:visible={visibleEdit}
+    bind:getPosition
+    bind:pendingPayments
+/>
 <div class="d-flex w-50">
     <input class="btn btn-warning me-1" type="button" value="Por pagar" />
     <input class="btn btn-info ms-1" type="button" value="Pagado" />
@@ -35,5 +52,10 @@
     />
 </div>
 <hr />
-<Filter bind:pendingPayments />
-<Table bind:visible={visibleEdit} bind:getPosition bind:pendingPayments />
+<Filter bind:elementsMessageOptimized bind:pendingPayments />
+<Table
+    bind:elementsMessage={elementsMessageOptimized}
+    bind:visible={visibleEdit}
+    bind:getPosition
+    bind:pendingPayments
+/>

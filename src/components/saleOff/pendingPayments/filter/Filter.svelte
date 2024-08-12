@@ -3,13 +3,15 @@
     import { getOutFlows } from "../../saleOff";
     //variables de exportación
     export let pendingPayments;
-
+    export let elementsMessageOptimized
     //Metodos
     onMount(async () => {
         let outFlows = await getOutFlows();
         console.log(outFlows)
         pendingPayments = await outFlows.pendingPayments;
+        elementsMessageOptimized.objects = pendingPayments;
     });
+
 </script>
 
 <div class="d-flex justify-content-center">

@@ -1,19 +1,15 @@
 <script>
-    import MessageOptimized from "../../../tools/delete/message/MessageOptimized.svelte";
     import { deletependingPayments } from "../pendingPayments";
 
     export let visible;
     export let getPosition;
 
     //Variables de MessageOptimized
-    let elementsMessage ={objects:{}};
-    export let pendingPayments=[];
-    $: {
-        elementsMessage.objects = pendingPayments;
-    }
+    export let elementsMessage;
+
+   
 </script>
 
-<MessageOptimized bind:elementsMessage />
 <table class="table">
     <thead>
         <tr>
@@ -57,15 +53,18 @@
                             />
                             <input
                                 on:click={() => {
-                                    elementsMessage.objectId =
-                                        pendingPayment.id;
+                                    if (elementsMessage) {
+                                        elementsMessage.objectId =
+                                            pendingPayment.id;
+                                        elementsMessage.text =
+                                            "Esas seguro que quieres eliminar este pago?";
+                                        elementsMessage.deleteObject =
+                                            deletependingPayments;
+                                        elementsMessage.visible =
+                                            !elementsMessage.visible;
 
-                                    elementsMessage.deleteObject =
-                                        deletependingPayments;
-                                    elementsMessage.visible =
-                                        !elementsMessage.visible;
-
-                                    console.log(elementsMessage);
+                                        console.log(elementsMessage);
+                                    }
                                 }}
                                 type="button"
                                 value="Eliminar"
