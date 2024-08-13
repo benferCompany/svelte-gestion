@@ -16,6 +16,7 @@
     import SaleOff from "./components/saleOff/SaleOff.svelte";
     import Shop from "./shop/Shop.svelte";
 	import Form from "./shop/contenidoTienda/form/Form.svelte";
+	import SalesPerson from "./components/salesPerson/SalesPerson.svelte";
 
 
 	let booleanNav;
@@ -23,11 +24,12 @@
 </script>
 
 <Router>
-	<!--
-		{#if booleanNav}
-			<Nav />
-		{/if}
-	-->
+	
+	
+	{#if booleanNav}
+		<Nav />
+	{/if}
+	
 	<Route path="/ventas">
 		<Sales />
 	</Route>
@@ -70,5 +72,9 @@
 	</Route>
 	<Route path ="/login">
 		<Form/>
+	</Route>
+
+	<Route path ="/salesPerson">
+		<SalesPerson/>
 	</Route>
 </Router>

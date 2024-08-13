@@ -3,33 +3,26 @@
     import { onMount } from "svelte";
 
     let siema;
-    let siemaSelector;
-    export let duration = { duration: 0, durationSiema: 0, direction:"next" };
 
     onMount(() => {
         siema = new Siema({
-            selector: siemaSelector,
             loop: true, // Puedes configurar opciones de Siema aquí
-            duration: duration.durationSiema, // Duración de la transición en milisegundos
+            duration: 200, // Duración de la transición en milisegundos
             perPage: 1, // Número de elementos visibles por página
         });
-        loop();
+        loop()
         return () => siema.destroy();
     });
 
     function loop() {
         setInterval(() => {
-            if (duration.direction == "prev") {
-                siema.prev();
-            }else{
-                siema.next();
-            }
-        }, duration.duration);
+            siema.next();
+        }, 3000);
     }
 </script>
 
 <div class="contenedor">
-    <div bind:this={siemaSelector} class="siema">
+    <div class="siema">
         <slot></slot>
     </div>
 </div>

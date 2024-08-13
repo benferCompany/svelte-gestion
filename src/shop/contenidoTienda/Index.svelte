@@ -1,14 +1,19 @@
 <script>
-    import Banner from "./banner/Banner.svelte";
+    import BannerProducts from "./banner-products/BannerProducts.svelte";
+import Banner from "./banner/Banner.svelte";
+    import Footer from "./footer/Footer.svelte";
     import Nav from "./nav/Nav.svelte";
+    import "cdnicono.css";
 </script>
-<link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
 <div class="index">
     <div class="nav">
         <Nav />
     </div>
     <div class="body">
-        <Banner />
+        <Banner/>
+        <BannerProducts/>
+        <Footer/>
     </div>
 </div>
 
@@ -20,13 +25,11 @@
         margin: 0;
         padding: 0;
         width: 100%;
-        background-color: skyblue;
+        background-color: #053f3f;
         height: 100%;
     }
 
-    .nav {
 
-    }
 
     .body {
         margin-top: 50px;

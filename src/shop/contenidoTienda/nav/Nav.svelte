@@ -10,13 +10,14 @@
     box-sizing: border-box;
     border-top: 1px solid rgb( 255, 255, 255,.1);
     border-bottom: 1px solid black;
-    transition: 0.5s;`;
+    transition: 0.5s;
+    text-decoration:none;`;
 </script>
 
 <div class="nav1" id="nav-1">
     <div style="width:100%; display:flex; justify-content:center;">
         <img
-            src="https://firebasestorage.googleapis.com/v0/b/cloud-image-361ff.appspot.com/o/images%2FbenfershopPng.png?alt=media&token=e58609b9-6974-49f1-bb0d-d872f93f7eaf"
+            src="https://firebasestorage.googleapis.com/v0/b/cloud-image-361ff.appspot.com/o/images%2FlogoBenfer.png?alt=media&token=e2cf96da-df32-48f9-a8bf-fb588a31fdcf"
             alt=""
             class="logo-2"
         />
@@ -36,7 +37,7 @@
         </header>
         <ul>
             <li>
-                <Link on:click={(e)=>{e.target.style="text-decoration:none"}} to="/shop" style={styleUlA}
+                <Link to="/shop" style={styleUlA}
                     ><i class="fas fa-home"></i>Inicio</Link
                 >
             </li>
