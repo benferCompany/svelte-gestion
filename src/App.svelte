@@ -8,21 +8,28 @@
 	import Products from "./components/products/Products.svelte";
 	import Inventary from "./components/inventary/Inventary.svelte";
 	import PaymentReceipt from "./components/sales/pay/paymentReceipt/PaymentReceipt.svelte";
-	import { booleanPathName } from "./components/tools/pathName/pathName";
-	import SalesActivity from "./components/salesActivity/SalesActivity.svelte";
-	import Firebase from "./routes/image/Firebase/Firebase.svelte";
-	import ImportExcel from "./components/products/importExcel/ImportExcel.svelte";
-	import SaleOff from "./components/saleOff/SaleOff.svelte";
-	import Shop from "./shop/Shop.svelte";
+	import {booleanPathName} from "./components/tools/pathName/pathName";
+    import SalesActivity from "./components/salesActivity/SalesActivity.svelte";
+    import Firebase from "./routes/image/Firebase/Firebase.svelte";
+    import ImportExcel from "./components/products/importExcel/ImportExcel.svelte";
+    import Input from "./components/acces/inputs/Input.svelte";
+    import SaleOff from "./components/saleOff/SaleOff.svelte";
+    import Shop from "./shop/Shop.svelte";
+	import Form from "./shop/contenidoTienda/form/Form.svelte";
+	import SalesPerson from "./components/salesPerson/SalesPerson.svelte";
+
 
 	let booleanNav;
 	$: booleanNav = $booleanPathName;
 </script>
 
 <Router>
-		{#if booleanNav}
-			<Nav />
-		{/if}
+	
+	
+	{#if booleanNav}
+		<Nav />
+	{/if}
+	
 	<Route path="/ventas">
 		<Sales />
 	</Route>
@@ -62,5 +69,12 @@
 	</Route>
 	<Route path = "/shop">
 		<Shop/>
+	</Route>
+	<Route path ="/login">
+		<Form/>
+	</Route>
+
+	<Route path ="/salesPerson">
+		<SalesPerson/>
 	</Route>
 </Router>

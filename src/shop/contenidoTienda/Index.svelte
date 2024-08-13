@@ -1,17 +1,37 @@
 <script>
+    import BannerProducts from "./banner-products/BannerProducts.svelte";
+import Banner from "./banner/Banner.svelte";
+    import Footer from "./footer/Footer.svelte";
+    import Nav from "./nav/Nav.svelte";
+    import "cdnicono.css";
 </script>
 
 <div class="index">
-    
+    <div class="nav">
+        <Nav />
+    </div>
+    <div class="body">
+        <Banner/>
+        <BannerProducts/>
+        <Footer/>
+    </div>
 </div>
 
 <style>
     .index {
-        background: rgb(241, 239, 239);
         position: absolute;
         top: 0;
         left: 0;
+        margin: 0;
+        padding: 0;
         width: 100%;
+        background-color: #053f3f;
         height: 100%;
+    }
+
+
+
+    .body {
+        margin-top: 50px;
     }
 </style>
