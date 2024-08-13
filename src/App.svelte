@@ -20,11 +20,9 @@
 </script>
 
 <Router>
-	<!--
 		{#if booleanNav}
 			<Nav />
 		{/if}
-	-->
 	<Route path="/ventas">
 		<Sales />
 	</Route>
