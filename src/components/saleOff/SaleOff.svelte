@@ -1,7 +1,7 @@
 <script>
     import "./saleOff.js";
     import Expenses from "./expenses/Expenses.svelte";
-    import PendingPayments from "./PendingPayments/PendingPayments.svelte";
+    import PendingPayments from "./pendingPayments/PendingPayments.svelte"
     import PaymentsSuppliers from "./paymentsSuppliers/PaymentsSuppliers.svelte";
 
     let select = 1;
