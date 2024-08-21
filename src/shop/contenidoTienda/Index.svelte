@@ -26,7 +26,7 @@ import Banner from "./banner/Banner.svelte";
         padding: 0;
         width: 100%;
         background-color: #053f3f;
-        height: 100%;
+        height: 500px;
     }
 
 

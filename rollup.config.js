@@ -45,6 +45,7 @@ export default {
 				dev: !production
 			},
 			
+			
 		}),
 		pdfPreview({
 			pages: ["page.html"],
