@@ -70,10 +70,13 @@
         //Add the marker to the map.
         map.markers.add(marker);
     };
+    export let callback =()=>{
 
+    }
     const handleMap = () => {
         booleanMap = false;
         document.querySelector("#myMap").classList.add("d-none");
+        callback();
     };
 </script>
 

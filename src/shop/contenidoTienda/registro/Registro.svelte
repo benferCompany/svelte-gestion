@@ -13,14 +13,14 @@
         input: ` border-radius: 3px;
         width: 81%;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);`,
-        inputHover: `  border: 1px solid rgb(0, 255, 251);
+        inputHover: `border: 1px solid rgb(0, 255, 251);
         border-color: #063146;
         transition: 0.5s;
         height: 35px;
         width: 200px;
         margin-top: 10px;
         border-radius: 3px;
-        width: 82%;
+        width: 100%;
         box-shadow: 0px 4px 8px rgb(6, 220, 181);`,
     };
 </script>

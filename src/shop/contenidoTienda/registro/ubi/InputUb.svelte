@@ -1,5 +1,5 @@
 <script>
-    import { onMount } from "svelte";
+  import { onMount } from "svelte";
   import { booleanPathName } from "../../../../components/tools/pathName/pathName";
   import Map from "./Map.svelte";
   import debounce from "lodash/debounce";
@@ -14,18 +14,24 @@
   let cambioDeLugar;
   let positionMarket;
   let body;
+  let callback = () => {
+    console.log("es callback");
+    if (inputFind) {
+      inputFind.style = styleInput ? styleInput.input : "";
+      body.style = "";
+    }
+  };
   export let styleInput;
 
   //variables locales
   let streets;
   let inputFind;
 
-  onMount(()=>{
-
+  onMount(() => {
     if (inputFind) {
       inputFind.style = styleInput ? styleInput.input : "";
     }
-  })
+  });
   const keyPress = debounce(async (e) => {
     console.log(e.target.value);
     let query = "Argentina Chaco " + e.target.value;
@@ -57,16 +63,15 @@
     <input
       style="width:100%;"
       on:keyup={keyPress}
-      on:focus={(e)=>{
-        e.target.style = styleInput.inputHover;
-        body.style="position:absolute; top:2em;"
+      on:focus={(e) => {
+        body.style = "position:absolute; top:0; left:0; width:100%;";
       }}
       type="search"
       name=""
       id=""
       bind:this={inputFind}
       on:mouseover={(e) => {
-        e.target.style = styleInput.inputHover;
+        inputFind.style = styleInput.inputHover;
       }}
       on:mouseout={(e) => {
         e.target.style = styleInput.input;
@@ -89,7 +94,7 @@
       {/each}
     {/if}
   </div>
-  <Map bind:getMap bind:cambioDeLugar bind:positionMarket />
+  <Map bind:callback bind:getMap bind:cambioDeLugar bind:positionMarket />
 </div>
 
 <style>
