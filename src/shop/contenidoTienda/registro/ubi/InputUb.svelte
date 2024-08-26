@@ -1,5 +1,6 @@
 <script>
-  import { booleanPathName } from "../../../components/tools/pathName/pathName";
+    import { onMount } from "svelte";
+  import { booleanPathName } from "../../../../components/tools/pathName/pathName";
   import Map from "./Map.svelte";
   import debounce from "lodash/debounce";
 
@@ -12,11 +13,19 @@
   let getMap;
   let cambioDeLugar;
   let positionMarket;
+  let body;
+  export let styleInput;
 
   //variables locales
   let streets;
   let inputFind;
 
+  onMount(()=>{
+
+    if (inputFind) {
+      inputFind.style = styleInput ? styleInput.input : "";
+    }
+  })
   const keyPress = debounce(async (e) => {
     console.log(e.target.value);
     let query = "Argentina Chaco " + e.target.value;
@@ -42,15 +51,26 @@
   };
 </script>
 
-<div class="body">
+<div bind:this={body}>
   <div style=" display:flex; justify-content:center;">
+    <!-- svelte-ignore a11y-mouse-events-have-key-events -->
     <input
       style="width:100%;"
       on:keyup={keyPress}
+      on:focus={(e)=>{
+        e.target.style = styleInput.inputHover;
+        body.style="position:absolute; top:2em;"
+      }}
       type="search"
       name=""
       id=""
       bind:this={inputFind}
+      on:mouseover={(e) => {
+        e.target.style = styleInput.inputHover;
+      }}
+      on:mouseout={(e) => {
+        e.target.style = styleInput.input;
+      }}
     />
   </div>
   <div>
@@ -73,10 +93,4 @@
 </div>
 
 <style>
-  .body{
-    width: 100%;
-    position: absolute;
-    top:0;
-    left:0;
-  }
 </style>
