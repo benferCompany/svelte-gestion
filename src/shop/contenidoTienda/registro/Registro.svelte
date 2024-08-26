@@ -8,7 +8,6 @@
     import { booleanPathName } from "../../../components/tools/pathName/pathName";
     import InputUb from "./ubi/InputUb.svelte";
     $booleanPathName = false;
-
     let styleInput = {
         input: ` border-radius: 3px;
         width: 81%;
@@ -23,6 +22,9 @@
         width: 100%;
         box-shadow: 0px 4px 8px rgb(6, 220, 181);`,
     };
+    //exportación de Input
+    let ubicacion;
+    let callback;
 </script>
 
 <link
@@ -46,6 +48,7 @@
                 <form action="">
                     <div class="nyp">
                         <input
+                            on:click={callback}
                             class="n"
                             type="text"
                             name="nombre"
@@ -53,6 +56,7 @@
                             placeholder="Nombre"
                         />
                         <input
+                            on:click={callback}
                             class="p"
                             type="text"
                             name="apellido"
@@ -60,20 +64,28 @@
                             placeholder="Apellido"
                         />
                     </div>
-                    <input type="number" name="din" id="" placeholder="DNI" />
                     <input
+                        on:click={callback}
+                        type="number"
+                        name="din"
+                        id=""
+                        placeholder="DNI"
+                    />
+                    <input
+                        on:click={callback}
                         type="number"
                         name="telefono"
                         id=""
                         placeholder="+54 3624-694287"
                     />
                     <input
+                        on:click={callback}
                         type="email"
                         name="email"
                         id=""
                         placeholder="e-mail"
                     />
-                    <InputUb bind:styleInput /> <br />
+                    <InputUb bind:ubicacion bind:callback bind:styleInput /> <br />
                     <button>Enviar</button>
                 </form>
             </fieldset>
