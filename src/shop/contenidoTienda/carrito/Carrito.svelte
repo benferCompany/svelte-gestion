@@ -121,8 +121,4 @@
         flex-direction: column;
         justify-content: end;
     }
-    h1 {
-        text-align: center;
-        color: white;
-    }
 </style>
