@@ -29,7 +29,7 @@
                     <h4>{product.title}</h4>
                     
                     <p class="precio">{product.selling_price}</p>
-                    <button class="btn">Añadir</button>
+                    <button class="btn-prod">Añadir</button>
                 </div>
                 
             {/each}
@@ -50,11 +50,13 @@
         text-align:center;
     }
 
-    .btn {
+    .btn-prod {
         border: 1px solid black;
-        background-color: #0d706f;
+        box-shadow: 0 0 12px rgba(0,0,0,0.5);
+        background-color: #084342;
         color: white;
         margin-top: 20px;
         border-radius: 2px;
+        width: 100px;
     }
 </style>

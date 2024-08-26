@@ -30,7 +30,7 @@
     "excel4node": "^1.8.2",
     "exceljs": "^4.4.0",
     "file-saver": "^2.0.5",
-    "firebase": "^10.11.0",
+    "firebase": "^10.13.0",
     "google-sign-in": "^3.0.4",
     "googleapis": "^134.0.0",
     "html2canvas": "^1.4.1",

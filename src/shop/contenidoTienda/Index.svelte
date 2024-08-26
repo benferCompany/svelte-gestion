@@ -1,6 +1,6 @@
 <script>
     import BannerProducts from "./banner-products/BannerProducts.svelte";
-import Banner from "./banner/Banner.svelte";
+    import Banner from "./banner/Banner.svelte";
     import Footer from "./footer/Footer.svelte";
     import Nav from "./nav/Nav.svelte";
     import "cdnicono.css";
@@ -26,7 +26,7 @@ import Banner from "./banner/Banner.svelte";
         padding: 0;
         width: 100%;
         background-color: #053f3f;
-        height: 100%;
+        height: 500px;
     }
 
 
