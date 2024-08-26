@@ -1,14 +1,16 @@
 <script>
     import {Link} from "svelte-routing";
+    import {keyPress} from "./ubi/input"
     let styleVolver = `padding-top: 25px;
     margin-left: 10px;
     font-size: 20px;
     color: white;
     font-family: 'Arial Narrow', Arial, sans-serif;`
     import {booleanPathName} from "../../../components/tools/pathName/pathName";
-    $booleanPathName = false;
+    $booleanPathName = false; 
 </script>
 
+    
 <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 <div class="body">    
     <div class="nav">
@@ -24,10 +26,10 @@
                         <input class="n" type="text" name="nombre" id="" placeholder="Nombre">
                         <input class="p" type="text" name="apellido" id="" placeholder="Apellido">
                     </div>
-                    <input type="number" name="din" id="" placeholder="DNI">
-                    <input type="number" name="telefono" id="" placeholder="+54 3624-694287">
-                    <input type="email" name="email" id="" placeholder="e-mail">
-                    <input type="text" name="ubicacion" id="" placeholder="Añadir Ubicación">  <br>
+                    <input type="number" name="din"       id="" placeholder="DNI">
+                    <input type="number" name="telefono"  id="" placeholder="+54 3624-694287">
+                    <input type="email"  name="email"     id="" placeholder="e-mail">
+                    <input on:keyup={keyPress} type="text"   name="ubicacion" id="" placeholder="Añadir Ubicación">  <br>
                     <button>Enviar</button>
                 </form>
             </fieldset>
@@ -36,6 +38,7 @@
 </div>
 
 <style>
+    
 .body {
    background-color: #084b6c;
    padding: 0;
@@ -127,5 +130,4 @@ button {
     color: white;
     background-color: #031b27;
 }
-
 </style>

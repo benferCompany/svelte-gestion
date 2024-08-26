@@ -1,5 +1,5 @@
 <script>
-  import { booleanPathName } from "../../../components/tools/pathName/pathName";
+  import { booleanPathName } from "../../../../components/tools/pathName/pathName";
   import Map from "./Map.svelte";
   import debounce from "lodash/debounce";
 
@@ -75,8 +75,6 @@
 <style>
   .body{
     width: 100%;
-    position: absolute;
-    top:0;
-    left:0;
+    
   }
 </style>

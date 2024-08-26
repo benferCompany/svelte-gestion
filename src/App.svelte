@@ -20,7 +20,6 @@
 	import Carrito from "./shop/contenidoTienda/carrito/Carrito.svelte";
 	import Categoria from "./shop/contenidoTienda/categoria/Categoria.svelte";
 	import Registro from "./shop/contenidoTienda/registro/Registro.svelte";
-	import InputUb from "./shop/contenidoTienda/form/InputUb.svelte";
 
 	let booleanNav;
 	$: booleanNav = $booleanPathName;
@@ -97,9 +96,6 @@
 
 	<Route path="/salesPerson">
 		<SalesPerson />
-	</Route>
-	<Route path="/ubi">
-		<InputUb />
 	</Route>
 	<Route path="/carrito">
 		<Carrito />

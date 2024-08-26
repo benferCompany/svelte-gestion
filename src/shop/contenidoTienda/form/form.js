@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
-=======
 import { writable } from "svelte/store";
 import { URL } from "../../../components/tools/connections/url";
 import { initializeApp } from "firebase/app";
@@ -12,7 +7,6 @@ import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvide
 export const userGoogle = writable({});
 
 // Configuración de Firebase
->>>>>>> 81aabd8bc13cc946bbb75bcf5de6ebe737ed2f75
 const firebaseConfig = {
   apiKey: "AIzaSyDNuZ9emxOAoS0QYUKnbpJIHTuOxRRpAK0",
   authDomain: "cloud-image-361ff.firebaseapp.com",
@@ -23,22 +17,6 @@ const firebaseConfig = {
   measurementId: "G-Z38539FJ3T"
 };
 
-<<<<<<< HEAD
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-
-
-const auth = getAuth(app);
-
-export const accessGoogle = async()=>{
-    const provider = new GoogleAuthProvider();
-    const response = await signInWithPopup(auth, provider);
-    const user = GoogleAuthProvider.credentialFromResult(response);
-    console.log(user);
-}
-
-=======
 export const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
@@ -118,4 +96,3 @@ export const accesGoogle = async () => {
     console.error('Error en la autenticación con Google:', error);
   }
 };
->>>>>>> 81aabd8bc13cc946bbb75bcf5de6ebe737ed2f75
