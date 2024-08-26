@@ -1,6 +1,6 @@
 <script>
     import BannerProducts from "./banner-products/BannerProducts.svelte";
-import Banner from "./banner/Banner.svelte";
+    import Banner from "./banner/Banner.svelte";
     import Footer from "./footer/Footer.svelte";
     import Nav from "./nav/Nav.svelte";
     import "cdnicono.css";

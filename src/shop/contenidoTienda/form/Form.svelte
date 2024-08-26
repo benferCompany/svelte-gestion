@@ -9,10 +9,8 @@
         margin-left: 10px;
         font-size: 20px;
         color: white;
-        font-family: 'Arial Narrow', Arial, sans-serif;
-    `;
-
-    // Manejador para el inicio de sesión
+        font-family: 'Arial Narrow', Arial`
+        
     async function handleSubmit(event) {
         try {
             await IniciaSesion(event);
@@ -35,7 +33,7 @@
     }
 </script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
 <div class="body">
     <div class="nav">
