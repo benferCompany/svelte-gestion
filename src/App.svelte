@@ -8,36 +8,29 @@
 	import Products from "./components/products/Products.svelte";
 	import Inventary from "./components/inventary/Inventary.svelte";
 	import PaymentReceipt from "./components/sales/pay/paymentReceipt/PaymentReceipt.svelte";
-	import {booleanPathName} from "./components/tools/pathName/pathName";
-    import SalesActivity from "./components/salesActivity/SalesActivity.svelte";
-    import Firebase from "./routes/image/Firebase/Firebase.svelte";
-    import ImportExcel from "./components/products/importExcel/ImportExcel.svelte";
-    import Input from "./components/acces/inputs/Input.svelte";
-    import SaleOff from "./components/saleOff/SaleOff.svelte";
-    import Shop from "./shop/Shop.svelte";
+	import { booleanPathName } from "./components/tools/pathName/pathName";
+	import SalesActivity from "./components/salesActivity/SalesActivity.svelte";
+	import Firebase from "./routes/image/Firebase/Firebase.svelte";
+	import ImportExcel from "./components/products/importExcel/ImportExcel.svelte";
+	import Input from "./components/acces/inputs/Input.svelte";
+	import SaleOff from "./components/saleOff/SaleOff.svelte";
+	import Shop from "./shop/Shop.svelte";
 	import Form from "./shop/contenidoTienda/form/Form.svelte";
-    import Categiria from "./shop/contenidoTienda/categoria/Categoria.svelte"
 	import SalesPerson from "./components/salesPerson/SalesPerson.svelte";
 	import Carrito from "./shop/contenidoTienda/carrito/Carrito.svelte";
-    import Categoria from "./shop/contenidoTienda/categoria/Categoria.svelte";
-    import Registro from "./shop/contenidoTienda/registro/Registro.svelte";
-    import InputUb from "./shop/contenidoTienda/form/InputUb.svelte";
+	import Categoria from "./shop/contenidoTienda/categoria/Categoria.svelte";
+	import Registro from "./shop/contenidoTienda/registro/Registro.svelte";
+	import InputUb from "./shop/contenidoTienda/form/InputUb.svelte";
 
-    import InputUb from "./shop/contenidoTienda/form/InputUb.svelte";
-
-	import Carrito from "./shop/contenidoTienda/carrito/Carrito.svelte";
-    import Categoria from "./shop/contenidoTienda/categoria/Categoria.svelte";
-    import Registro from "./shop/contenidoTienda/registro/Registro.svelte";
 	let booleanNav;
 	$: booleanNav = $booleanPathName;
 </script>
 
 <Router>
-	
 	{#if booleanNav}
 		<Nav />
 	{/if}
-	
+
 	<Route path="/ventas">
 		<Sales />
 	</Route>
@@ -70,7 +63,6 @@
 		<SalesActivity />
 	</Route>
 
-
 	<Route path="/firebase">
 		<Firebase />
 	</Route>
@@ -87,30 +79,29 @@
 		<Shop />
 	</Route>
 
-	<Route path = "/shop">
-		<Shop/>
+	<Route path="/shop">
+		<Shop />
 	</Route>
 
-	<Route path ="/login">
-		<Form/>
+	<Route path="/login">
+		<Form />
 	</Route>
 
-	<Route path ="/registro">
-		<Registro/>
+	<Route path="/registro">
+		<Registro />
 	</Route>
 
-	<Route path ="/categoria">
-	    <Categoria/>
+	<Route path="/categoria">
+		<Categoria />
 	</Route>
 
-	<Route path ="/salesPerson">
-		<SalesPerson/>
+	<Route path="/salesPerson">
+		<SalesPerson />
 	</Route>
-	<Route path ="/ubi">
-		<InputUb/>
-
-	<Route path ="/carrito">
-		<Carrito/>
-
+	<Route path="/ubi">
+		<InputUb />
+	</Route>
+	<Route path="/carrito">
+		<Carrito />
 	</Route>
 </Router>
