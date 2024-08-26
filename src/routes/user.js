@@ -1,6 +1,5 @@
 import { writable } from "svelte/store";
 import {URL} from "../components/tools/connections/url";
-
 export const salesPerson = async () => {
     let urlPerson = URL+"/salePerson/1";
     try {

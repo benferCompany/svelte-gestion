@@ -4,6 +4,7 @@
     import Sidelbar from "./sidelbar/Sidelbar.svelte";
     import CreateProduct from "./sidelbar/components/create/CreateProduct.svelte";
     import SearchAndShowProducts from "../searchAndShowProducts/SearchAndShowProducts.svelte";
+    import Categories from "./categories/Categories.svelte";
     let height = window.screen.availHeight - 150;
     let handleClickCreate;
     let booleanView;
@@ -22,6 +23,8 @@
             <UpdateExcel />
         {:else if booleanView === 2}
             <ExportExcel />
+        {:else if booleanView ===3}
+            <Categories/>
         {/if}
     </div>
 </div>

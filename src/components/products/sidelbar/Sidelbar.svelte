@@ -34,6 +34,14 @@
             }} type="button" class="btn btn-success">Exportar Excel</button
             >
         </div>
+
+        <div>
+            <button on:click={()=>{
+               
+                booleanView = 3;
+            }} type="button" class="btn btn-success">Categorias</button
+            >
+        </div>
     </div>
 </div>
 
