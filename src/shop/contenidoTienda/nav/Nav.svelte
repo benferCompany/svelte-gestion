@@ -1,4 +1,5 @@
 <script>
+    import { slide } from 'svelte/transition';
     import { Link } from "svelte-routing";
     let styleUlA = `display: block;
     height: 100%;
@@ -10,18 +11,43 @@
     box-sizing: border-box;
     border-top: 1px solid rgb( 255, 255, 255,.1);
     border-bottom: 1px solid black;
-    transition: 0.5s;`;
+    transition: 0.5s;
+    text-decoration:none;`;
+
+    let inputSearch = false;
+
+    let isActive = false;
+    let logoCheck = true;
+
+  function handleClick() {
+    isActive = !isActive;
+    inputSearch = !inputSearch;
+   
+  }
 </script>
 
-<div class="nav1" id="nav-1">
-    <div style="width:100%; display:flex; justify-content:center;">
-        <img
-            src="https://firebasestorage.googleapis.com/v0/b/cloud-image-361ff.appspot.com/o/images%2FbenfershopPng.png?alt=media&token=e58609b9-6974-49f1-bb0d-d872f93f7eaf"
-            alt=""
-            class="logo-2"
-        />
+<div class="nav1" id="nav-1" >
+    <div  style="width:100%; display:flex; justify-content:end;">
+        {#if logoCheck}
+        <div style=" width:60%; display:flex; justify-content:space-between;">
+            
+            <img
+                src="https://firebasestorage.googleapis.com/v0/b/cloud-image-361ff.appspot.com/o/images%2FlogoBenfer.png?alt=media&token=e2cf96da-df32-48f9-a8bf-fb588a31fdcf"
+                alt=""
+                class="logo-2"
+            />
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <div ><p on:click={handleClick} class="{isActive? 'active':'lupa'}" style="">🔍<p></div>
+        </div>
+        {:else}
+        <div style=" width:60%; display:flex; justify-content:end;">
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <div ><p on:click={handleClick} class="{isActive? 'active':'lupa'}" style="">🔍<p></div>
+        </div>
+        {/if}
     </div>
-    <input type="checkbox" id="check" />
+    
+    <input type="checkbox" id="check" on:change = {()=>{logoCheck =!logoCheck}} />
     <label for="check">
         <i class="fas fa-bars" id="btn"></i>
         <i class="fas fa-times" id="cancel"></i>
@@ -36,37 +62,43 @@
         </header>
         <ul>
             <li>
-                <Link on:click={(e)=>{e.target.style="text-decoration:none"}} to="/shop" style={styleUlA}
+                <Link to="/shop" style={styleUlA}
                     ><i class="fas fa-home"></i>Inicio</Link
                 >
             </li>
             <li>
-                <Link to="/shop" style={styleUlA}
+                <Link to="/login" style={styleUlA}
                     ><i class="fas fa-user"></i>Iniciar</Link
                 >
             </li>
             <li>
-                <Link to="/shop" style={styleUlA}
-                    ><i class="fas fa-question-circle"></i>Servicios</Link
+                <Link to="/carrito" style={styleUlA}
+                    ><i class="fa-solid fa-cart-shopping"></i>Carrito</Link
                 >
             </li>
             <li>
-                <Link to="/shop" style={styleUlA}
-                    ><i class="fas fa-envelope"></i>Contactos</Link
-                >
-            </li>
-            <li>
-                <Link to="/shop" style={styleUlA}
+                <Link to="/categoria" style={styleUlA}
                     ><i class="fas fa-sliders-h"></i>Categorias</Link
                 >
             </li>
             <li>
                 <Link to="/shop" style={styleUlA}
-                    ><i class="fas fa-qrcode"></i>Pagos</Link
+                    ><i class="fas fa-qrcode"></i>Tus Compra</Link
                 >
             </li>
         </ul>
     </div>
+    {#if inputSearch}
+        <div transition:slide style="display:flex; justify-content:center; width:100%; margin-top:1em;">
+            <input
+                style="width:80%; border-radius:10px 0 0 10px"
+                type="search"
+                placeholder="Buscar Producto"
+                id="search"
+            />
+            <button style="border-radius:0 10px 10px 0">Buscar</button>
+        </div>
+    {/if}
 </div>
 
 <style>
@@ -75,17 +107,17 @@
     /*NAV */ /*NAV */ /*NAV */ /*NAV */
 
     .nav1 {
-        display: flex;
         position: fixed;
         width: 100%;
         justify-content: space-between;
         background-color: #063146;
         color: #063146;
+        transition: 1s;
         z-index: 99;
     }
 
     .logo {
-        margin-top: 20px;
+        margin-top: 0px;
         width: 80px;
         height: auto;
     }
@@ -97,6 +129,7 @@
     }
 
     /*NAV2 */ /*NAV2 */ /*NAV2 */ /*NAV2 */ /*NAV2 */
+
     .nav-2 {
         position: fixed;
         left: -250px;
@@ -108,10 +141,9 @@
     }
 
     .nav-2 header {
+        margin-top: 0;
         font-size: 22px;
-        color: white;
         text-align: center;
-        line-height: 70px;
         background-color: #063146;
         user-select: none;
     }
@@ -168,5 +200,18 @@
 
     #check:checked ~ label #cancel {
         left: 195px;
+    }
+
+    .lupa{
+        font-size:2em; 
+        margin-top:0.3em;
+        border-radius:1em;
+        cursor: pointer;
+        
+    }
+    .active{
+        font-size:2em; 
+        margin-top:0.3em;
+        box-shadow:0 0 5px -5px rgba(0,0,0,0.5);
     }
 </style>

@@ -1,14 +1,15 @@
 <script>
     import { onMount } from "svelte";
     import { getOutFlows } from "../../saleOff";
+    import {getPendingPayments} from "./filter"
     //variables de exportación
     export let pendingPayments;
     export let elementsMessageOptimized
     //Metodos
     onMount(async () => {
-        let outFlows = await getOutFlows();
-        console.log(outFlows)
-        pendingPayments = await outFlows.pendingPayments;
+        
+        pendingPayments = await getPendingPayments();
+        console.log(pendingPayments)
         elementsMessageOptimized.objects = pendingPayments;
     });
 
