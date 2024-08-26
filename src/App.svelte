@@ -18,6 +18,7 @@
 	import Form from "./shop/contenidoTienda/form/Form.svelte";
 	import SalesPerson from "./components/salesPerson/SalesPerson.svelte";
 
+    import InputUb from "./shop/contenidoTienda/form/InputUb.svelte";
 
 	let booleanNav;
 	$: booleanNav = $booleanPathName;
@@ -76,5 +77,8 @@
 
 	<Route path ="/salesPerson">
 		<SalesPerson/>
+	</Route>
+	<Route path ="/ubi">
+		<InputUb/>
 	</Route>
 </Router>

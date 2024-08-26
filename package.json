@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public --no-clear -s --port 80 --host 0.0.0.0 --cors"
+    "start": "sirv public --no-clear -s --port 3001 --host 0.0.0.0 --cors"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.0",
@@ -20,14 +20,19 @@
     "rollup-plugin-css-only": "^4.3.0",
     "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-node-polyfills": "^0.2.1",
+    "rollup-plugin-polyfill-node": "^0.13.0",
     "rollup-plugin-svelte": "^7.1.2",
     "svelte": "^3.55.0"
   },
   "dependencies": {
     "@afipsdk/afip.js": "^1.0.1",
     "@cloudinary/url-gen": "^1.19.0",
+    "@googlemaps/js-api-loader": "^1.16.8",
+    "@maptiler/sdk": "^2.2.2",
+    "@onsvisual/svelte-maps": "^1.2.19",
     "afip.ts": "^2.0.6",
     "axios": "^1.5.0",
+    "azure-maps-control": "^3.3.0",
     "excel4node": "^1.8.2",
     "exceljs": "^4.4.0",
     "file-saver": "^2.0.5",
@@ -36,7 +41,11 @@
     "googleapis": "^134.0.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
+    "leaflet": "^1.9.4",
     "lodash": "^4.17.21",
+    "mapbox-gl": "^3.6.0",
+    "maplibre-gl": "^3.3.1",
+    "modestmaps": "^3.3.7-dev",
     "numeros_a_palabras": "^1.0.8",
     "prettier": "^2.8.8",
     "puppeteer": "^19.11.1",
