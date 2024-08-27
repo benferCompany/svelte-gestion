@@ -5,7 +5,7 @@ const apiKey =
 
 export const keyPress = debounce(async (e) => {
     console.log(e.target.value);
-    
+
     let query = "Argentina Chaco " + e.target.value;
     let response = await fetch(
       `https://atlas.microsoft.com/search/address/json?api-version=1.0&query=${encodeURIComponent(query)}&subscription-key=${apiKey}`,
@@ -13,18 +13,4 @@ export const keyPress = debounce(async (e) => {
     let json = await response.json();
     console.log(json.results);
     streets = json.results;
-  }, 1000); select = async (e, st) => {
-    e.target.parentNode.style = "background:rgba(0,0,0,0.2);";
-
-    await new Promise((resolve) => setTimeout(resolve, 100));
-    if (inputFind) {
-      console.log(st.address.freeformAddress);
-      inputFind.value = st.address.freeformAddress;
-    }
-    getMap();
-    cambioDeLugar(st.position.lat, st.position.lon);
-    streets = "";
-  };
-
   }, 1000);
-
