@@ -3,8 +3,70 @@
     import Nav from "../nav/Nav.svelte";
     import Footer from "../footer/Footer.svelte";
     import { Link } from "svelte-routing";
+    import Pago from "./pago/Pago.svelte";
     $booleanPathName = false;
-
+    let booleanMercadoPago = false;
+    let detalle= {
+        id: 1,
+        cae: "",
+        caeFchVto: null,
+        salesPerson: {
+            shift: "",
+            auth: "",
+            comission: 0.0,
+            id: 1,
+            name: "Vendedor",
+            last_name: "Apellido Vendedor",
+            address: "Dirección de Vendedor",
+            email: "email@vendedor.com",
+            phone: "111111",
+            mobile_phone: "1111111",
+            idPersonal: "11-1111111111-1",
+            img: "https://img.freepik.com/fotos-premium/retrato-hombre-negocios-expresion-cara-seria-fondo-estudio-espacio-copia-bengala-persona-corporativa-enfoque-pensamiento-duda-mirada-facial-dilema-o-concentracion_590464-84924.jpg",
+        },
+        customer: {
+            id: 2,
+            name: "Benjamín ",
+            last_name: "Gomez",
+            address: "Leopoldo Lugones 726",
+            email: "benjidfer@outlook.com",
+            phone: "12233000",
+            mobile_phone: "03625635884",
+            idPersonal: "35307058",
+            fiscal_status: "Consumidor Final",
+            current_account: 0.0,
+            discount: 0.0,
+        },
+        company: {
+            id: 1,
+            name: "Empresa",
+            business_name: "Nombre de Empreas",
+            cuit: "11-111111111-1",
+            address: "Dirección de Empresa",
+            fiscal_status: "Monotributo",
+            business_activity: "21/08/2024",
+        },
+        paymentType: "Efectivo",
+        fiscalStatus: "Consumidor Final",
+        detailProductList: [
+            {
+                id: 1,
+                quality: 5.0,
+                productId: 1,
+                internalCode: "1pro",
+                description: "descripción del producto",
+                price: 130.0,
+                costPrice: 125.0,
+                totalCostPrice: 625.0,
+                totalPrice: 650.0,
+            },
+        ],
+        numberInvoice: "F-T 12",
+        total: 650.0,
+        totalCost: 625.0,
+        discount: null,
+        date: "27/08/2024 19:18",
+    };
     let products = [
         {
             title: "titulo del producto",
@@ -88,7 +150,21 @@
                     <h5>Total</h5>
                     <h5>$299.999</h5>
                 </div>
-                <button class="btn-com" style="background-color: #3483fa; border-radius: 5px; width:100%; color:white; margin-top: 1.5em;">Continuar compra</button>
+                <div class="mercado-pago">
+                    {#if !booleanMercadoPago}
+                    <button on:click={()=>{
+                        console.log("boton");
+                        booleanMercadoPago = !booleanMercadoPago;
+                        }} class="btn-com">Continuar compra</button>
+                    {/if}
+                    {#if booleanMercadoPago}
+                        <div>
+    
+                            <Pago bind:detalle/>
+                        </div>
+                    {/if}
+                </div>
+                   
             </div>
         </div>
     </div>
@@ -119,5 +195,13 @@
         display: flex;
         flex-direction: column;
         justify-content: end;
+    }
+   
+
+    .btn-com {
+        background-color: #3483fa; 
+        border-radius: 5px; 
+        width:100%; color:white; 
+        margin-top: 1.5em;
     }
 </style>

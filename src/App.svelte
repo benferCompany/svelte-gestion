@@ -22,6 +22,7 @@
 	import Registro from "./shop/contenidoTienda/registro/Registro.svelte";
 	import Pago from "./shop/contenidoTienda/carrito/pago/Pago.svelte";
     import EstadoPago from "./shop/contenidoTienda/carrito/pago/EstadoPago.svelte";
+    import Descripcion from "./shop/contenidoTienda/categoria/descriptions/Descripcion.svelte";
 	let booleanNav;
 	$: booleanNav = $booleanPathName;
 </script>
@@ -107,4 +108,9 @@
 	<Route path="/statePage">
 		<EstadoPago/>
 	</Route>
+
+	<Route path="/description">
+		<Descripcion/>
+	</Route>
+	
 </Router>
