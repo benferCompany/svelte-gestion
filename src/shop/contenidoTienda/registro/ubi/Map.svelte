@@ -52,14 +52,12 @@
             pixelOffset: [5, -15],
         });
         positionMarket = marker.getOptions().position;
-        console.log(positionMarket);
         var output = document.getElementById("output");
 
         //Add a drag event to get the position of the marker. Markers support drag, dragstart and dragend events.
         map.events.add("drag", marker, function () {
             var pos = marker.getOptions().position;
             positionMarket = {lon:pos[0], lat:pos[1]};
-            console.log(positionMarket);
             //Round longitude,latitude values to 5 decimal places.
             output.innerText =
                 Math.round(pos[0] * 100000) / 100000 +
@@ -70,10 +68,13 @@
         //Add the marker to the map.
         map.markers.add(marker);
     };
+    export let callback =()=>{
 
+    }
     const handleMap = () => {
         booleanMap = false;
         document.querySelector("#myMap").classList.add("d-none");
+        callback();
     };
 </script>
 
@@ -84,7 +85,7 @@
 
 <div
     id="myMap"
-    style="position:relative;width:100%;min-width:290px;height:600px;"
+    style="position:relative;width:100%;min-width:290px;height:150vw;"
 ></div>
 {#if booleanMap}
     <div

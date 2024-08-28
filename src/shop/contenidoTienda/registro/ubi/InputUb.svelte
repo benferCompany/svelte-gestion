@@ -14,6 +14,16 @@
   let cambioDeLugar;
   let positionMarket;
   let body;
+  export let ubicacion = {ub:null, ubMarcador:null};
+  export let callback = () => {
+    
+    ubicacion.ubMarcador = positionMarket;
+    if (inputFind) {
+      inputFind.style = styleInput ? styleInput.input : "";
+      body.style = "";
+      body.children[0].style = "";
+    }
+  };
   export let styleInput;
 
   //variables locales
@@ -26,7 +36,6 @@
     }
   });
   const keyPress = debounce(async (e) => {
-    console.log(e.target.value);
     let query = "Argentina Chaco " + e.target.value;
     let response = await fetch(
       `https://atlas.microsoft.com/search/address/json?api-version=1.0&query=${encodeURIComponent(query)}&subscription-key=${apiKey}`,
@@ -39,13 +48,17 @@
   const select = async (e, st) => {
     e.target.parentNode.style = "background:rgba(0,0,0,0.2);";
 
-    await new Promise((resolve) => setTimeout(resolve, 100));
     if (inputFind) {
       console.log(st.address.freeformAddress);
       inputFind.value = st.address.freeformAddress;
     }
     getMap();
-    cambioDeLugar(st.position.lat, st.position.lon);
+    console.log(st);
+    let position = st.position;
+    cambioDeLugar(position.lat, position.lon);
+    ubicacion.ub =st;
+    
+    await new Promise((resolve) => setTimeout(resolve, 100));
     streets = "";
   };
 </script>
@@ -57,26 +70,28 @@
       class="ipt"
       style="width:100%;"
       on:keyup={keyPress}
-      on:focus={(e) => {
-        body.style = "position:absolute; top:2em; width:100%; left:0;";
-        e.target.style = "width:100%;";
+      on:focus={(e)=>{
+        e.target.style = styleInput.inputHover;
+        body.style="position:absolute; top:2em;"
       }}
       type="search"
       name=""
       id=""
       bind:this={inputFind}
       on:mouseover={(e) => {
-       
+        e.target.style = styleInput.inputHover;
       }}
       on:mouseout={(e) => {
         e.target.style = styleInput.input;
       }}
+      placeholder="Ubicación"
+      
     />
   </div>
-  <div style="background:white;">
+  <div>
     {#if streets}
       {#each streets as st}
-        <div style="border: solid  1px black">
+        <div style="border: solid  1px black; ">
           <!-- svelte-ignore a11y-click-events-have-key-events -->
           <p
             on:click={(e) => {
@@ -89,7 +104,7 @@
       {/each}
     {/if}
   </div>
-  <Map bind:getMap bind:cambioDeLugar bind:positionMarket />
+  <Map bind:callback bind:getMap bind:cambioDeLugar bind:positionMarket />
 </div>
 
 <style>
