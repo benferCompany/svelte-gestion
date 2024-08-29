@@ -109,7 +109,7 @@
 		<EstadoPago/>
 	</Route>
 
-	<Route path="/description">
+	<Route path="/description/:id">
 		<Descripcion/>
 	</Route>
 	

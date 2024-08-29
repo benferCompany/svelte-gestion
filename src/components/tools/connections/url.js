@@ -1,4 +1,4 @@
-let urlRemote ="http://20.77.41.157:8080"
-let urlLocal = "http://localhost:8080";
+let urlRemote ="https://benfer.shop/api"
+let urlLocal = "http://localhost:8080/api";
 
-export let URL = urlLocal;
+export let URL = urlRemote;
