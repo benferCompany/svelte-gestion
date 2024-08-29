@@ -45,15 +45,14 @@
         <div>
             {#each products as pro}
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <div class="div-prod">
-                    <div
-                        on:click={() => {
-                            console.log("/product/" + pro.id);
-                            navigate(
-                                "http://benfer.shop:8080/products/" + pro.id,
-                            );
-                        }}
-                    >
+                <div class="div-prod"   on:click={() => {
+                    console.log("/product/" + pro.id);
+                    navigate(
+                        "http://localhost:8080/description/" + pro.id,
+                    );
+                }}>
+                    <div>
+                    
                         <h5>{pro.title}</h5>
                         <div>
                             <img style="width:100%; border-radius: 5px;" src={pro.image} alt="" />
@@ -63,7 +62,6 @@
                         </div>
                     </div>
                     <div>
-                        <button class="btn-a">Añadir</button>
                     </div>
                 </div>
             {/each}

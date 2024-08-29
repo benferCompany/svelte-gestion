@@ -1,4 +1,4 @@
-let urlRemote ="http://20.77.41.157:8080";
+let urlRemote ="http://40.81.137.39:8080"
 let urlLocal = "http://localhost:8080";
 export let URL = urlRemote;
 
