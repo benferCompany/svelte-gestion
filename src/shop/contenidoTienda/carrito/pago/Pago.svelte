@@ -17,6 +17,7 @@
 
     export let detalle;
     onMount(() => {
+        console.log(detalle)
         const script = document.createElement("script");
         script.src = "https://sdk.mercadopago.com/js/v2";
         script.async = true;
@@ -32,7 +33,7 @@
                 },
             );
             const bricksBuilder = mp.bricks();
-            console.log(bricksBuilder);
+
             mp.bricks().create("wallet", "wallet_container", {
                 initialization: {
                     preferenceId: id,
