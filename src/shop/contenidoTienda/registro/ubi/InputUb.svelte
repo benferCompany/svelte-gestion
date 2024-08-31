@@ -67,22 +67,28 @@
   <div style=" display:flex; justify-content:center;">
     <!-- svelte-ignore a11y-mouse-events-have-key-events -->
     <input
+      class="ipt"
       style="width:100%;"
       on:keyup={keyPress}
+      on:focus={(e)=>{
+        e.target.style = styleInput.inputHover;
+        body.style="position:absolute; top:2em;"
+      }}
       type="search"
       name=""
       id=""
       bind:this={inputFind}
-      on:click={(e) => {
-        inputFind.style = styleInput.inputHover;
-        body.style = "position:absolute; top:0; left:0; width:100%;";
-        body.children[0].style = "background:#063146; padding:2em;";
+      on:mouseover={(e) => {
+        e.target.style = styleInput.inputHover;
+      }}
+      on:mouseout={(e) => {
+        e.target.style = styleInput.input;
       }}
       placeholder="Ubicación"
       
     />
   </div>
-  <div style="background:white">
+  <div>
     {#if streets}
       {#each streets as st}
         <div style="border: solid  1px black; ">

@@ -1,7 +1,7 @@
 <script>
     import { Link, navigate } from "svelte-routing";
     import { IniciaSesion, accesGoogle } from "./form";
-    import { onMount } from "svelte";
+
 
 
     let styleVolver = `

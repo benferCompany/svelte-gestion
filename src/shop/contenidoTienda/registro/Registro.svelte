@@ -1,9 +1,12 @@
 <script>
+
     import { Link } from "svelte-routing";
     let styleVolver = `padding-top: 25px;
     margin-left: 10px;
     font-size: 20px;
     color: white;
+    
+
     font-family: 'Arial Narrow', Arial, sans-serif;`;
     import { booleanPathName } from "../../../components/tools/pathName/pathName";
     import InputUb from "./ubi/InputUb.svelte";
@@ -64,13 +67,7 @@
                             placeholder="Apellido"
                         />
                     </div>
-                    <input
-                        on:click={callback}
-                        type="number"
-                        name="din"
-                        id=""
-                        placeholder="DNI"
-                    />
+                    <input type="number" name="din" id="" placeholder="DNI" />
                     <input
                         on:click={callback}
                         type="number"
@@ -94,6 +91,8 @@
 </div>
 
 <style>
+
+
     .body {
         background-color: #084b6c;
         padding: 0;
@@ -104,6 +103,7 @@
         top: 0;
         left: 0;
     }
+
 
     .contenedor-hijo {
         margin-top: 30px;
@@ -175,6 +175,7 @@
         width: 82%;
         box-shadow: 0px 4px 8px rgb(6, 220, 181);
     }
+
 
     button {
         margin-top: 7px;
