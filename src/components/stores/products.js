@@ -107,6 +107,7 @@ export const lastElement = async()=>{
     try {
         const response = await fetch(`${URL}/products/lastElement`);
         const data = await response.json();
+        console.log(data)
         return data
 
     } catch (error) {

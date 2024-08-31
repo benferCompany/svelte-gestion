@@ -1,33 +1,21 @@
 <script>
     //Importaciones
-    import { Link, navigate } from "svelte-routing";
+    import {navigate } from "svelte-routing";
     import Nav from "../nav/Nav.svelte";
     import Footer from "../footer/Footer.svelte";
-    import { categorias, products } from "./categoria";
-    import { onMount } from "svelte";
-    let styleVolver = `padding-top: 0;
-    margin-left: 10px;
-    font-size: 20px;
-    color: black;
-    font-family: 'Arial Narrow', Arial, sans-serif;`;
+
+    import { products } from "../nav/search";
+
     import { booleanPathName } from "../../../components/tools/pathName/pathName";
-    let categoriesProducts = [];
     let body;
+    booleanPathName.set(false);
+    window.addEventListener("resize", () => {
+        console.log(window.innerHeight);
+    });
+    let prds;
     $: {
-        $booleanPathName = false;
-        console.log(categorias);
-        categoriesProducts = [
-            ...new Set(
-                products
-                    .flatMap((product) => product.categories)
-                    .filter((category) => category !== undefined),
-            ),
-        ];
-        console.log(categoriesProducts);
+        prds = $products;
     }
-   window.addEventListener("resize",()=>{
-        console.log(window.innerHeight)
-    })
 </script>
 
 <div bind:this={body} class="body">
@@ -35,36 +23,40 @@
     <div class="category">
         <h2>Categorias</h2>
         <select name="" id="">
-            {#each categoriesProducts as category}
-                <option>{category.name}</option>
-            {/each}
+            <!---Agrer aca las option de categoria que tiene los productos-->
         </select>
     </div>
 
     <div class="products">
         <div>
-            {#each products as pro}
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <div class="div-prod"   on:click={() => {
-                    console.log("/product/" + pro.id);
-                    navigate(
-                        "http://localhost:8080/description/" + pro.id,
-                    );
-                }}>
-                    <div>
-                    
-                        <h5>{pro.title}</h5>
+            {#if prds}
+            {#if prds.content}
+                {#each prds.content as pro}
+                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+                    <div
+                        class="div-prod"
+                        on:click={() => {
+                            navigate(`/description/` + pro.id);
+                        }}
+                    >
                         <div>
-                            <img style="width:100%; border-radius: 5px;" src={pro.image} alt="" />
+                            <h5>{pro.title}</h5>
+                            <div>
+                                <img
+                                    style="width:100%; border-radius: 5px;"
+                                    src={pro.image}
+                                    alt=""
+                                />
+                            </div>
+                            <div>
+                                <h5>{pro.selling_price}</h5>
+                            </div>
                         </div>
-                        <div>
-                            <h5>{pro.selling_price}</h5>
-                        </div>
+                        <div></div>
                     </div>
-                    <div>
-                    </div>
-                </div>
-            {/each}
+                {/each}
+                {/if}
+            {/if}
         </div>
     </div>
 

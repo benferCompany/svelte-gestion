@@ -23,6 +23,7 @@
 	import Pago from "./shop/contenidoTienda/carrito/pago/Pago.svelte";
     import EstadoPago from "./shop/contenidoTienda/carrito/pago/EstadoPago.svelte";
     import Descripcion from "./shop/contenidoTienda/categoria/descriptions/Descripcion.svelte";
+    import ModDescription from "./components/products/sidelbar/components/create/description/ModDescription.svelte";
 	let booleanNav;
 	$: booleanNav = $booleanPathName;
 </script>
@@ -111,6 +112,10 @@
 
 	<Route path="/description/:id">
 		<Descripcion/>
+	</Route>
+
+	<Route path="/modDescription">
+		<ModDescription/>
 	</Route>
 	
 </Router>

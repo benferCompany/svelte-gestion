@@ -1,7 +1,9 @@
 <script>
     import { slide } from 'svelte/transition';
-    import { Link } from "svelte-routing";
+    import { Link, navigate } from "svelte-routing";
+    import {getProduct, products} from "./search"
     let styleUlA = `display: block;
+
     height: 100%;
     width: 100%;
     line-height: 65px;
@@ -89,15 +91,19 @@
         </ul>
     </div>
     {#if inputSearch}
-        <div transition:slide style="display:flex; justify-content:center; width:100%; margin-top:1em;">
+        <form on:submit|preventDefault={async(e)=>{
+            products.set(await getProduct(e))
+            navigate("/categoria")
+        }} transition:slide style="display:flex; justify-content:center; width:100%; margin-top:1em;">
             <input
                 style="width:80%; border-radius:10px 0 0 10px"
                 type="search"
                 placeholder="Buscar Producto"
                 id="search"
+                name="search"
             />
-            <button style="border-radius:0 10px 10px 0">Buscar</button>
-        </div>
+            <input type="submit" style="border-radius:0 10px 10px 0" value="Buscar"/>
+        </form>
     {/if}
 </div>
 

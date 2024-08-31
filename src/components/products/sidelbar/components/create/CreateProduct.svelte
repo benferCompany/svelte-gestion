@@ -9,12 +9,9 @@
     import { lastElement } from "../../../../stores/products";
     import { onMount } from "svelte";
     let booleanEdit = false;
-    let addInternal = 1;
+    let addInternal;
     let cod2 = "";
-    let idInternal;
-    $: {
-        idInternal = addInternal + cod2;
-    }
+    let idInternal =0;
     export let handleClickCreate = () => {
         booleanEdit = !booleanEdit;
     };
@@ -29,17 +26,17 @@
     onMount(async () => {
         try {
             let response = await lastElement();
-            if(response.status ==200){
+           
                 console.log("todo salio bien")
                 addInternal = response+1;
-            }else{
-                console.log("algo salio mal")
-            }
         
         } catch (error) {
             console.log(error);
+            addInternal=1
         }
+        idInternal = addInternal;
     });
+    $:{idInternal=addInternal+cod2}
 </script>
 
 <Message {alertMessage} bind:showAndHideAlert />
@@ -94,15 +91,6 @@
                             class="form-control"
                         />
                     </div>
-                </div>
-                <div>
-                    <label for="" class=" text-center">Descripción</label>
-                    <input
-                        name="description"
-                        type="text"
-                        class="form-control"
-                        required
-                    />
                 </div>
                 <div class="d-flex justify-content-around">
                     <div>
