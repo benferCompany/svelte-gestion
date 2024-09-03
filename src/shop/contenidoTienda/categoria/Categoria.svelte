@@ -36,7 +36,7 @@
                     <div
                         class="div-prod"
                         on:click={() => {
-                            navigate(`/description/` + pro.id);
+                            navigate(`/description?id=` + pro.id);
                         }}
                     >
                         <div>

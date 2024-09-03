@@ -130,7 +130,7 @@ export const getDescriptionProduct=async(id)=>{
     try{
         const response =await fetch(`${URL}/descriptionProduct/${id}`)
         const json = await response.json()
-        return {json, status:true};
+        return json;
     }catch(error){
         console.error("Error inesperando con la consulta desciprtionProduct", error);
     }

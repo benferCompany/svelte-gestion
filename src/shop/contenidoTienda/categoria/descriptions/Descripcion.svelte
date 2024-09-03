@@ -4,14 +4,22 @@
     import { getProduct, addCarrito } from "./description";
     import { carrito } from "../../carrito/carrito";
     import { navigate } from "svelte-routing";
+    import { getDescriptionProduct } from "../../../../components/stores/products";
     let product;
+    let descripcion;
     let cantidadCarrito = 0;
+    function createSequentialArray(N) {
+        return Array.from({ length: N }, (_, i) => i + 1);
+    }
     booleanPathName.set(false);
     onMount(async () => {
-        let id = window.location.pathname.split("/").pop();
-        if (id) {
-            product = await getProduct(id);
-        }
+    let id;
+        const params = new URLSearchParams(window.location.search);
+        id = params.get("id");
+        console.log(id);
+        descripcion = await getDescriptionProduct(id);
+        product = await getProduct(id);
+        
     });
     let image = {
         id: 1,
@@ -26,7 +34,6 @@
     let selectedOption = "";
 
     $: {
-        
         if ($carrito && product) {
             console.log(product);
             $carrito.forEach((p) => {
@@ -38,7 +45,7 @@
     }
 </script>
 
-{#if product}
+{#if product && descripcion}
     <div class="body">
         <div class="carrusel">
             {#each image.src as img}
@@ -88,16 +95,17 @@
             <div class="selec">
                 <h3 class="h3">stock disponibles</h3>
                 <select>
-                    <option selected>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
+                    {#each createSequentialArray(product.stores[0].stock) as i }
+                    <option value={i}>{i}</option>    
+                    {/each}
+                    
                 </select>
             </div>
         </div>
         <div class="btns">
             <button
-                on:click={() => {
+                on:click={async() => {
+                    addCarrito($carrito, product)
                     navigate("/carrito");
                 }}
                 style="background-color: rgb(9, 50, 73);">Compra ahora</button
@@ -107,7 +115,6 @@
                 on:click={() => {
                     addCarrito($carrito, product);
                 }}
-                
             >
                 {#if cantidadCarrito > 0}
                     Agregar mas({cantidadCarrito})
@@ -117,46 +124,8 @@
             </button>
         </div>
         <div class="descriptions">
-            <p class="p">
-                <i class="color:red;">Compra Protegida</i> Se abrirá en una nueva
-                ventana, recibí el producto que esperabas o te devolvemos tu dinero.
-            </p>
-            <div class="caracters-padre">
-                <h3 style="margin-top: 20px;">Características principal</h3>
-                <div class="caracterist-1">
-                    <div class="info">
-                        <b>Marca</b> <br />
-                        <b>Tamaño</b><br />
-                        <b>Peso</b><br />
-                        <b>Color</b><br />
-                        <b>Uso</b><br />
-                    </div>
-                    <div class="info2">
-                        <b>hp</b><br />
-                        <b>grande</b><br />
-                        <b>3 kg</b><br />
-                        <b>plateado</b><br />
-                        <b>Nuevo</b><br />
-                    </div>
-                </div>
-                <h3>Características Secundaria</h3>
-                <div class="caracterist-1">
-                    <div class="info">
-                        <b>Pantalla</b> <br />
-                        <b>Memoria</b><br />
-                        <b>Disco</b><br />
-                        <b>Procesador</b><br />
-                        <b>Bateria</b><br />
-                    </div>
-                    <div class="info2">
-                        <b>24"</b><br />
-                        <b>8gb DDR3</b><br />
-                        <b>ssd 380gb</b><br />
-                        <b>i5 7762k</b><br />
-                        <b>10.000 MAP</b><br />
-                    </div>
-                </div>
-            </div>
+            
+            {@html descripcion.content}
         </div>
         <h4 style="text-align: center; padding-bottom: 10px;">
             Agregar un comentario
@@ -380,10 +349,12 @@
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
     }
-    .boton-carrito{
-        background-color: rgb(255, 117, 11); padding-top:0; margin-top:0;
+    .boton-carrito {
+        background-color: rgb(255, 117, 11);
+        padding-top: 0;
+        margin-top: 0;
     }
-    .boton-carrito:active{
+    .boton-carrito:active {
         background-color: rgb(170, 77, 7);
     }
 </style>

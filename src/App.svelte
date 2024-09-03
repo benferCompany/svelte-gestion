@@ -76,13 +76,11 @@
 		<SaleOff />
 	</Route>
 
-	<Route path="/shop">
+	<Route path="/">
 		<Shop />
 	</Route>
 
-	<Route path="/shop">
-		<Shop />
-	</Route>
+	
 
 	<Route path="/login">
 		<Form />
@@ -109,7 +107,7 @@
 		<EstadoPago/>
 	</Route>
 
-	<Route path="/description/:id">
+	<Route path="/description">
 		<Descripcion/>
 	</Route>
 

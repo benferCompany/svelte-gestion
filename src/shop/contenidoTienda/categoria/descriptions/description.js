@@ -11,7 +11,7 @@ export const getProduct = async (id) => {
 }
 
 export const addCarrito = (car, product) => {
-
+    console.log("hace carrito")
 
     let detailProductList = [
 
@@ -19,7 +19,7 @@ export const addCarrito = (car, product) => {
 
     let prd = {
         "id": product.id,
-        "quality": null,
+        "quality": 0,
         "productId": product.id,
         "internalCode": product.internalCode,
         "description": product.title,
@@ -31,28 +31,34 @@ export const addCarrito = (car, product) => {
     }
 
     car.push(prd)
-    
+
     car.forEach((c) => {
         let existingProduct = detailProductList.find((p) => p.id === c.id);
 
         if (existingProduct) {
-            existingProduct.quality = existingProduct.quality?existingProduct.quality:0;
-            console.log(existingProduct)
-            existingProduct.quality += c.quality?c.quality:1;
+            // Si no existe quality, inicializar en 0
+            existingProduct.quality = existingProduct.quality || 0;
+            console.log(existingProduct);
+
+            // Sumar la calidad del nuevo producto o sumar 1 si no tiene definida la calidad
+            existingProduct.quality += c.quality || 1;
+
+            // Calcular precios totales
             existingProduct.totalPrice = existingProduct.quality * existingProduct.price;
             existingProduct.totalCostPrice = existingProduct.quality * existingProduct.costPrice;
         } else {
-    
-            detailProductList.push({
-                ...c, // Copia las propiedades del objeto del carrito
-                totalPrice: c.quality * c.price,
-                totalCostPrice: c.quality * c.costPrice,
-            });
+            // Si no existe el producto en la lista, agregarlo con valores iniciales
+            c.quality = c.quality || 1; // Asegurarse que la calidad está definida
+            c.totalPrice = c.quality * c.price;
+            c.totalCostPrice = c.quality * c.costPrice;
+            detailProductList.push(c);
+            console.log(detailProductList);
         }
     });
 
-    localStorage.setItem('carrito',JSON.stringify(detailProductList));
+    localStorage.setItem('carrito', JSON.stringify(detailProductList));
     carrito.set(detailProductList);
+
 
 }
 

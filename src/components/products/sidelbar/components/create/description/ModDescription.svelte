@@ -6,7 +6,7 @@
   import { onMount } from "svelte";
   import TextEdit from "./TextEdit.svelte";
   import { URL } from "../../../../../tools/connections/url";
-    import Message from "../../../../../message/Message.svelte";
+  import Message from "../../../../../message/Message.svelte";
   import { navigate } from "svelte-routing";
   let product;
   let description;
@@ -19,9 +19,10 @@
     console.log(id);
     let response = await getDescriptionProduct(id);
     product = await getProduct(id);
-    if (response.json) {
+    console.log(response);
+    if (!response.error) {
       if (!description) {
-        description = response.json;
+        description = response;
       }
       if (!content) {
         content = description.content;
@@ -47,48 +48,51 @@
     });
     const json = await response.json();
     console.log(json);
-    if(json){
+    if (json) {
       showAndHideAlert();
-      volver = true
+      volver = true;
     }
   };
 
   let content;
 
+  let alertMessage = {
+    alertStyle: "alert-success",
+    message: "Se cargó la descripción con éxito.",
+  };
 
-   let alertMessage = {
-        alertStyle: "alert-success",
-        message: "Se cargó la descripción con éxito.",
-    };
+  let showAndHideAlert;
 
-    
-
-   let showAndHideAlert;
-
-   const back = ()=>{
+  const back = () => {
     window.history.back();
-   }
-
+  };
 </script>
+
 <Message bind:alertMessage bind:showAndHideAlert />
 <div class="contenedor" style="">
   <div class="width:40%">
-    {#if content}
+    {#if description}
       <TextEdit bind:content />
     {/if}
 
     <div style="display:flex;">
       {#if volver}
-      <button on:click={()=>{volver=false; back()}} class="btn btn-secondary m-2">Volver</button>
+        <button
+          on:click={() => {
+            volver = false;
+            back();
+          }}
+          class="btn btn-secondary m-2">Volver</button
+        >
       {:else}
-      <button
-      on:click={async () => {
-        await handleClick(description, content);
-      }}
-      class="btn btn-info m-2">Enviar</button
-    >
+        <button
+          on:click={async () => {
+            await handleClick(description, content);
+          }}
+          class="btn btn-info m-2">Enviar</button
+        >
       {/if}
-      
+
       <button on:click={back} class="btn btn-danger m-2">Cancelar</button>
     </div>
   </div>
