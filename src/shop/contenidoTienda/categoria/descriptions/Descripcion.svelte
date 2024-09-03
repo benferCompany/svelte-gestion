@@ -5,13 +5,12 @@
     import { carrito } from "../../carrito/carrito";
     import { navigate } from "svelte-routing";
     let product;
-
+    let cantidadCarrito = 0;
     booleanPathName.set(false);
     onMount(async () => {
         let id = window.location.pathname.split("/").pop();
         if (id) {
             product = await getProduct(id);
-            console.log(product);
         }
     });
     let image = {
@@ -25,6 +24,18 @@
         ],
     };
     let selectedOption = "";
+
+    $: {
+        
+        if ($carrito && product) {
+            console.log(product);
+            $carrito.forEach((p) => {
+                if (p.id === product.id) {
+                    cantidadCarrito = p.quality;
+                }
+            });
+        }
+    }
 </script>
 
 {#if product}
@@ -78,9 +89,9 @@
                 <h3 class="h3">stock disponibles</h3>
                 <select>
                     <option selected>1</option>
-                    <option >2</option>
-                    <option >3</option>
-                    <option >4</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
                 </select>
             </div>
         </div>
@@ -92,12 +103,18 @@
                 style="background-color: rgb(9, 50, 73);">Compra ahora</button
             > <br />
             <button
+                class="boton-carrito"
                 on:click={() => {
                     addCarrito($carrito, product);
                 }}
-                style="background-color: rgb(255, 117, 11); padding-top:0; margin-top:0;"
-                >Añadir al carrito</button
+                
             >
+                {#if cantidadCarrito > 0}
+                    Agregar mas({cantidadCarrito})
+                {:else}
+                    Añadir al carrito
+                {/if}
+            </button>
         </div>
         <div class="descriptions">
             <p class="p">
@@ -190,17 +207,17 @@
     }
 
     /*todos los riado*/ /*todos los radio*/ /*todos los radio*/ /*todos los radio*/
-.colors-produc {
-    margin-top: 15px;
-    display: flex;
-    justify-content: space-between;
-}
+    .colors-produc {
+        margin-top: 15px;
+        display: flex;
+        justify-content: space-between;
+    }
 
-.inpts {
-    display: flex;
-    margin: 0;
-    padding: 0;
-}
+    .inpts {
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
 
     input[type="radio"] {
         margin-left: 5px;
@@ -362,5 +379,11 @@
         border-bottom-left-radius: 0;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
+    }
+    .boton-carrito{
+        background-color: rgb(255, 117, 11); padding-top:0; margin-top:0;
+    }
+    .boton-carrito:active{
+        background-color: rgb(170, 77, 7);
     }
 </style>

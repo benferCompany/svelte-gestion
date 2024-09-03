@@ -107,10 +107,31 @@ export const lastElement = async()=>{
     try {
         const response = await fetch(`${URL}/products/lastElement`);
         const data = await response.json();
-        console.log(data)
+        
         return data
 
     } catch (error) {
         console.error("Error fetching data:", error);
+    }
+}
+
+
+export const getProduct = async(id)=>{
+    try{
+        const response = await fetch(`${URL}/products/${id}`);
+        const json = await response.json(); 
+        return json;
+    }catch(error){
+        console.error("Error inesperado en consulta de producto por id", error)
+    }
+}
+
+export const getDescriptionProduct=async(id)=>{
+    try{
+        const response =await fetch(`${URL}/descriptionProduct/${id}`)
+        const json = await response.json()
+        return {json, status:true};
+    }catch(error){
+        console.error("Error inesperando con la consulta desciprtionProduct", error);
     }
 }

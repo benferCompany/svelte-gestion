@@ -7,6 +7,7 @@
     import { URL } from "../../tools/connections/url";
     import { deleteProduct } from "../../stores/products";
     import { productsTablet } from "./tablet";
+    import { navigate } from "svelte-routing";
     export let handleClickClose;
     export let products = [];
     let visible;
@@ -22,7 +23,6 @@
             `${URL}/products/name?page=${page}&size=5`,
             {
                 description: description.target.value,
-
             },
         );
     }, 300);
@@ -83,13 +83,13 @@
             <thead>
                 <tr>
                     <th class="col-1">Id</th>
-                    <th class="col-3">Descripción</th>
+                    <th class="col-2">Descripción</th>
                     <th class="col-1">Stock</th>
                     <th class="col-1">Stock-min</th>
                     <th class="col-1">Stock-max</th>
                     <th class="col-1">Costo</th>
                     <th class="col-1">PVP</th>
-                    <th class="col-1">Acción</th>
+                    <th class="col-4">Acción</th>
                 </tr>
             </thead>
 
@@ -97,7 +97,7 @@
                 {#each products.content as product, index (product)}
                     <tr class="align-middle">
                         <td>{product.id}</td>
-                        <td>{product.description}</td>
+                        <td>{product.title}</td>
 
                         <td>{stores[index] ? stores[index].stock : 0}</td>
                         <td>{stores[index] ? stores[index].stock_min : 0}</td>
@@ -113,6 +113,13 @@
                                     class="btn btn-warning btn-sm"
                                     >Editar</button
                                 >
+                                <button
+                                    on:click={()=>{navigate("/modDescription?id="+product.id)}}
+                                    type="button"
+                                    class="btn btn-info btn-sm ms-1"
+                                    >Descripción</button
+                                >
+
                                 <button
                                     type="button"
                                     class="btn btn-danger btn-sm ms-1"

@@ -27,7 +27,10 @@
         try {
             let response = await lastElement();
            
-                console.log("todo salio bien")
+                if(typeof response !=="number"){
+                    addInternal = 1
+                    return false    
+                }
                 addInternal = response+1;
         
         } catch (error) {

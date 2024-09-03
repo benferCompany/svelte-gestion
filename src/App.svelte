@@ -12,7 +12,6 @@
 	import SalesActivity from "./components/salesActivity/SalesActivity.svelte";
 	import Firebase from "./routes/image/Firebase/Firebase.svelte";
 	import ImportExcel from "./components/products/importExcel/ImportExcel.svelte";
-	import Input from "./components/acces/inputs/Input.svelte";
 	import SaleOff from "./components/saleOff/SaleOff.svelte";
 	import Shop from "./shop/Shop.svelte";
 	import Form from "./shop/contenidoTienda/form/Form.svelte";

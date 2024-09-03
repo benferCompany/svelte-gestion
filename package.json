@@ -31,6 +31,7 @@
     "@maptiler/sdk": "^2.2.2",
     "@mercadopago/sdk-react": "^0.0.19",
     "@onsvisual/svelte-maps": "^1.2.19",
+    "@tinymce/tinymce-svelte": "^3.0.0",
     "afip.ts": "^2.0.6",
     "axios": "^1.5.0",
     "azure-maps-control": "^3.3.0",
@@ -38,6 +39,7 @@
     "exceljs": "^4.4.0",
     "file-saver": "^2.0.5",
     "firebase": "^10.13.0",
+    "froala-editor": "^4.2.1",
     "google-sign-in": "^3.0.4",
     "googleapis": "^134.0.0",
     "html2canvas": "^1.4.1",
@@ -51,9 +53,12 @@
     "numeros_a_palabras": "^1.0.8",
     "prettier": "^2.8.8",
     "puppeteer": "^19.11.1",
+    "quill": "^2.0.2",
+    "quill-image-resize-module": "^3.0.0",
     "siema": "^1.5.1",
     "sirv-cli": "^2.0.0",
     "svelte-routing": "^2.0.0",
+    "trix": "^1.3.1",
     "vite-plugin-pdf-preview": "^0.2.0",
     "xlsx": "^0.18.5"
   }
