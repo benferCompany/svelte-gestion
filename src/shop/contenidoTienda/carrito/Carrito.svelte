@@ -55,7 +55,7 @@
             <div style="width:93%;">
                 {#each detalle.detailProductList as product}
                     <div
-                        style="width:100%;padding:1em; background:white; border-radius:10px; box-shadow:0 0 12px 0px rgba(0,0,0,0.5); height: 300px; display:flex; flex-direction:column; justify-content:space-between; margin-bottom:1em;"
+                        style="width:100%;padding:1em; background:white; border-radius:10px; box-shadow:0 0 12px 0px rgba(0,0,0,0.5); display:flex; flex-direction:column; justify-content:space-between; margin-bottom:1em;"
                     >
                         <div>
                             <h5>{product.description}</h5>
