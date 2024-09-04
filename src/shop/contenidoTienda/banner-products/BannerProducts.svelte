@@ -25,7 +25,7 @@
         <Slaider bind:duration>
             {#each products.content as product}
                 <div class="info">
-                    <img src={product.image} alt="no soportado" />
+                    <img style="width:100%;" src={product.image} alt="no soportado" />
                     <h4>{product.title}</h4>
                     
                     <p class="precio">{product.selling_price}</p>

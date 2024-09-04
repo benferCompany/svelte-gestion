@@ -34,7 +34,7 @@ export function changeImputImage(event) {
 //Evento para enviar la imagen al firebase
 export const handleImageUpload = async (file, fileName, isValidType) => {
     const storageRef = ref(storage, "images/" + fileName);
-    isValidType = ['image/jpeg', 'image/png', 'image/gif'].includes(file.type)
+    isValidType = ['image/jpeg', 'image/png', 'image/gif','image/webp'].includes(file.type)
     try {
         if(isValidType){
 
