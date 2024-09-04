@@ -46,7 +46,7 @@
         margin-bottom:50px;
         background-color: rgba(255, 255, 255, 0.909);
         width: 80%;
-        height: 340px;
+       
         text-align:center;
     }
 
