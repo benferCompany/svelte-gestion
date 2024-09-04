@@ -7,19 +7,19 @@
     import { getDescriptionProduct } from "../../../../components/stores/products";
     let product;
     let descripcion;
-    let cantidadCarrito = 0;
+    let cantidadCarrito = 1;
+    let estadoCarrito = 0;
     function createSequentialArray(N) {
         return Array.from({ length: N }, (_, i) => i + 1);
     }
     booleanPathName.set(false);
     onMount(async () => {
-    let id;
+        let id;
         const params = new URLSearchParams(window.location.search);
         id = params.get("id");
         console.log(id);
         descripcion = await getDescriptionProduct(id);
         product = await getProduct(id);
-        
     });
     let image = {
         id: 1,
@@ -34,11 +34,12 @@
     let selectedOption = "";
 
     $: {
+
         if ($carrito && product) {
             console.log(product);
             $carrito.forEach((p) => {
                 if (p.id === product.id) {
-                    cantidadCarrito = p.quality;
+                    estadoCarrito = p.quality;
                 }
             });
         }
@@ -94,37 +95,41 @@
             </div>
             <div class="selec">
                 <h3 class="h3">stock disponibles</h3>
-                <select>
-                    {#each createSequentialArray(product.stores[0].stock) as i }
-                    <option value={i}>{i}</option>    
+                {#if estadoCarrito >0}
+                <select disabled bind:value={estadoCarrito}>
+                    {#each createSequentialArray(product.stores[0].stock) as i}
+                        <option value={i}>{i}</option>
                     {/each}
-                    
                 </select>
+                
+                {:else}
+
+                <select bind:value={cantidadCarrito}>
+                    {#each createSequentialArray(product.stores[0].stock) as i}
+                        <option value={i}>{i}</option>
+                    {/each}
+                </select>
+                {/if}
             </div>
         </div>
         <div class="btns">
             <button
-                on:click={async() => {
-                    addCarrito($carrito, product)
+                on:click={async () => {
+                    addCarrito($carrito, product, cantidadCarrito);
                     navigate("/carrito");
                 }}
-                style="background-color: rgb(9, 50, 73);">Compra ahora</button
-            > <br />
-            <button
-                class="boton-carrito"
-                on:click={() => {
-                    addCarrito($carrito, product);
-                }}
+                style="background-color: rgb(9, 50, 73);"
             >
-                {#if cantidadCarrito > 0}
-                    Agregar mas({cantidadCarrito})
+                {#if estadoCarrito > 0}
+                    Ya esta en carrito ({estadoCarrito})
                 {:else}
-                    Añadir al carrito
+                    Compra ahora
                 {/if}
             </button>
+
+            <br />
         </div>
         <div class="descriptions">
-            
             {@html descripcion.content}
         </div>
         <h4 style="text-align: center; padding-bottom: 10px;">
@@ -267,10 +272,6 @@
         color: rgba(0, 0, 0, 0.702);
     }
 
-    .p {
-        margin-top: 10%;
-    }
-
     .selec {
         max-width: 100%;
         margin-top: 10px;
@@ -301,19 +302,8 @@
         margin-top: 10px;
     }
 
-    .caracterist-1 {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 40px;
-    }
-
     .infor {
         margin-left: 10px;
-    }
-
-    .info2 {
-        margin-left: 25px;
-        padding-right: 10px;
     }
 
     .sin-p-b {
@@ -348,13 +338,5 @@
         border-bottom-left-radius: 0;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
-    }
-    .boton-carrito {
-        background-color: rgb(255, 117, 11);
-        padding-top: 0;
-        margin-top: 0;
-    }
-    .boton-carrito:active {
-        background-color: rgb(170, 77, 7);
     }
 </style>

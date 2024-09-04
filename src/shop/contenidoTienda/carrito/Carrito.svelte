@@ -24,7 +24,9 @@
             (p) => p.id !== id,
         );
         localStorage.setItem("carrito", detalle.detailProductList);
+        $carrito = detalle.detailProductList;
     };
+
     $: {
         total = 0;
         totalCost = 0;
@@ -98,7 +100,7 @@
                                 {#if $carrito}
                                     {#each $carrito as car}
                                         <select bind:value={product.quality}>
-                                            {#each createSequentialArray(car.quality) as i}
+                                            {#each createSequentialArray(car.stock) as i}
                                                 <option value={i}>{i}</option>
                                             {/each}
                                         </select>

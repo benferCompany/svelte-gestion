@@ -10,7 +10,7 @@ export const getProduct = async (id) => {
     }
 }
 
-export const addCarrito = (car, product) => {
+export const addCarrito = (car, product, cantidad) => {
     console.log("hace carrito")
 
     let detailProductList = [
@@ -19,7 +19,7 @@ export const addCarrito = (car, product) => {
 
     let prd = {
         "id": product.id,
-        "quality": 0,
+        "quality": cantidad,
         "productId": product.id,
         "internalCode": product.internalCode,
         "description": product.title,
@@ -27,9 +27,9 @@ export const addCarrito = (car, product) => {
         "costPrice": product.cost_price,
         "totalCostPrice": 0,
         "totalPrice": 0,
-        "image": product.image
+        "image": product.image,
+        "stock": product.stores?product.stores[0]?.stock:1
     }
-
     car.push(prd)
 
     car.forEach((c) => {
@@ -41,8 +41,7 @@ export const addCarrito = (car, product) => {
             console.log(existingProduct);
 
             // Sumar la calidad del nuevo producto o sumar 1 si no tiene definida la calidad
-            existingProduct.quality += c.quality || 1;
-
+           
             // Calcular precios totales
             existingProduct.totalPrice = existingProduct.quality * existingProduct.price;
             existingProduct.totalCostPrice = existingProduct.quality * existingProduct.costPrice;

@@ -111,13 +111,4 @@
         border-radius: 0.1em;
     }
 
-    .btn-a {
-        color: black;
-        background-color: #fce61c;
-        border: 1px solid rgb(0, 0, 0);
-        border-radius: 5px;
-        width: 100%;
-        height: 50px;
-        box-shadow: 3px 4px 1px rgba(0, 0, 0, 0.3);
-    }
 </style>
