@@ -78,11 +78,7 @@
     div {
         padding-top: 80px;
         text-align: center;
-        background: linear-gradient(
-            to right,
-            rgb(21, 100, 108),
-            rgb(3, 34, 41)
-        );
+        background: rgb(3, 34, 41);
         font-family: "Arial Narrow", Arial, sans-serif;
         height: 100vh;
     }
@@ -109,7 +105,6 @@
     #i {
         background: linear-gradient(#d93025, #fbbc05, #34a853, #4285f4);
         -webkit-background-clip: text;
-        clip: text;
         color: transparent;
         margin-right: 10px;
         font-size: 27px;
