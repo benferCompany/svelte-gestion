@@ -78,7 +78,7 @@
                 >
             </li>
             <li>
-                <Link to="/registro" style={styleUlA}
+                <Link to="/user" style={styleUlA}
                     ><i class="fas fa-user"></i>Usuario</Link
                 >
             </li>

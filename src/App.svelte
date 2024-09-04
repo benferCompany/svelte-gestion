@@ -86,7 +86,7 @@
 		<Form />
 	</Route>
 
-	<Route path="/registro">
+	<Route path="/user">
 		<Registro />
 	</Route>
 
