@@ -3,18 +3,20 @@
     import Banner from "./banner/Banner.svelte";
     import Footer from "./footer/Footer.svelte";
     import Nav from "./nav/Nav.svelte";
+    
+   
 </script>
 
-<div class="index">
-    <div class="nav">
-        <Nav />
+    <div class="index">
+        <div class="nav">
+            <Nav />
+        </div>
+        <div class="body">
+            <Banner />
+            <BannerProducts />
+            <Footer />
+        </div>
     </div>
-    <div class="body">
-        <Banner/>
-        <BannerProducts/>
-        <Footer/>
-    </div>
-</div>
 
 <style>
     .index {
@@ -27,8 +29,6 @@
         background-color: #053f3f;
         height: 500px;
     }
-
-
 
     .body {
         margin-top: 50px;

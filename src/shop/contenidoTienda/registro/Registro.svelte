@@ -1,6 +1,22 @@
 <script>
 
     import { Link } from "svelte-routing";
+    import { userGoogle } from "../form/form";
+    import {updateCustomer} from "./customer"
+    let user;
+    let names;
+    $:{
+        user = $userGoogle
+        console.log(user)
+        if(user.entity.name && !user.entity.last_name){
+           names = user.entity.name.split(" ")
+        }else if(!user.entity.name && !user.entity.last_name){
+            names =["", ""]
+        }else{
+            names = [user.entity.name, user.entity.last_name]
+        }
+    }
+
     let styleVolver = `padding-top: 25px;
     margin-left: 10px;
     font-size: 20px;
@@ -36,7 +52,7 @@
 />
 <div class="body">
     <div class="nav">
-        <Link to="/shop" style={styleVolver} class="volver">Volver</Link>
+        <Link to="/" style={styleVolver} class="volver">Volver</Link>
         <img
             src="https://firebasestorage.googleapis.com/v0/b/cloud-image-361ff.appspot.com/o/images%2FbenfershopPng.png?alt=media&token=e58609b9-6974-49f1-bb0d-d872f93f7eaf"
             alt=""
@@ -48,32 +64,36 @@
         <div class="contenedor-hijo">
             <fieldset>
                 <legend><h3>¡Bienvenido!</h3></legend>
-                <form action="">
+                <form on:submit|preventDefault={updateCustomer} action="">
+                    <input style="display:none" type="text" name="id" value={user.entity.id}>
                     <div class="nyp">
                         <input
                             on:click={callback}
                             class="n"
                             type="text"
-                            name="nombre"
+                            name="name"
                             id=""
                             placeholder="Nombre"
+                            value ={names[0]}
                         />
                         <input
                             on:click={callback}
                             class="p"
                             type="text"
-                            name="apellido"
+                            name="last_name"
                             id=""
                             placeholder="Apellido"
+                            value={names[1]}
                         />
                     </div>
-                    <input type="number" name="din" id="" placeholder="DNI" />
+                    <input value={user.entity.idPersonal} type="number" name="idPersonal" id="" placeholder="DNI" />
                     <input
                         on:click={callback}
                         type="number"
-                        name="telefono"
+                        name="mobile_phone"
                         id=""
                         placeholder="+54 3624-694287"
+                        value ={user.entity.mobile_phone}
                     />
                     <input
                         on:click={callback}
@@ -81,9 +101,17 @@
                         name="email"
                         id=""
                         placeholder="e-mail"
+                        value={user.entity.email}
                     />
-                    <InputUb bind:ubicacion bind:callback bind:styleInput /> <br />
-                    <button>Enviar</button>
+                    <input
+                        on:click={callback}
+                        type="text"
+                        name="address"
+                        id=""
+                        placeholder="Dirección"
+                        value={user.entity.address}
+                    />
+                    <button type="submit">Enviar</button>
                 </form>
             </fieldset>
         </div>

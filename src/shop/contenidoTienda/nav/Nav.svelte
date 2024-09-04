@@ -2,6 +2,15 @@
     import { slide } from 'svelte/transition';
     import { Link, navigate } from "svelte-routing";
     import {getProduct, products} from "./search"
+    import { userGoogle } from '../form/form';
+    import { onMount } from 'svelte';
+    
+    onMount(()=>{
+        console.log($userGoogle);
+        if(!$userGoogle.entity){
+        navigate("/login");
+    }
+    })
     let styleUlA = `display: block;
 
     height: 100%;
@@ -69,8 +78,8 @@
                 >
             </li>
             <li>
-                <Link to="/login" style={styleUlA}
-                    ><i class="fas fa-user"></i>Iniciar</Link
+                <Link to="/registro" style={styleUlA}
+                    ><i class="fas fa-user"></i>Usuario</Link
                 >
             </li>
             <li>

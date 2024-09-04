@@ -129,6 +129,7 @@
 
             <br />
         </div>
+        <hr/>
         <div class="descriptions">
             {@html descripcion.content}
         </div>

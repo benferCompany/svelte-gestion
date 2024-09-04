@@ -2,9 +2,11 @@ import { writable } from "svelte/store";
 import { URL } from "../../../components/tools/connections/url";
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
 // Store para gestionar el usuario de Google
-export const userGoogle = writable({});
+let user = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user")):{};
+export const userGoogle = writable(user);
+
+
 
 // Configuración de Firebase
 const firebaseConfig = {
@@ -48,7 +50,7 @@ export const crearUsuario = async (e) => {
 // Función para manejar el login
 export const login = async (token) => {
   try {
-    const response = await fetch(`${URL}/categories/token`, {
+    const response = await fetch(`${URL}/customer/token`, {
       method: "GET",
       headers: {
         'Authorization': `Bearer ${token}`
@@ -90,7 +92,8 @@ export const accesGoogle = async () => {
     console.log(response.user.accessToken)
     const resLogin = await login(response.user.accessToken);
     console.log(resLogin);
-
+    localStorage.setItem("user", JSON.stringify(resLogin));
+    userGoogle.set(resLogin);
     return resLogin;
   } catch (error) {
     console.error('Error en la autenticación con Google:', error);
