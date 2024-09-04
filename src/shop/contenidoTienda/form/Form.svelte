@@ -109,6 +109,7 @@
     #i {
         background: linear-gradient(#d93025, #fbbc05, #34a853, #4285f4);
         -webkit-background-clip: text;
+        clip: text;
         color: transparent;
         margin-right: 10px;
         font-size: 27px;
