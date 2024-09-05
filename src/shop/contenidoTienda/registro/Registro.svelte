@@ -65,7 +65,7 @@
                         value={user.id}
                     />
                     <div class="nyp">
-                        <div style="display:flex; justify-content:center; width:200px;">
+                        <div style="display:flex; justify-content:center;">
 
                             <input
                                 on:click={callback}
@@ -80,6 +80,7 @@
                                 type="text"
                                 name="last_name"
                                 id=""
+                                value ={user.last_name}
                                 placeholder="Apellido"
                             />
                         </div>
