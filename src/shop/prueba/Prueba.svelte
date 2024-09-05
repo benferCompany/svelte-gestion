@@ -1,8 +1,17 @@
 <script>
+    import { onMount } from "svelte";
+    import { login } from "../contenidoTienda/form/form";
     let token;
+    let customer;
     if (Android) {
         token = Android.getToken();
     }
+    onMount(async () => {
+        if (token) {
+            const response = await login(token);
+            customer = JSON.stringify(response);
+        }
+    });
 </script>
 
 <h1>Hello prueba</h1>
@@ -10,4 +19,7 @@
     <p>
         {token}
     </p>
+{/if}
+{#if customer}
+    <p>{customer}</p>
 {/if}
