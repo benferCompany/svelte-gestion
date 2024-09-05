@@ -7,8 +7,6 @@
         if (Android) {
         token = Android.getToken();
     }
-    
-        
     });
 
     const handleLogin = async(token)=>{
