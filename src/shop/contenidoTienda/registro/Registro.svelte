@@ -5,8 +5,8 @@
     let user;
     let token
     onMount(async()=>{
-            user = await createCustomer(JSON.parse(Android.getToken()));
-            token = Android.getToken();
+            user = await createCustomer(Android.getToken());
+            token = JSON.stringify(Android.getToken());
         
     })
     let styleVolver = `padding-top: 25px;
