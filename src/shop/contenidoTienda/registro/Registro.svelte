@@ -5,7 +5,7 @@
     let user;
     let token
     onMount(async()=>{
-            user = await createCustomer(Android.getToken());
+            user = await createCustomer(JSON.parse(Android.getToken()));
             token = JSON.stringify(Android.getToken());
         
     })
