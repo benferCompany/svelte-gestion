@@ -46,8 +46,8 @@ export const logout = () => {
     localStorage.removeItem("user");
 };
 
-export const createCustomer =async (user)=>{
-    const response = await fetch(`${URL}/customer/byEmail/${user.email}`)
+export const createCustomer =async (email)=>{
+    const response = await fetch(`${URL}/customer/byEmail/${email}`)
     const json = await response.json();
     return json;
 }
