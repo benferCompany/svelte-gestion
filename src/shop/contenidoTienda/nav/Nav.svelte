@@ -1,27 +1,19 @@
 <script>
-    import { slide } from 'svelte/transition';
+    import { slide } from "svelte/transition";
     import { Link, navigate } from "svelte-routing";
-    import {getProduct, products} from "./search"
-    import { login, userGoogle } from '../form/form';
-    import { onMount } from 'svelte';
-    
-    onMount(async()=>{
-
-        let token;
-        const params = new URLSearchParams(window.location.search);
-        token = params.get("token");
-
-            await login(token);
+    import { getProduct, products } from "./search";
+    import { login, userGoogle } from "../form/form";
+    import { onMount } from "svelte";
+let token;
+    onMount(async () => {
+       token = window.token
+      
 
         console.log($userGoogle);
-        if(!$userGoogle.entity){
-            
+        if (!$userGoogle.entity) {
             //navigate("/login");
-
-
-    }
-
-    })
+        }
+    });
     let styleUlA = `display: block;
 
     height: 100%;
@@ -41,35 +33,61 @@
     let isActive = false;
     let logoCheck = true;
 
-  function handleClick() {
-    isActive = !isActive;
-    inputSearch = !inputSearch;
-   
-  }
+    function handleClick() {
+        isActive = !isActive;
+        inputSearch = !inputSearch;
+    }
 </script>
-
-<div class="nav1" id="nav-1" >
-    <div  style="width:100%; display:flex; justify-content:end;">
+{#if token}
+<h5>{token}</h5>
+{/if}
+<div class="nav1" id="nav-1">
+    <div style="width:100%; display:flex; justify-content:end;">
         {#if logoCheck}
-        <div style=" width:60%; display:flex; justify-content:space-between;">
-            
-            <img
-                src="https://firebasestorage.googleapis.com/v0/b/cloud-image-361ff.appspot.com/o/images%2FlogoBenfer.png?alt=media&token=e2cf96da-df32-48f9-a8bf-fb588a31fdcf"
-                alt=""
-                class="logo-2"
-            />
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <div ><p on:click={handleClick} class="{isActive? 'active':'lupa'}" style="">🔍<p></div>
-        </div>
+            <div
+                style=" width:60%; display:flex; justify-content:space-between;"
+            >
+                <img
+                    src="https://firebasestorage.googleapis.com/v0/b/cloud-image-361ff.appspot.com/o/images%2FlogoBenfer.png?alt=media&token=e2cf96da-df32-48f9-a8bf-fb588a31fdcf"
+                    alt=""
+                    class="logo-2"
+                />
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <div>
+                    <p
+                        on:click={handleClick}
+                        class={isActive ? "active" : "lupa"}
+                        style=""
+                    >
+                        🔍
+                    </p>
+                    <p></p>
+                </div>
+            </div>
         {:else}
-        <div style=" width:60%; display:flex; justify-content:end;">
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <div ><p on:click={handleClick} class="{isActive? 'active':'lupa'}" style="">🔍<p></div>
-        </div>
+            <div style=" width:60%; display:flex; justify-content:end;">
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <div>
+                    <p
+                        on:click={handleClick}
+                        class={isActive ? "active" : "lupa"}
+                        style=""
+                    >
+                        🔍
+                    </p>
+                    <p></p>
+                </div>
+            </div>
         {/if}
     </div>
-    
-    <input type="checkbox" id="check" on:change = {()=>{logoCheck =!logoCheck}} />
+
+    <input
+        type="checkbox"
+        id="check"
+        on:change={() => {
+            logoCheck = !logoCheck;
+        }}
+    />
     <label for="check">
         <i class="fas fa-bars" id="btn"></i>
         <i class="fas fa-times" id="cancel"></i>
@@ -111,10 +129,14 @@
         </ul>
     </div>
     {#if inputSearch}
-        <form on:submit|preventDefault={async(e)=>{
-            products.set(await getProduct(e))
-            navigate("/categoria")
-        }} transition:slide style="display:flex; justify-content:center; width:100%; margin-top:1em;">
+        <form
+            on:submit|preventDefault={async (e) => {
+                products.set(await getProduct(e));
+                navigate("/categoria");
+            }}
+            transition:slide
+            style="display:flex; justify-content:center; width:100%; margin-top:1em;"
+        >
             <input
                 style="width:80%; border-radius:10px 0 0 10px"
                 type="search"
@@ -122,7 +144,11 @@
                 id="search"
                 name="search"
             />
-            <input type="submit" style="border-radius:0 10px 10px 0" value="Buscar"/>
+            <input
+                type="submit"
+                style="border-radius:0 10px 10px 0"
+                value="Buscar"
+            />
         </form>
     {/if}
 </div>
@@ -228,16 +254,15 @@
         left: 195px;
     }
 
-    .lupa{
-        font-size:2em; 
-        margin-top:0.3em;
-        border-radius:1em;
+    .lupa {
+        font-size: 2em;
+        margin-top: 0.3em;
+        border-radius: 1em;
         cursor: pointer;
-        
     }
-    .active{
-        font-size:2em; 
-        margin-top:0.3em;
-        box-shadow:0 0 5px -5px rgba(0,0,0,0.5);
+    .active {
+        font-size: 2em;
+        margin-top: 0.3em;
+        box-shadow: 0 0 5px -5px rgba(0, 0, 0, 0.5);
     }
 </style>
