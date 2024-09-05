@@ -128,7 +128,9 @@
             </li>
             <li>
                 {#if customer}
-                    <h5>{customer.entity.name}</h5>
+                    {#if customer.entity}
+                        <h5>{customer.entity.name}</h5>
+                    {/if}
                 {/if}
             </li>
         </ul>
