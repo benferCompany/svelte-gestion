@@ -5,17 +5,11 @@
     let customer;
     onMount(async () => {
         if (Android) {
-        token = Android.getToken();
+        token = JSON.stringify(Android.getToken());
     }
     });
 
-    const handleLogin = async(token)=>{
-        if (token) {
-            const response = await login(token);
-            customer = JSON.stringify(response);
-        }
-    }
-    $:{customer}
+ 
 </script>
 
 <h1>Hello prueba</h1>
@@ -23,12 +17,4 @@
     <p>
         {token}
     </p>
-{/if}
-<div>
-    <button on:click={()=>{
-        handleLogin(token)
-    }}>Login</button>
-</div>
-{#if customer}
-    <p>{customer}</p>
 {/if}
