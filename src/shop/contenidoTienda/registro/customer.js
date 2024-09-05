@@ -45,3 +45,13 @@ export const logout = () => {
     userGoogle.set({});
     localStorage.removeItem("user");
 };
+
+export const createCustomer =async (user)=>{
+    const response = await fetch(`${URL}/customer`,{
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({name: user.name, email: user.email})
+    })
+    const json = response.json();
+    return json;
+}

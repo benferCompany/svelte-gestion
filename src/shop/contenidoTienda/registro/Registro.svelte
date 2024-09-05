@@ -1,31 +1,22 @@
 <script>
     import { Link, navigate } from "svelte-routing";
-    import { userGoogle } from "../form/form";
-    import { updateCustomer, logout } from "./customer";
+    import { onMount } from "svelte";
+    import { updateCustomer, logout, createCustomer } from "./customer";
     let user;
-    let names;
-    $: {
-        user = $userGoogle;
-        console.log(user);
-        if (user.entity.name && !user.entity.last_name) {
-            names = user.entity.name.split(" ");
-        } else if (!user.entity.name && !user.entity.last_name) {
-            names = ["", ""];
-        } else {
-            names = [user.entity.name, user.entity.last_name];
-        }
-    }
+    onMount(async()=>{
+        if(Android){
+            user = await createCustomer(JSON.parse(Android.getToken()));
 
+        }
+    })
     let styleVolver = `padding-top: 25px;
     margin-left: 10px;
     font-size: 20px;
     color: white;
-    
-
     font-family: 'Arial Narrow', Arial, sans-serif;`;
     import { booleanPathName } from "../../../components/tools/pathName/pathName";
-    import InputUb from "./ubi/InputUb.svelte";
     $booleanPathName = false;
+   
     let styleInput = {
         input: ` border-radius: 3px;
         width: 81%;
@@ -49,6 +40,7 @@
     rel="stylesheet"
     href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
 />
+{#if user}
 <div class="body">
     <div class="nav">
         <Link to="/" style={styleVolver} class="volver">Volver</Link>
@@ -78,7 +70,7 @@
                             name="name"
                             id=""
                             placeholder="Nombre"
-                            value={names[0]}
+                            value={user.name}
                         />
                         <input
                             on:click={callback}
@@ -87,7 +79,6 @@
                             name="last_name"
                             id=""
                             placeholder="Apellido"
-                            value={names[1]}
                         />
                     </div>
                     <input
@@ -145,6 +136,9 @@
         </div>
     </div>
 </div>
+{:else}
+<h1>Usuario no registrado</h1>
+{/if}
 
 <style>
     .body {
