@@ -5,9 +5,12 @@
     import { login, userGoogle } from "../form/form";
     import { onMount } from "svelte";
     let token;
+    let customer
     onMount(async () => {
         token = Android.getToken();
-
+        if(token){
+            customer = await login(token)
+        }
         console.log($userGoogle);
         if (!$userGoogle.entity) {
             //navigate("/login");
@@ -125,9 +128,9 @@
             </li>
             <li>
                 <h1>reload</h1>
-                {#if token}
-                    <h1>token</h1>
-                    <h5>{token}</h5>
+                {#if customer}
+                    <h1>Customer</h1>
+                    <h5>{customer}</h5>
                 {/if}
             </li>
         </ul>
