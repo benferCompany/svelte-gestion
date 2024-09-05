@@ -4,10 +4,9 @@
     import { getProduct, products } from "./search";
     import { login, userGoogle } from "../form/form";
     import { onMount } from "svelte";
-let token;
+    let token;
     onMount(async () => {
-       token = window.token
-      
+        token = Android.getToken();
 
         console.log($userGoogle);
         if (!$userGoogle.entity) {
@@ -38,9 +37,7 @@ let token;
         inputSearch = !inputSearch;
     }
 </script>
-{#if token}
-<h5>{token}</h5>
-{/if}
+
 <div class="nav1" id="nav-1">
     <div style="width:100%; display:flex; justify-content:end;">
         {#if logoCheck}
@@ -150,6 +147,11 @@ let token;
                 value="Buscar"
             />
         </form>
+    {/if}
+    <h1>reload</h1>
+    {#if token}
+        <h1>token</h1>
+        <h5>{token}</h5>
     {/if}
 </div>
 
