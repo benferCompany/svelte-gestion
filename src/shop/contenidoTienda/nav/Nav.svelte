@@ -127,10 +127,8 @@
                 >
             </li>
             <li>
-                <h1>reload</h1>
                 {#if customer}
-                    <h1>Customer</h1>
-                    <h5>{customer}</h5>
+                    <h5>{customer.entity.name}</h5>
                 {/if}
             </li>
         </ul>
