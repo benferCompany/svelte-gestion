@@ -3,10 +3,11 @@
     import { onMount } from "svelte";
     import { updateCustomer, logout, createCustomer } from "./customer";
     let user;
+    let token
     onMount(async()=>{
         if(Android){
             user = await createCustomer(JSON.parse(Android.getToken()));
-
+            token = Android.getToken();
         }
     })
     let styleVolver = `padding-top: 25px;
@@ -138,6 +139,9 @@
 </div>
 {:else}
 <h1>Usuario no registrado</h1>
+    {#if token}
+        <h1>{token}</h1>
+    {/if}
 {/if}
 
 <style>
