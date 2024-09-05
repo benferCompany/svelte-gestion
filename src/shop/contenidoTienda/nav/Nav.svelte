@@ -2,14 +2,25 @@
     import { slide } from 'svelte/transition';
     import { Link, navigate } from "svelte-routing";
     import {getProduct, products} from "./search"
-    import { userGoogle } from '../form/form';
+    import { login, userGoogle } from '../form/form';
     import { onMount } from 'svelte';
     
-    onMount(()=>{
+    onMount(async()=>{
+
+        let token;
+        const params = new URLSearchParams(window.location.search);
+        token = params.get("token");
+
+            await login(token);
+
         console.log($userGoogle);
         if(!$userGoogle.entity){
-        navigate("/login");
+            
+            //navigate("/login");
+
+
     }
+
     })
     let styleUlA = `display: block;
 
@@ -73,7 +84,7 @@
         </header>
         <ul>
             <li>
-                <Link to="/shop" style={styleUlA}
+                <Link to="/" style={styleUlA}
                     ><i class="fas fa-home"></i>Inicio</Link
                 >
             </li>
@@ -93,7 +104,7 @@
                 >
             </li>
             <li>
-                <Link to="/shop" style={styleUlA}
+                <Link to="/" style={styleUlA}
                     ><i class="fas fa-qrcode"></i>Tus Compra</Link
                 >
             </li>

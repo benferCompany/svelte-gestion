@@ -62,6 +62,9 @@ export const login = async (token) => {
     }
 
     const json = await response.json();
+    
+    localStorage.setItem("user", JSON.stringify(json));
+    userGoogle.set(json);
     return json;
   } catch (error) {
     console.error('Error en el login:', error);
@@ -89,11 +92,8 @@ export const accesGoogle = async () => {
   try {
     const provider = new GoogleAuthProvider();
     const response = await signInWithPopup(auth, provider);
-    console.log(response.user.accessToken)
     const resLogin = await login(response.user.accessToken);
-    console.log(resLogin);
-    localStorage.setItem("user", JSON.stringify(resLogin));
-    userGoogle.set(resLogin);
+    
     return resLogin;
   } catch (error) {
     console.error('Error en la autenticación con Google:', error);
