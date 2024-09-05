@@ -18,7 +18,7 @@ export const updateCustomer = async (e) => {
         discount: 0,
         idPersonal: e.target.idPersonal.value
     };
-    if (localStorage.getItem("user")) {
+    
         try {
             const response = await fetch(`${URL}/customer`, {
                 method: "PUT",
@@ -27,16 +27,12 @@ export const updateCustomer = async (e) => {
             })
             const json = await response.json();
 
-            console.log(json);
-            let userUpdate = JSON.parse(localStorage.getItem("user"));
-            userUpdate.entity = json;
-            localStorage.setItem("user", JSON.stringify(userUpdate));
-            userGoogle.set(userUpdate);
+            return json;
 
         } catch (error) {
             console.error("Algún error inesperado", error);
         }
-    }
+    
 
 }
 
