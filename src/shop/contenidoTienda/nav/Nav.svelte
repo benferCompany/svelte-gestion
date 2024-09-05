@@ -16,6 +16,7 @@
             //navigate("/login");
         }
     });
+    $:{customer}
     let styleUlA = `display: block;
 
     height: 100%;
