@@ -6,7 +6,6 @@
     let token
     onMount(async()=>{
         if(Android.getToken()){
-
             user = await createCustomer(Android.getToken());
             token = Android.getToken();
 
@@ -66,23 +65,24 @@
                         value={user.id}
                     />
                     <div class="nyp">
-                        <input
-                            on:click={callback}
-                            class="n"
-                            type="text"
-                            name="name"
-                            id=""
-                            placeholder="Nombre"
-                            value={user.name}
-                        />
-                        <input
-                            on:click={callback}
-                            class="p"
-                            type="text"
-                            name="last_name"
-                            id=""
-                            placeholder="Apellido"
-                        />
+                        <div style="display:flex; justify-content:center; width:200px;">
+
+                            <input
+                                on:click={callback}
+                                type="text"
+                                name="name"
+                                id=""
+                                placeholder="Nombre"
+                                value={user.name}
+                            />
+                            <input
+                                on:click={callback}
+                                type="text"
+                                name="last_name"
+                                id=""
+                                placeholder="Apellido"
+                            />
+                        </div>
                     </div>
                     <input
                         value={user.idPersonal}
@@ -139,11 +139,6 @@
         </div>
     </div>
 </div>
-{:else}
-<h1>Usuario no registrado</h1>
-    {#if token}
-        <h1>{token}</h1>
-    {/if}
 {/if}
 
 <style>
@@ -195,15 +190,6 @@
         width: 100%;
     }
 
-    .n {
-        width: 40%;
-        margin-left: 27px;
-    }
-
-    .p {
-        width: 40%;
-        margin-left: 3px;
-    }
 
     fieldset {
         text-align: center;
