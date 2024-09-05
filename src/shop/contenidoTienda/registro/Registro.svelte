@@ -60,7 +60,7 @@
                         style="display:none"
                         type="text"
                         name="id"
-                        value={user.entity.id}
+                        value={user.id}
                     />
                     <div class="nyp">
                         <input
@@ -82,7 +82,7 @@
                         />
                     </div>
                     <input
-                        value={user.entity.idPersonal}
+                        value={user.idPersonal}
                         type="number"
                         name="idPersonal"
                         id=""
@@ -94,7 +94,7 @@
                         name="mobile_phone"
                         id=""
                         placeholder="+54 3624-694287"
-                        value={user.entity.mobile_phone}
+                        value={user.mobile_phone}
                     />
                     <input
                         on:click={callback}
@@ -102,12 +102,12 @@
                         style="color:black;"
                         id=""
                         placeholder="e-mail"
-                        value={user.entity.email}
+                        value={user.email}
                         disabled
                     />
                     <input
                         style="display:none;"
-                        value={user.entity.email}
+                        value={user.email}
                         type="email"
                         name="email"
                         id=""
@@ -118,7 +118,7 @@
                         name="address"
                         id=""
                         placeholder="Dirección"
-                        value={user.entity.address}
+                        value={user.address}
                     />
                     <div>
                         <button type="submit">Actualizar</button>
