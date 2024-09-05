@@ -3,10 +3,11 @@
     import { login } from "../contenidoTienda/form/form";
     let token;
     let customer;
-    if (Android) {
+    onMount(async () => {
+        if (Android) {
         token = Android.getToken();
     }
-    onMount(async () => {
+    
         if (token) {
             const response = await login(token);
             customer = JSON.stringify(response);
