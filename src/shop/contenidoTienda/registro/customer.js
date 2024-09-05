@@ -47,11 +47,7 @@ export const logout = () => {
 };
 
 export const createCustomer =async (user)=>{
-    const response = await fetch(`${URL}/customer`,{
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(user)
-    })
+    const response = await fetch(`${URL}/customer/byEmail/${user.email}`)
     const json = await response.json();
     return json;
 }
