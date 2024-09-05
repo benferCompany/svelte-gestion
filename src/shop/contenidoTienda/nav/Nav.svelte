@@ -123,6 +123,13 @@
                     ><i class="fas fa-qrcode"></i>Tus Compra</Link
                 >
             </li>
+            <li>
+                <h1>reload</h1>
+                {#if token}
+                    <h1>token</h1>
+                    <h5>{token}</h5>
+                {/if}
+            </li>
         </ul>
     </div>
     {#if inputSearch}
@@ -147,11 +154,6 @@
                 value="Buscar"
             />
         </form>
-    {/if}
-    <h1>reload</h1>
-    {#if token}
-        <h1>token</h1>
-        <h5>{token}</h5>
     {/if}
 </div>
 
