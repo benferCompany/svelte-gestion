@@ -129,7 +129,7 @@
                         <button
                             type="reset"
                             on:click={() => {
-                               Android.logout();
+                              console.log("Es")
                             }}>Cerrar sesión</button
                         >
                     </div>
