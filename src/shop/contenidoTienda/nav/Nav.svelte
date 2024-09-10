@@ -2,18 +2,18 @@
     import { slide } from "svelte/transition";
     import { Link, navigate } from "svelte-routing";
     import { getProduct, products } from "./search";
-    import { login, userGoogle } from "../form/form";
+    import { login } from "../form/form";
     import { onMount } from "svelte";
-    let token;
+    let email;
     let customer
     onMount(async () => {
-        token = Android.getToken();
-        if(token){
-            customer = await login(token)
-        }
-        console.log($userGoogle);
-        if (!$userGoogle.entity) {
-            //navigate("/login");
+        if(Android){
+
+            email = Android.getEmail();
+            if(email){
+                customer = await login(email)
+            }
+            
         }
     });
     $:{customer}
@@ -129,10 +129,17 @@
             </li>
             <li>
                 {#if customer}
-                    {#if customer.entity}
-                        <h5>{customer.entity.name}</h5>
-                    {/if}
+                       <h5>{customer.name}</h5>
+                   
                 {/if}
+            </li>
+            <li>
+                <!-- svelte-ignore missing-declaration -->
+                <button on:click={()=>{
+                    if(Android){
+                        Android.logout();
+                    }
+                }}>Cerrar Sesión</button>
             </li>
         </ul>
     </div>
