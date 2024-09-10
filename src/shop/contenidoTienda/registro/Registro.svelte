@@ -5,11 +5,10 @@
     let user;
     let email;
     onMount(async()=>{
-        if(Android.getEmail()){
             user = await createCustomer(Android.getEmail());
             email = Android.getEmail();
 
-        }
+        
     })
     let styleVolver = `padding-top: 25px;
     margin-left: 10px;
