@@ -5,18 +5,18 @@
     import { login } from "../form/form";
     import { onMount } from "svelte";
     let email;
-    let customer
+    let customer;
     onMount(async () => {
-        if(Android){
-
+        if (Android) {
             email = Android.getEmail();
-            if(email){
-                customer = await login(email)
+            if (email) {
+                customer = await login(email);
             }
-            
         }
     });
-    $:{customer}
+    $: {
+        customer;
+    }
     let styleUlA = `display: block;
 
     height: 100%;
@@ -129,17 +129,10 @@
             </li>
             <li>
                 {#if customer}
-                       <h5>{customer.name}</h5>
-                   
+                    {#if customer.entity}
+                        <h5>{customer.entity.name}</h5>
+                    {/if}
                 {/if}
-            </li>
-            <li>
-                <!-- svelte-ignore missing-declaration -->
-                <button on:click={()=>{
-                    if(Android){
-                        Android.logout();
-                    }
-                }}>Cerrar Sesión</button>
             </li>
         </ul>
     </div>
