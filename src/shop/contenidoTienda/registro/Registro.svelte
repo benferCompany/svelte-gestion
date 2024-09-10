@@ -5,10 +5,11 @@
     let user;
     let email;
     onMount(async()=>{
+        if(Android.getEmail()){
             user = await createCustomer(Android.getEmail());
             email = Android.getEmail();
 
-        
+        }
     })
     let styleVolver = `padding-top: 25px;
     margin-left: 10px;
@@ -125,11 +126,12 @@
                     />
                     <div>
                         <button type="submit">Actualizar</button>
-                        <!-- svelte-ignore missing-declaration -->
                         <button
                             type="reset"
                             on:click={() => {
-                              console.log("Es")
+                                logout();
+                                navigate("/");
+                                window.location.reload()
                             }}>Cerrar sesión</button
                         >
                     </div>
