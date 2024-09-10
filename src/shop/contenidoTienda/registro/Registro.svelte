@@ -3,11 +3,11 @@
     import { onMount } from "svelte";
     import { updateCustomer, logout, createCustomer } from "./customer";
     let user;
-    let token
+    let email;
     onMount(async()=>{
-        if(Android.getToken()){
-            user = await createCustomer(Android.getToken());
-            token = Android.getToken();
+        if(Android.getEmail()){
+            user = await createCustomer(Android.getEmail());
+            email = Android.getEmail();
 
         }
     })
@@ -126,12 +126,11 @@
                     />
                     <div>
                         <button type="submit">Actualizar</button>
+                        <!-- svelte-ignore missing-declaration -->
                         <button
                             type="reset"
                             on:click={() => {
-                                logout();
-                                navigate("/");
-                                window.location.reload()
+                               Android.logout();
                             }}>Cerrar sesión</button
                         >
                     </div>

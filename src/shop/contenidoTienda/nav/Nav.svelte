@@ -4,70 +4,79 @@
     import { getProduct, products } from "./search";
     import { login } from "../form/form";
     import { onMount } from "svelte";
-
     let email;
-    let customer;
-    let inputSearch = false;
-    let isActive = false;
-    let logoCheck = true;
-    
+    let customer
     onMount(async () => {
-        if (typeof Android !== "undefined" && Android.getEmail) {
+        if(Android){
+
             email = Android.getEmail();
-            if (email) {
-                customer = await login(email);
+            if(email){
+                customer = await login(email)
             }
+            
         }
     });
+    $:{customer}
+    let styleUlA = `display: block;
+
+    height: 100%;
+    width: 100%;
+    line-height: 65px;
+    font-size: 20px;
+    color: white;
+    padding-left: 40px;
+    box-sizing: border-box;
+    border-top: 1px solid rgb( 255, 255, 255,.1);
+    border-bottom: 1px solid black;
+    transition: 0.5s;
+    text-decoration:none;`;
+
+    let inputSearch = false;
+
+    let isActive = false;
+    let logoCheck = true;
 
     function handleClick() {
         isActive = !isActive;
         inputSearch = !inputSearch;
     }
-let styleUlA = `display: block;
-
-height: 100%;
-width: 100%;
-line-height: 65px;
-font-size: 20px;
-color: white;
-padding-left: 40px;
-box-sizing: border-box;
-border-top: 1px solid rgb( 255, 255, 255,.1);
-border-bottom: 1px solid black;
-transition: 0.5s;
-text-decoration:none;`;
 </script>
 
 <div class="nav1" id="nav-1">
     <div style="width:100%; display:flex; justify-content:end;">
         {#if logoCheck}
-            <div style="width:60%; display:flex; justify-content:space-between;">
+            <div
+                style=" width:60%; display:flex; justify-content:space-between;"
+            >
                 <img
                     src="https://firebasestorage.googleapis.com/v0/b/cloud-image-361ff.appspot.com/o/images%2FlogoBenfer.png?alt=media&token=e2cf96da-df32-48f9-a8bf-fb588a31fdcf"
                     alt=""
                     class="logo-2"
                 />
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <div>
-                    <!-- svelte-ignore a11y-click-events-have-key-events -->
                     <p
                         on:click={handleClick}
                         class={isActive ? "active" : "lupa"}
+                        style=""
                     >
                         🔍
                     </p>
+                    <p></p>
                 </div>
             </div>
         {:else}
-            <div style="width:60%; display:flex; justify-content:end;">
+            <div style=" width:60%; display:flex; justify-content:end;">
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <div>
-                    <!-- svelte-ignore a11y-click-events-have-key-events -->
                     <p
                         on:click={handleClick}
                         class={isActive ? "active" : "lupa"}
+                        style=""
                     >
                         🔍
                     </p>
+                    <p></p>
                 </div>
             </div>
         {/if}
@@ -76,7 +85,9 @@ text-decoration:none;`;
     <input
         type="checkbox"
         id="check"
-        on:change={() => { logoCheck = !logoCheck; }}
+        on:change={() => {
+            logoCheck = !logoCheck;
+        }}
     />
     <label for="check">
         <i class="fas fa-bars" id="btn"></i>
@@ -91,20 +102,41 @@ text-decoration:none;`;
             />
         </header>
         <ul>
-            <li><Link to="/" style={styleUlA}><i class="fas fa-home"></i>Inicio</Link></li>
-            <li><Link to="/user" style={styleUlA}><i class="fas fa-user"></i>Usuario</Link></li>
-            <li><Link to="/carrito" style={styleUlA}><i class="fa-solid fa-cart-shopping"></i>Carrito</Link></li>
-            <li><Link to="/categoria" style={styleUlA}><i class="fas fa-sliders-h"></i>Categorias</Link></li>
-            <li><Link to="/" style={styleUlA}><i class="fas fa-qrcode"></i>Tus Compra</Link></li>
+            <li>
+                <Link to="/" style={styleUlA}
+                    ><i class="fas fa-home"></i>Inicio</Link
+                >
+            </li>
+            <li>
+                <Link to="/user" style={styleUlA}
+                    ><i class="fas fa-user"></i>Usuario</Link
+                >
+            </li>
+            <li>
+                <Link to="/carrito" style={styleUlA}
+                    ><i class="fa-solid fa-cart-shopping"></i>Carrito</Link
+                >
+            </li>
+            <li>
+                <Link to="/categoria" style={styleUlA}
+                    ><i class="fas fa-sliders-h"></i>Categorias</Link
+                >
+            </li>
+            <li>
+                <Link to="/" style={styleUlA}
+                    ><i class="fas fa-qrcode"></i>Tus Compra</Link
+                >
+            </li>
             <li>
                 {#if customer}
-                    <h5>{customer.name}</h5>
+                       <h5>{customer.name}</h5>
+                   
                 {/if}
             </li>
             <li>
                 <!-- svelte-ignore missing-declaration -->
-                <button on:click={() => {
-                    if (typeof Android !== "undefined" && Android.logout) {
+                <button on:click={()=>{
+                    if(Android){
                         Android.logout();
                     }
                 }}>Cerrar Sesión</button>
