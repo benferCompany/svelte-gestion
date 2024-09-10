@@ -126,12 +126,13 @@
                     />
                     <div>
                         <button type="submit">Actualizar</button>
+                        <!-- svelte-ignore missing-declaration -->
                         <button
                             type="reset"
                             on:click={() => {
-                                logout();
-                                navigate("/");
-                                window.location.reload()
+                                if(Android){
+                                    Android.logout();
+                                }
                             }}>Cerrar sesión</button
                         >
                     </div>
