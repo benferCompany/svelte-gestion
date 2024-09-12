@@ -24,6 +24,7 @@
     import Descripcion from "./shop/contenidoTienda/categoria/descriptions/Descripcion.svelte";
     import ModDescription from "./components/products/sidelbar/components/create/description/ModDescription.svelte";
     import Prueba from "./shop/prueba/Prueba.svelte";
+    import PoliticaDePrivacidad from "./shop/politicaDePrivacidad/PoliticaDePrivacidad.svelte";
 	let booleanNav;
 	$: booleanNav = $booleanPathName;
 </script>
@@ -118,6 +119,9 @@
 
 	<Route path="/prueba">
 		<Prueba/>
+	</Route>
+	<Route path="/politicadeprivacidad">
+		<PoliticaDePrivacidad/>
 	</Route>
 	
 </Router>
