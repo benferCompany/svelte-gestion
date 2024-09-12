@@ -15,7 +15,7 @@
     <ol>
         <li>Inicia sesión en tu cuenta de BenferShop.</li>
         <li>
-            Dirígete a la sección de "Configuración" en tu perfil de usuario.
+            Dirígete a al menu luego en "Usuario" en tu perfil de usuario.
         </li>
         <li>Selecciona "Eliminar cuenta" y confirma tu acción.</li>
         <li>

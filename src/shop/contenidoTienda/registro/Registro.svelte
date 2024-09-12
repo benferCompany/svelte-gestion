@@ -1,12 +1,7 @@
 <script>
     import { Link, navigate } from "svelte-routing";
     import { onMount } from "svelte";
-    import {
-        updateCustomer,
-        logout,
-        createCustomer,
-        deletecount,
-    } from "./customer";
+    import { updateCustomer, createCustomer, deletecount } from "./customer";
     let user;
     let email;
     onMount(async () => {
@@ -40,12 +35,44 @@
     //exportación de Input
     let ubicacion;
     let callback;
+    let visible = false;
+    const handleRemoveCount = () => {
+        visible = !visible;
+    };
 </script>
 
 <link
     rel="stylesheet"
     href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
 />
+{#if visible}
+    <div style="position:absolute; top:auto; button:auto; width:50%;">
+        <div style="display:flex; justify-content:center;">
+            <h5>
+                ¿Esta seguro que quieres eliminar esta cuenta? ¡Los cambios no
+                podran revertirse!
+            </h5>
+            <div style="display:flex; justify-content:center;">
+                <button
+                    on:click={() => {
+                        visible = !visible;
+                    }}
+                    class="btn btn-danger">Cancelar</button
+                >
+                <!-- svelte-ignore missing-declaration -->
+                <button
+                    on:click={async () => {
+                        if (Android) {
+                            Android.logout();
+                        }
+                        await deletecount(email);
+                    }}
+                    class="btn btn-success">Confirmar</button
+                >
+            </div>
+        </div>
+    </div>
+{/if}
 {#if user}
     <div class="body">
         <div class="nav">
@@ -134,14 +161,9 @@
                                     }
                                 }}>Cerrar sesión</button
                             >
-                            <!-- svelte-ignore missing-declaration -->
                             <button
                                 on:click={() => {
-                                    deletecount(email);
-                                    if(Android){
-
-                                        Android.logout()
-                                    }
+                                    handleRemoveCount()
                                 }}>Elminar cuenta</button
                             >
                         </div>
