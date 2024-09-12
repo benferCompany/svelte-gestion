@@ -1,7 +1,12 @@
 <script>
     import { Link, navigate } from "svelte-routing";
     import { onMount } from "svelte";
-    import { updateCustomer, logout, createCustomer,deletecount } from "./customer";
+    import {
+        updateCustomer,
+        logout,
+        createCustomer,
+        deletecount,
+    } from "./customer";
     let user;
     let email;
     onMount(async () => {
@@ -63,24 +68,22 @@
                             name="id"
                             value={user.id}
                         />
-                        <div style="display:flex; justify-content:center;">
-                            <input
-                                on:click={callback}
-                                type="text"
-                                name="name"
-                                id=""
-                                placeholder="Nombre"
-                                value={user.name}
-                            />
-                            <input
-                                on:click={callback}
-                                type="text"
-                                name="last_name"
-                                id=""
-                                value={user.last_name}
-                                placeholder="Apellido"
-                            />
-                        </div>
+                        <input
+                            on:click={callback}
+                            type="text"
+                            name="name"
+                            id=""
+                            placeholder="Nombre"
+                            value={user.name}
+                        />
+                        <input
+                            on:click={callback}
+                            type="text"
+                            name="last_name"
+                            id=""
+                            value={user.last_name}
+                            placeholder="Apellido"
+                        />
                         <input
                             value={user.idPersonal}
                             type="number"
@@ -131,7 +134,16 @@
                                     }
                                 }}>Cerrar sesión</button
                             >
-                            <button on:click={()=>{deletecount(email)}}>Elminar cuenta</button>
+                            <!-- svelte-ignore missing-declaration -->
+                            <button
+                                on:click={() => {
+                                    deletecount(email);
+                                    if(Android){
+
+                                        Android.logout()
+                                    }
+                                }}>Elminar cuenta</button
+                            >
                         </div>
                     </form>
                 </fieldset>
@@ -183,7 +195,6 @@
         text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
         font-family: "Arial Narrow", Arial, sans-serif;
     }
-
 
     fieldset {
         text-align: center;
