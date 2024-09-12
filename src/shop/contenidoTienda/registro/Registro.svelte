@@ -49,7 +49,7 @@
 
 <Overlay bind:visible>
     <div style="position:absolute; top:25%; left:25%; width:50%;">
-        <div style="display:flex; justify-content:center;">
+        <div>
             <h5>
                 ¿Esta seguro que quieres eliminar esta cuenta? ¡Los cambios no
                 podran revertirse!
