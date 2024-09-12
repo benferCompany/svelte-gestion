@@ -2,6 +2,7 @@
     import { Link, navigate } from "svelte-routing";
     import { onMount } from "svelte";
     import { updateCustomer, createCustomer, deletecount } from "./customer";
+    import Overlay from "../../../components/tools/overlay/Overlay.svelte"
     let user;
     let email;
     onMount(async () => {
@@ -45,8 +46,9 @@
     rel="stylesheet"
     href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
 />
-{#if visible}
-    <div style="position:absolute; top:auto; button:auto; width:50%;">
+
+<Overlay bind:visible>
+    <div style="position:absolute; top:25%; left:25%; width:50%;">
         <div style="display:flex; justify-content:center;">
             <h5>
                 ¿Esta seguro que quieres eliminar esta cuenta? ¡Los cambios no
@@ -72,8 +74,9 @@
             </div>
         </div>
     </div>
-{/if}
-{#if user}
+</Overlay>    
+
+    {#if user}
     <div class="body">
         <div class="nav">
             <Link to="/" style={styleVolver} class="volver">Volver</Link>
