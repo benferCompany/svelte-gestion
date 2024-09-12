@@ -48,12 +48,12 @@
 />
 
 <Overlay bind:visible>
-    <div style="position:absolute; top:25%; left:25%; width:50%;">
+    <div style="position:absolute; top:25%; left:25%; width:50%; background:white;">
         <div>
-            <h5>
+            <p>
                 ¿Esta seguro que quieres eliminar esta cuenta? ¡Los cambios no
                 podran revertirse!
-            </h5>
+            </p>
             <div style="display:flex; justify-content:center;">
                 <button
                     on:click={() => {
