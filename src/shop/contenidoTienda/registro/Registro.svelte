@@ -1,16 +1,15 @@
 <script>
     import { Link, navigate } from "svelte-routing";
     import { onMount } from "svelte";
-    import { updateCustomer, logout, createCustomer } from "./customer";
+    import { updateCustomer, logout, createCustomer,deletecount } from "./customer";
     let user;
     let email;
-    onMount(async()=>{
-        if(Android.getEmail()){
+    onMount(async () => {
+        if (Android.getEmail()) {
             user = await createCustomer(Android.getEmail());
             email = Android.getEmail();
-
         }
-    })
+    });
     let styleVolver = `padding-top: 25px;
     margin-left: 10px;
     font-size: 20px;
@@ -18,7 +17,7 @@
     font-family: 'Arial Narrow', Arial, sans-serif;`;
     import { booleanPathName } from "../../../components/tools/pathName/pathName";
     $booleanPathName = false;
-   
+
     let styleInput = {
         input: ` border-radius: 3px;
         width: 81%;
@@ -43,30 +42,28 @@
     href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
 />
 {#if user}
-<div class="body">
-    <div class="nav">
-        <Link to="/" style={styleVolver} class="volver">Volver</Link>
-        <img
-            src="https://firebasestorage.googleapis.com/v0/b/cloud-image-361ff.appspot.com/o/images%2FbenfershopPng.png?alt=media&token=e58609b9-6974-49f1-bb0d-d872f93f7eaf"
-            alt=""
-            class="logo"
-        />
-    </div>
+    <div class="body">
+        <div class="nav">
+            <Link to="/" style={styleVolver} class="volver">Volver</Link>
+            <img
+                src="https://firebasestorage.googleapis.com/v0/b/cloud-image-361ff.appspot.com/o/images%2FbenfershopPng.png?alt=media&token=e58609b9-6974-49f1-bb0d-d872f93f7eaf"
+                alt=""
+                class="logo"
+            />
+        </div>
 
-    <div class="contenedor">
-        <div class="contenedor-hijo">
-            <fieldset>
-                <legend><h3>¡Bienvenido!</h3></legend>
-                <form on:submit|preventDefault={updateCustomer} action="">
-                    <input
-                        style="display:none"
-                        type="text"
-                        name="id"
-                        value={user.id}
-                    />
-                    <div class="nyp">
+        <div class="contenedor">
+            <div class="contenedor-hijo">
+                <fieldset>
+                    <legend><h3>¡Bienvenido!</h3></legend>
+                    <form on:submit|preventDefault={updateCustomer} action="">
+                        <input
+                            style="display:none"
+                            type="text"
+                            name="id"
+                            value={user.id}
+                        />
                         <div style="display:flex; justify-content:center;">
-
                             <input
                                 on:click={callback}
                                 type="text"
@@ -80,67 +77,67 @@
                                 type="text"
                                 name="last_name"
                                 id=""
-                                value ={user.last_name}
+                                value={user.last_name}
                                 placeholder="Apellido"
                             />
                         </div>
-                    </div>
-                    <input
-                        value={user.idPersonal}
-                        type="number"
-                        name="idPersonal"
-                        id=""
-                        placeholder="DNI"
-                    />
-                    <input
-                        on:click={callback}
-                        type="number"
-                        name="mobile_phone"
-                        id=""
-                        placeholder="+54 3624-694287"
-                        value={user.mobile_phone}
-                    />
-                    <input
-                        on:click={callback}
-                        type="email"
-                        style="color:black;"
-                        id=""
-                        placeholder="e-mail"
-                        value={user.email}
-                        disabled
-                    />
-                    <input
-                        style="display:none;"
-                        value={user.email}
-                        type="email"
-                        name="email"
-                        id=""
-                    />
-                    <input
-                        on:click={callback}
-                        type="text"
-                        name="address"
-                        id=""
-                        placeholder="Dirección"
-                        value={user.address}
-                    />
-                    <div>
-                        <button type="submit">Actualizar</button>
-                        <!-- svelte-ignore missing-declaration -->
-                        <button
-                            type="reset"
-                            on:click={() => {
-                                if(Android){
-                                    Android.logout();
-                                }
-                            }}>Cerrar sesión</button
-                        >
-                    </div>
-                </form>
-            </fieldset>
+                        <input
+                            value={user.idPersonal}
+                            type="number"
+                            name="idPersonal"
+                            id=""
+                            placeholder="DNI"
+                        />
+                        <input
+                            on:click={callback}
+                            type="number"
+                            name="mobile_phone"
+                            id=""
+                            placeholder="+54 3624-694287"
+                            value={user.mobile_phone}
+                        />
+                        <input
+                            on:click={callback}
+                            type="email"
+                            style="color:black;"
+                            id=""
+                            placeholder="e-mail"
+                            value={user.email}
+                            disabled
+                        />
+                        <input
+                            style="display:none;"
+                            value={user.email}
+                            type="email"
+                            name="email"
+                            id=""
+                        />
+                        <input
+                            on:click={callback}
+                            type="text"
+                            name="address"
+                            id=""
+                            placeholder="Dirección"
+                            value={user.address}
+                        />
+                        <div>
+                            <button type="submit">Actualizar</button>
+                            <!-- svelte-ignore missing-declaration -->
+                            <button
+                                type="reset"
+                                on:click={() => {
+                                    if (Android) {
+                                        Android.logout();
+                                    }
+                                }}>Cerrar sesión</button
+                            >
+                            <button on:click={()=>{deletecount(email)}}>Elminar cuenta</button>
+                        </div>
+                    </form>
+                </fieldset>
+            </div>
         </div>
     </div>
-</div>
 {/if}
 
 <style>
@@ -185,11 +182,6 @@
         color: #031b27;
         text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
         font-family: "Arial Narrow", Arial, sans-serif;
-    }
-
-    .nyp {
-        display: flex;
-        width: 100%;
     }
 
 

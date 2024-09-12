@@ -47,3 +47,11 @@ export const createCustomer =async (email)=>{
     const json = await response.json();
     return json;
 }
+
+export const deletecount = async(email)=>{
+    const response = await fetch(`${URL}/customer/deleteByEmail/${email}`,{
+        method: "DELETE"
+    })
+    const boolean = await response.boolean();
+    return boolean;
+}
