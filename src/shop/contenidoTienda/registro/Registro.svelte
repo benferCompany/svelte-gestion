@@ -48,8 +48,8 @@
 />
 
 <Overlay bind:visible>
-    <div style="position:absolute; top:25%; left:25%; width:50%; background:white;">
-        <div>
+    <div style="position:absolute; top:12.5%; left:12.5%; width:75%; background:white; border-radius:1em;">
+        <div style="padding:2em;">
             <p>
                 ¿Esta seguro que quieres eliminar esta cuenta? ¡Los cambios no
                 podran revertirse!
