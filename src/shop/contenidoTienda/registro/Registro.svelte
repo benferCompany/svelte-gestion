@@ -167,7 +167,7 @@
                             <button
                                 on:click={() => {
                                     handleRemoveCount()
-                                }}>Elminar cuenta</button
+                                }}>Eliminar cuenta</button
                             >
                         </div>
                     </form>
