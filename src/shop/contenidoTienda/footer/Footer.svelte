@@ -1,4 +1,5 @@
 <script>
+    import { Link } from "svelte-routing";
     import { slide } from "svelte/transition";
     let booleanDetail = false;
 </script>
@@ -28,7 +29,7 @@
             <p class="p">
                 © 2024 BenFer Store Todos los derechos reservados. BenFer Store
                 se compromete a proteger la privacidad de sus usuarios. Para más
-                detalles, por favor consulte nuestra política completa.
+                detalles, por favor consulte nuestra política completa <Link to="https:benfer.shop/politicadeprivacidad">Política de privacidad</Link>.
             </p>
         </div>
     {/if}
