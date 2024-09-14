@@ -62,3 +62,33 @@ export const addCarrito = (car, product, cantidad) => {
 }
 
 
+
+export const getImagesProduct=async(idProd)=>{
+    const response = await fetch(`${URL}/imagesProduct/${idProd}`);
+    const json = await response.json(); 
+    return json;
+}
+
+export const descuento = {
+    id:1,
+    motivo: "Compra online",
+    descuento: 10
+
+}
+
+export function aplicarDescuento(precioOriginal, porcentajeDescuento) {
+    // Calcular el valor del descuento
+    const descuento = (precioOriginal * porcentajeDescuento) / 100;
+    
+    // Calcular el precio con el descuento aplicado
+    const precioConDescuento = precioOriginal - descuento;
+    
+    return precioConDescuento;
+}
+
+export let options = {
+    cuotas:false,
+    descuento:true,
+    colores: false
+
+}

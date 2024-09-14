@@ -1,7 +1,14 @@
 <script>
     import { onMount } from "svelte";
     import { booleanPathName } from "../../../../components/tools/pathName/pathName";
-    import { getProduct, addCarrito } from "./description";
+    import {
+        getProduct,
+        addCarrito,
+        getImagesProduct,
+        aplicarDescuento,
+        descuento,
+        options,
+    } from "./description";
     import { carrito } from "../../carrito/carrito";
     import { navigate } from "svelte-routing";
     import { getDescriptionProduct } from "../../../../components/stores/products";
@@ -9,6 +16,7 @@
     let descripcion;
     let cantidadCarrito = 1;
     let estadoCarrito = 0;
+    let images;
     function createSequentialArray(N) {
         return Array.from({ length: N }, (_, i) => i + 1);
     }
@@ -20,21 +28,13 @@
         console.log(id);
         descripcion = await getDescriptionProduct(id);
         product = await getProduct(id);
+        images = await getImagesProduct(id);
+        console.log(product);
     });
-    let image = {
-        id: 1,
-        idProd: 1,
-        src: [
-            "https://http2.mlstatic.com/D_NQ_NP_2X_722369-MLA74216980342_012024-F.webp",
-            "https://http2.mlstatic.com/D_NQ_NP_2X_774676-MLA74217355402_012024-F.webp",
-            "https://http2.mlstatic.com/D_NQ_NP_2X_892682-MLA74330572137_012024-F.webp",
-            "https://http2.mlstatic.com/D_NQ_NP_2X_894449-MLA74330572119_012024-F.webp",
-        ],
-    };
+
     let selectedOption = "";
 
     $: {
-
         if ($carrito && product) {
             console.log(product);
             $carrito.forEach((p) => {
@@ -48,73 +48,90 @@
 
 {#if product && descripcion}
     <div class="body">
-        <div class="carrusel">
-            {#each image.src as img}
-                <div class="fotos">
-                    <img
-                        src={img}
-                        style="  
-                height: 210px; 
+        {#if images}
+            <div class="carrusel">
+                {#each images.src as img}
+                    <div class="fotos">
+                        <img
+                            src={img}
+                            style="  
                 width: 290px; 
                 flex: 1 0 auto;
                 padding-left: 1em;"
-                        alt="no soportado bot"
-                    />
-                </div>
-            {/each}
-        </div>
-        <div class="infor" style="margin: 0; padding:0;">
-            <h6 class="sin-p-b"><s>$2.419.599</s></h6>
-            <h2 class="sin-p-b">$2.296.399</h2>
-            <h5 class="sin-p-b">Mismo precio en 18 cuotas de $127.577,72</h5>
-            <div class="colors-produc">
-                <b>colores disponibles:</b>
-                <div class="inpts">
-                    <input
-                        type="radio"
-                        id="option1"
-                        name="options"
-                        bind:group={selectedOption}
-                        value="option1"
-                    />
-                    <input
-                        type="radio"
-                        id="option2"
-                        name="options"
-                        bind:group={selectedOption}
-                        value="option2"
-                    />
-                    <input
-                        type="radio"
-                        id="option3"
-                        name="options"
-                        bind:group={selectedOption}
-                        value="option3"
-                    />
-                </div>
+                            alt="no soportado bot"
+                        />
+                    </div>
+                {/each}
             </div>
+        {/if}
+        <div class="infor" style="margin: 0; padding:0;">
+            <h6 class="sin-p-b"><s>${product.selling_price}</s></h6>
+            {#if options.descuento}
+                <h5 class="sin-p-b">Descuento por compras online</h5>
+                <h2 class="sin-p-b">
+                    ${aplicarDescuento(
+                        product.selling_price,
+                        descuento.descuento,
+                    )}
+                </h2>
+            {/if}
+            {#if options.cuotas}
+                <h5 class="sin-p-b">
+                    Mismo precio en 18 cuotas de $127.577,72
+                </h5>
+            {/if}
+            {#if options.colores}
+                <div class="colors-produc">
+                    <b>colores disponibles:</b>
+                    <div class="inpts">
+                        <input
+                            type="radio"
+                            id="option1"
+                            name="options"
+                            bind:group={selectedOption}
+                            value="option1"
+                        />
+                        <input
+                            type="radio"
+                            id="option2"
+                            name="options"
+                            bind:group={selectedOption}
+                            value="option2"
+                        />
+                        <input
+                            type="radio"
+                            id="option3"
+                            name="options"
+                            bind:group={selectedOption}
+                            value="option3"
+                        />
+                    </div>
+                </div>
+            {/if}
             <div class="selec">
                 <h3 class="h3">stock disponibles</h3>
-                {#if estadoCarrito >0}
-                <select disabled bind:value={estadoCarrito}>
-                    {#each createSequentialArray(product.stores[0].stock) as i}
-                        <option value={i}>{i}</option>
-                    {/each}
-                </select>
-                
+                {#if estadoCarrito > 0}
+                    <select disabled bind:value={estadoCarrito}>
+                        {#each createSequentialArray(product.stores[0].stock) as i}
+                            <option value={i}>{i}</option>
+                        {/each}
+                    </select>
                 {:else}
-
-                <select bind:value={cantidadCarrito}>
-                    {#each createSequentialArray(product.stores[0].stock) as i}
-                        <option value={i}>{i}</option>
-                    {/each}
-                </select>
+                    <select bind:value={cantidadCarrito}>
+                        {#each createSequentialArray(product.stores[0].stock) as i}
+                            <option value={i}>{i}</option>
+                        {/each}
+                    </select>
                 {/if}
             </div>
         </div>
         <div class="btns">
             <button
                 on:click={async () => {
+                    product.selling_price = aplicarDescuento(
+                        product.selling_price,
+                        descuento.descuento,
+                    );
                     addCarrito($carrito, product, cantidadCarrito);
                     navigate("/carrito");
                 }}
@@ -129,7 +146,7 @@
 
             <br />
         </div>
-        <hr/>
+        <hr />
         <div class="descriptions">
             {@html descripcion.content}
         </div>

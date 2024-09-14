@@ -26,6 +26,8 @@
     import Prueba from "./shop/prueba/Prueba.svelte";
     import PoliticaDePrivacidad from "./shop/politicaDePrivacidad/PoliticaDePrivacidad.svelte";
     import EliminarCuenta from "./shop/politicaDePrivacidad/EliminarCuenta.svelte";
+    import ImagesProduct from "./components/products/sidelbar/components/create/description/images/ImagesProduct.svelte";
+    
 	let booleanNav;
 	$: booleanNav = $booleanPathName;
 </script>
@@ -127,4 +129,8 @@
 	<Route path = "/eliminarcuenta">
 		<EliminarCuenta/>
 	</Route>
+	<Route path ="/imagesProduct">
+		<ImagesProduct/>
+	</Route>
+
 </Router>

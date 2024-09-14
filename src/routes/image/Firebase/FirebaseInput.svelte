@@ -50,36 +50,46 @@
         {/if}
         <div class="d-flex justify-content-end">
             {#if !loading}
-            <input
-                on:click={async () => {
-                    if (!booleanFinally) {
-                        loading = true;
-                        let response = await handleImageUpload(
-                            file,
-                            fileName,
-                            isValidType,
-                        );
-                        image = response.entity.value;
-                        message = response.message;
-                        if(!response.error){
-                            booleanFinally = !booleanFinally;
-                            if (booleanFinally) {
-                                buttonAttribute.class = "btn btn-success";
-                                buttonAttribute.value = "Finalizar";
+                {#if file}
+                    <input
+                        on:click={async () => {
+                            if (!booleanFinally) {
+                                loading = true;
+                                let response = await handleImageUpload(
+                                    file,
+                                    fileName,
+                                    isValidType,
+                                );
+                                image = response.entity.value;
+                                message = response.message;
+                                if (!response.error) {
+                                    booleanFinally = !booleanFinally;
+                                    if (booleanFinally) {
+                                        buttonAttribute.class =
+                                            "btn btn-success";
+                                        buttonAttribute.value = "Finalizar";
+                                    }
+                                }
+                                loading = false;
+                            } else {
+                                toggleImage();
                             }
-                        }
-                        loading = false;
-                    } else {
-                        toggleImage();
-                    }
-                }}
-                class={buttonAttribute.class}
-                type="button"
-                value={buttonAttribute.value}
-            />
+                        }}
+                        class={buttonAttribute.class}
+                        type="button"
+                        value={buttonAttribute.value}
+                    />
+                {/if}
             {:else}
-                <div class="d-flex justify-content-end" style="width:100%; height:50px;">
-                    <img style="max-width:100%; max-height:100%" src="imgs/loading.gif" alt="">
+                <div
+                    class="d-flex justify-content-end"
+                    style="width:100%; height:50px;"
+                >
+                    <img
+                        style="max-width:100%; max-height:100%"
+                        src="imgs/loading.gif"
+                        alt=""
+                    />
                 </div>
             {/if}
         </div>
