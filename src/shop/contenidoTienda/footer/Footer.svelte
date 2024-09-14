@@ -29,7 +29,7 @@
             <p class="p">
                 © 2024 BenFer Store Todos los derechos reservados. BenFer Store
                 se compromete a proteger la privacidad de sus usuarios. Para más
-                detalles, por favor consulte nuestra <Link to="https:benfer.shop/politicadeprivacidad">Política de privacidad</Link>.
+                detalles, por favor consulte nuestra <Link to="https://benfer.shop/politicadeprivacidad">Política de privacidad</Link>.
             </p>
         </div>
     {/if}
