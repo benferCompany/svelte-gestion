@@ -2,6 +2,7 @@
     import Slaider from "../slaider/Slaider.svelte";
     import { onMount } from "svelte";
     import { URL } from "../../../components/tools/connections/url";
+    import {navigate} from "svelte-routing";
     let products;
     onMount(async () => {
         let response = await fetch(`${URL}/products/name`, {
@@ -29,7 +30,9 @@
                     <h4>{product.title}</h4>
                     
                     <p class="precio">{product.selling_price}</p>
-                    <button class="btn-prod">Añadir</button>
+                    <button on:click={()=>{
+                        navigate("/description?id="+product.id)
+                    }} class="btn-prod">Ver</button>
                 </div>
                 
             {/each}

@@ -27,10 +27,11 @@ export const updateCustomer = async (e) => {
             })
             const json = await response.json();
 
-            return json;
+            return true;
 
         } catch (error) {
             console.error("Algún error inesperado", error);
+            return false;
         }
     
 

@@ -91,7 +91,13 @@
             <div class="contenedor-hijo">
                 <fieldset>
                     <legend><h3>¡Bienvenido!</h3></legend>
-                    <form on:submit|preventDefault={updateCustomer} action="">
+                    <!-- svelte-ignore missing-declaration -->
+                    <form on:submit|preventDefault={(e)=>{
+                        
+                        if(Android && updateCustomer(e)){
+                            Android.getToastMessage("Los registros se actualizaron")
+                        }
+                    }} action="">
                         <input
                             style="display:none"
                             type="text"
