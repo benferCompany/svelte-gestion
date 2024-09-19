@@ -3,26 +3,25 @@
     import {navigate } from "svelte-routing";
     import Nav from "../nav/Nav.svelte";
     import Footer from "../footer/Footer.svelte";
+
+    import { products } from "../nav/search";
+
     import { booleanPathName } from "../../../components/tools/pathName/pathName";
-    import { onMount } from "svelte";
-    import {getProductByCategories} from "./categoria";
     let body;
-    let prds
     booleanPathName.set(false);
-    
-    onMount(async()=>{
-        const params = new URLSearchParams(window.location.search);
-        let category = params.get("category");
-        prds = await getProductByCategories(category);
-
-    })
-
+    window.addEventListener("resize", () => {
+        console.log(window.innerHeight);
+    });
+    let prds;
+    $: {
+        prds = $products;
+    }
 </script>
 
 <div bind:this={body} class="body">
     <Nav />
     <div class="category">
-        <h2>Categorias</h2>
+        <h2>Productos</h2>
         <select name="" id="">
             <!---Agrer aca las option de categoria que tiene los productos-->
         </select>

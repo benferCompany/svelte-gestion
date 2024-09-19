@@ -170,7 +170,7 @@
                                     }
                                 }}>Cerrar sesión</button
                             >
-                            <button
+                            <button type="reset"
                                 on:click={() => {
                                     handleRemoveCount()
                                 }}>Eliminar cuenta</button

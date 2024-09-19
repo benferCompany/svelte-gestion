@@ -135,3 +135,18 @@ export const getDescriptionProduct=async(id)=>{
         console.error("Error inesperando con la consulta desciprtionProduct", error);
     }
 }
+
+export const updateCategoriesInProduct = async(product)=>{
+    try{
+        const response = await fetch(`${URL}/products/category/product`,{
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(product)
+        })
+        const json = await response.json();
+        return json;
+    }catch(error){
+        console.error("Hubo un error al intentar eliminar la categoría en productos",error);
+        return false;
+    }
+}

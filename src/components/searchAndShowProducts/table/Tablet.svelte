@@ -114,12 +114,22 @@
                                     >Editar</button
                                 >
                                 <button
-                                    on:click={()=>{navigate("/modDescription?id="+product.id)}}
+                                    on:click={() => {
+                                        navigate(
+                                            "/modDescription?id=" + product.id,
+                                        );
+                                    }}
                                     type="button"
                                     class="btn btn-info btn-sm ms-1"
                                     >Descripción</button
                                 >
-
+                                <button
+                                    on:click={() => {
+                                        navigate("/categories?id=" + product.id);
+                                    }}
+                                    class="btn btn-primary btn-sm ms-1"
+                                    >Categorias</button
+                                >
                                 <button
                                     type="button"
                                     class="btn btn-danger btn-sm ms-1"

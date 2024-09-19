@@ -27,6 +27,9 @@
     import PoliticaDePrivacidad from "./shop/politicaDePrivacidad/PoliticaDePrivacidad.svelte";
     import EliminarCuenta from "./shop/politicaDePrivacidad/EliminarCuenta.svelte";
     import ImagesProduct from "./components/products/sidelbar/components/create/description/images/ImagesProduct.svelte";
+    import Search from "./shop/contenidoTienda/search/Search.svelte";
+	import InfoTienda from "./shop/contenidoTienda/info-tienda/InfoTienda.svelte";
+    import Categories from "./components/products/sidelbar/components/categories/Categories.svelte";
     
 	let booleanNav;
 	$: booleanNav = $booleanPathName;
@@ -126,11 +129,19 @@
 	<Route path="/politicadeprivacidad">
 		<PoliticaDePrivacidad/>
 	</Route>
+	<Route path="/porquecompraraqui">
+		<InfoTienda/>
+	</Route>
 	<Route path = "/eliminarcuenta">
 		<EliminarCuenta/>
 	</Route>
 	<Route path ="/imagesProduct">
 		<ImagesProduct/>
 	</Route>
-
+	<Route path = "/search">
+		<Search/>
+	</Route>
+	<Route path="/categories">
+		<Categories/>
+	</Route>
 </Router>

@@ -33,8 +33,7 @@
             </p>
         </div>
     {/if}
-    <h4>Por que Comprar en Benfer</h4>
-    <p></p>
+    <h4><Link to="/porquecompraraqui" style ="color: white; margin-top: 5px;">Por que Comprar en Benfer</Link></h4>
 </div>
 
 <style>
