@@ -1,5 +1,6 @@
 <script>
-    import { Link } from "svelte-routing";
+    import { Link, navigate } from "svelte-routing";
+    
     import { slide } from "svelte/transition";
     let booleanDetail = false;
 </script>
@@ -20,7 +21,7 @@
         </li>
         <li><i class="fas fa-envelope" id="gm"></i>Gmail</li>
         <li class="w">
-            <i class="fa-brands fa-whatsapp" id="wap"></i><Link class="a-w" to="https://api.whatsapp.com/send/?phone=543624230777&text&type=phone_number&app_absent=0">WhatsApp</Link>
+            <i class="fa-brands fa-whatsapp" id="wap"></i><a on:click={()=>{navigate("https://api.whatsapp.com/send/?phone=543624230777&text&type=phone_number&app_absent=0")}} class="a-w" href="#">WhatsApp</a>
         </li>
     </ul>
 
