@@ -4,7 +4,7 @@
     import Nav from "../nav/Nav.svelte";
     import Footer from "../footer/Footer.svelte";
     import { products } from "../nav/search";
-    import {getCategoriesProducts, filterProductsByCategory} from "./search"
+    import {getCategoriesProducts} from "./search"
     import { booleanPathName } from "../../../components/tools/pathName/pathName";
     let body;
     booleanPathName.set(false);
@@ -13,6 +13,19 @@
         prds = $products;
     }
     let category;
+
+
+    let filteredProducts
+    function filterProductsByCategory() {
+    if (category) {
+      filteredProducts = prds.content.filter(product => 
+        product.categories.some(category => category.name === selectedCategory)
+      );
+    } else {
+      filteredProducts = prds.content; // Si no se selecciona una categoría, mostrar todos los productos
+    }
+    
+  }
     
 </script>
 
@@ -24,8 +37,9 @@
             <div class="category">
                 <h2>Productos</h2>
                 <select bind:value={category} on:change={()=>{
-                    const response = filterProductsByCategory(prds,category);
+                    const response = filterProductsByCategory($products,category);
                     console.log(response)
+                    products.set(response);
                 }} name="" id="">
                    {#each getCategoriesProducts(prds) as pr}
                         <option value="">{pr}</option>

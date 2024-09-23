@@ -1,4 +1,4 @@
 /node_modules/
 /public/build/
-/src/components/tools/connections/url.js
+/src/components/tools/connections/
 .DS_Store

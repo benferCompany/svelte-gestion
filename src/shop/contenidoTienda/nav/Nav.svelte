@@ -6,12 +6,15 @@
     import { onMount } from "svelte";
     let email;
     let customer;
+    let Android;
     onMount(async () => {
         if (Android) {
             email = Android.getEmail();
             if (email) {
                 customer = await login(email);
             }
+        }else{
+           //navigate("https://play.google.com/store/apps/details?id=com.benfercompany.benfershop")
         }
     });
     $: {
