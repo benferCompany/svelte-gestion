@@ -8,11 +8,19 @@
 <div class="footer">
     <h4>Contactos</h4>
     <ul>
-        <li><i class="fa-brands fa-facebook-f" id="fa"></i>Facebook</li>
-        <li><i class="fa-brands fa-instagram" id="ig"></i>Instagram</li>
+        <li>
+            <a class="a-f" href="https://www.facebook.com/profile.php?id=100010204693381&mibextid=ZbWKwL">
+                <i class="fa-brands fa-facebook-f" id="fa"></i>Facebook
+            </a>
+        </li>
+        <li>
+            <a class="a-i" href="https://www.instagram.com/benfer55?igsh=MXVheDRrOTIydXVzZw%3D%3D">
+                <i class="fa-brands fa-instagram" id="ig"></i>Instagram
+            </a>
+        </li>
         <li><i class="fas fa-envelope" id="gm"></i>Gmail</li>
         <li class="w">
-            <i class="fa-brands fa-whatsapp" id="wap"></i>WhatsApp
+            <i class="fa-brands fa-whatsapp" id="wap"></i><a class="a-w" href="https://api.whatsapp.com/send/?phone=543624230777&text&type=phone_number&app_absent=0">WhatsApp</a>
         </li>
     </ul>
 
@@ -27,13 +35,13 @@
     {#if booleanDetail}
         <div transition:slide>
             <p class="p">
-                © 2024 BenFer Store Todos los derechos reservados. BenFer Store
+                © 2024 BenferShop Todos los derechos reservados. BenferShop
                 se compromete a proteger la privacidad de sus usuarios. Para más
                 detalles, por favor consulte nuestra <Link to="/politicadeprivacidad">Política de privacidad</Link>.
             </p>
         </div>
     {/if}
-    <h4><Link to="/porquecompraraqui" style ="color: white; margin-top: 5px;">Por que Comprar en Benfer</Link></h4>
+    <h4><Link to="/porquecompraraqui" style ="color: white; margin-top: 5px;">¿Por que comprar en BenferShop?</Link></h4>
 </div>
 
 <style>
@@ -92,5 +100,17 @@
     }
     #wap {
         color: rgb(29, 230, 29);
+    }
+
+    .a-f {
+        color: white;
+    }
+
+    .a-i {
+        color: white;
+    }
+
+    .a-w {
+        color: white;
     }
 </style>

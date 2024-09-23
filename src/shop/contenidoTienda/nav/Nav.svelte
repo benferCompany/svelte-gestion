@@ -119,12 +119,12 @@
             </li>
             <li>
                 <Link to="/categoria" style={styleUlA}
-                    ><i class="fas fa-sliders-h"></i>Categorias</Link
+                    ><i class="fas fa-sliders-h"></i>Categorías</Link
                 >
             </li>
             <li>
                 <Link to="/" style={styleUlA}
-                    ><i class="fas fa-qrcode"></i>Tus Compra</Link
+                    ><i class="fas fa-qrcode"></i>Compras</Link
                 >
             </li>
             <li>
@@ -140,6 +140,7 @@
         <form
             on:submit|preventDefault={async (e) => {
                 products.set(await getProduct(e));
+                handleClick();
                 navigate("/search");
             }}
             transition:slide

@@ -1,21 +1,26 @@
 <script>
+    import { navigate } from "svelte-routing";
     import { booleanPathName } from "../../../components/tools/pathName/pathName";
     booleanPathName.set(false);
+    
+    function volver () {
+        navigate("/")
+    }
 </script>
 
 <div class="body">
     <h2>¿Porque comprar en Benfer.shop?</h2>
     <p>
-        ¡Bienvenido a BenFer, tu destino seguro para compras en línea! En
-        BenFer, garantizamos una experiencia de compra sin preocupaciones.
+        ¡Bienvenido a BenFerShop, tu destino seguro para compras en línea! En
+        BenFerShop, garantizamos una experiencia de compra sin preocupaciones.
         Puedes estar seguro de que tus compras son seguras y libres de estafas.
         Nuestro compromiso con la calidad y la transparencia nos distingue.
-        Además, en BenFer te recompensamos por elegirnos. Por eso, ofrecemos
+        Además, en BenFerShop te recompensamos por elegirnos. Por eso, ofrecemos
         descuentos exclusivos para compras en línea, asegurando que obtendrás
         los mejores precios, explora nuestro amplio catálogo desde la comodidad
         de tu hogar Únete.
     </p>
-    <button>← volver</button>
+    <button on:click={volver}>Volver</button>
 </div>
 
 <style>
@@ -47,10 +52,12 @@
     }
 
     button {
-        width: 120px;
-        border-radius: 5px;
+        width: 200px;
+        border-radius: 10px;
         border: 1px solid grey;
         margin-top: 10px;
+        background-color: rgb(2, 21, 23);
+        color: white;
     }
 
 </style>

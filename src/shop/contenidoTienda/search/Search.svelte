@@ -1,64 +1,69 @@
 <script>
     //Importaciones
-    import {navigate } from "svelte-routing";
+    import { navigate } from "svelte-routing";
     import Nav from "../nav/Nav.svelte";
     import Footer from "../footer/Footer.svelte";
-
     import { products } from "../nav/search";
-
+    import {getCategoriesProducts, filterProductsByCategory} from "./search"
     import { booleanPathName } from "../../../components/tools/pathName/pathName";
     let body;
     booleanPathName.set(false);
-    window.addEventListener("resize", () => {
-        console.log(window.innerHeight);
-    });
     let prds;
     $: {
         prds = $products;
     }
+    let category;
+    
 </script>
 
 <div bind:this={body} class="body">
-    <Nav />
-    <div class="category">
-        <h2>Productos</h2>
-        <select name="" id="">
-            <!---Agrer aca las option de categoria que tiene los productos-->
-        </select>
-    </div>
+        <Nav/>
+    
+    {#if prds}
+        {#if prds.content}
+            <div class="category">
+                <h2>Productos</h2>
+                <select bind:value={category} on:change={()=>{
+                    const response = filterProductsByCategory(prds,category);
+                    console.log(response)
+                }} name="" id="">
+                   {#each getCategoriesProducts(prds) as pr}
+                        <option value="">{pr}</option>
+                   {/each}
+                   <option value="">seleccionar todas</option>
+                </select>
+            </div>
 
-    <div class="products">
-        <div>
-            {#if prds}
-            {#if prds.content}
-                {#each prds.content as pro}
-                    <!-- svelte-ignore a11y-click-events-have-key-events -->
-                    <div
-                        class="div-prod"
-                        on:click={() => {
-                            navigate(`/description?id=` + pro.id);
-                        }}
-                    >
-                        <div>
-                            <h5>{pro.title}</h5>
+            <div class="products">
+                <div>
+                    {#each prds.content as pro}
+                        <!-- svelte-ignore a11y-click-events-have-key-events -->
+                        <div
+                            class="div-prod"
+                            on:click={() => {
+                                navigate(`/description?id=` + pro.id);
+                            }}
+                        >
                             <div>
-                                <img
-                                    style="width:100%; border-radius: 5px;"
-                                    src={pro.image}
-                                    alt=""
-                                />
+                                <h5>{pro.title}</h5>
+                                <div>
+                                    <img
+                                        style="width:100%; border-radius: 5px;"
+                                        src={pro.image}
+                                        alt=""
+                                    />
+                                </div>
+                                <div>
+                                    <h5>{pro.selling_price}</h5>
+                                </div>
                             </div>
-                            <div>
-                                <h5>{pro.selling_price}</h5>
-                            </div>
+                            <div></div>
                         </div>
-                        <div></div>
-                    </div>
-                {/each}
-                {/if}
-            {/if}
-        </div>
-    </div>
+                    {/each}
+                </div>
+            </div>
+        {/if}
+    {/if}
 
     <Footer />
 </div>
