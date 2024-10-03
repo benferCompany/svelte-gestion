@@ -5,6 +5,7 @@
   let conf = {
     height: 500,
     menubar: false,
+    language:"es",
     plugins: [
       "advlist",
       "autolink",
