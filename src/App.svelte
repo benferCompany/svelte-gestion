@@ -30,6 +30,8 @@
     import Search from "./shop/contenidoTienda/search/Search.svelte";
 	import InfoTienda from "./shop/contenidoTienda/info-tienda/InfoTienda.svelte";
     import Categories from "./components/products/sidelbar/components/categories/Categories.svelte";
+    import ChildCategory from "./shop/contenidoTienda/categoria/child/ChildCategory.svelte";
+
     
 	let booleanNav;
 	$: booleanNav = $booleanPathName;
@@ -143,5 +145,8 @@
 	</Route>
 	<Route path="/categories">
 		<Categories/>
+	</Route>
+	<Route path= "/childCategory">
+		<ChildCategory/>
 	</Route>
 </Router>

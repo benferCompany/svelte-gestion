@@ -10,3 +10,25 @@ export const getProductByCategories = async(category)=>{
         return false;
     }
 }
+
+export const getParentCategories = async()=>{
+    try{
+        const response = await fetch(`${URL}/categories/parentCategory`)
+        const json = await response.json();
+        return json;
+    }catch(error){
+        console.error("Hubo un error al intentar obtener categorias padres",error);
+        return false;
+    }
+}
+
+export const getChildCategories = async (name)=>{
+    try{
+        const response = await fetch(`${URL}/categories/${name}`);
+        const json = await response.json();
+        return json;
+    }catch(error){
+        console.error("Hubo un error al intentar obtener categorias hijos",error);
+        return false;
+    }
+}

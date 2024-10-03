@@ -8,3 +8,12 @@
         <img src="imgs/loading.gif" alt="">
     </div>
 </Overlay>
+
+<style>
+    .loading{
+        width:100%;
+    }
+    .loading img{
+        width: 100%;
+    }
+</style>

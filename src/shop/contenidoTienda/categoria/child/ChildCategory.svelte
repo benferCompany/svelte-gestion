@@ -1,18 +1,37 @@
 <script>
     //Importaciones
     import { navigate } from "svelte-routing";
-    import Nav from "../nav/Nav.svelte";
-    import {locationProducts} from "../nav/search"
-    import Footer from "../footer/Footer.svelte";
-    import { booleanPathName } from "../../../components/tools/pathName/pathName";
+    import Nav from "../../nav/Nav.svelte";
+    import {locationProducts} from "../../nav/search"
+    import Footer from "../../footer/Footer.svelte";
+    import { booleanPathName } from "../../../../components/tools/pathName/pathName";
     import Pagination from "./Pagination.svelte";
-    import Loading from "../../../components/tools/loading/Loading.svelte"
+    import Loading from "../../../../components/tools/loading/Loading.svelte"
+    import { onMount } from "svelte";
+    import { getChildCategories } from "../categoria";
     let body;
     booleanPathName.set(false);
     let loading;
     
     let filterProductsByCategory;
-    
+
+    onMount(async()=>{
+        const param = new URLSearchParams(location.search);
+        const category = param.get("category");
+        const getCategories = await getChildCategories(category);
+        const categories =[]
+
+        for(let cat of getCategories){
+            categories.push(cat.name);
+        }
+        $locationProducts.categories = categories;
+        $locationProducts.category;
+        $locationProducts.desc = " ";
+        $locationProducts.size = 10;
+        $locationProducts.products = await filterProductsByCategory($locationProducts.category?$locationProducts.category:category, $locationProducts.desc, 0,$locationProducts.size);
+        console.log($locationProducts)
+        console.log(category);
+    })    
 </script>
 <Loading bind:loading  />
 <div bind:this={body} class="body">
@@ -26,7 +45,7 @@
                     on:change={async(e)=>{
                         $locationProducts.category = e.target.value;
                         const response = await filterProductsByCategory($locationProducts.category, $locationProducts.desc, 0,$locationProducts.size);
-                        
+                        console.log(response)
                     }}
                     bind:value={$locationProducts.category}
                     name=""

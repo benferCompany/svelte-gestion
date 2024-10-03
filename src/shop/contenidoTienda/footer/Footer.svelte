@@ -19,7 +19,6 @@
                 <i class="fa-brands fa-instagram" id="ig"></i>Instagram
             </a>
         </li>
-        <li><i class="fas fa-envelope" id="gm"></i>Gmail</li>
         <li class="w">
             <i class="fa-brands fa-whatsapp" id="wap"></i><a on:click={()=>{navigate("https://api.whatsapp.com/send/?phone=543624230777&text&type=phone_number&app_absent=0")}} class="a-w" href="#">WhatsApp</a>
         </li>
@@ -94,11 +93,7 @@
          color: transparent;
         border-radius: 3px;
     }
-    #gm {
-        background: linear-gradient(45deg, #D93025, #FBBC05, #34A853, #4285F4);
-            -webkit-background-clip: text;
-            color: transparent;
-    }
+    
     #wap {
         color: rgb(29, 230, 29);
     }

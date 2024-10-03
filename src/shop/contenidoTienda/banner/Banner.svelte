@@ -1,50 +1,63 @@
 <script>
+    import { onMount } from "svelte";
     import Slaider from "../slaider/Slaider.svelte";
 
     let duration = {
-        duration:3000,
-        durationSiema:1000
-    }
+        duration: 5000,
+        durationSiema: 1000,
+    };
+    const imagesBanner = [
+        {
+            id: 1,
+            description: "¡Descubre Todo lo que Necesitas en Nuestro Bazar!",
+            src: "https://firebasestorage.googleapis.com/v0/b/cloud-image-361ff.appspot.com/o/images%2Fbaza%20banner.jpg?alt=media&token=ba313288-173a-4d91-bd8f-0380a0f81cba",
+        },
+        {
+            id: 2,
+            description:
+                "Accesorios que Definen Tu Estilo: Carteras, Cinturones y Más",
+            src: "https://firebasestorage.googleapis.com/v0/b/cloud-image-361ff.appspot.com/o/images%2Fmarroquineria%20banner.jpg?alt=media&token=32e7222a-5b2a-4eb7-862c-7284a78c73ce",
+        },
+        {
+            id: 3,
+            description:
+                "Transforma tus Ideas en Realidad con Nuestras Herramientas",
+            src: "https://firebasestorage.googleapis.com/v0/b/cloud-image-361ff.appspot.com/o/images%2Fherramientas%20banner.jpg?alt=media&token=b9f3bb77-8115-4554-a4e3-acd762375b92",
+        },
+        {
+            id: 4,
+            description:
+                "¡Equipos de Pesca: Desde Principiantes hasta Expertos!",
+            src: "https://firebasestorage.googleapis.com/v0/b/cloud-image-361ff.appspot.com/o/images%2Fpesca%20banner.jpg?alt=media&token=27f17bac-be93-480b-9e1a-87e501cc78b9",
+        },
+        {
+            id: 5,
+            description: null,
+            src: "https://firebasestorage.googleapis.com/v0/b/cloud-image-361ff.appspot.com/o/images%2F300x250-envios.jpg?alt=media&token=0f9d8019-a750-42fe-83a5-30ee53e1b1a9",
+        },
+    ];
 </script>
 
 <Slaider bind:duration>
-    <div class="slaide1">
-        <div class="info">
-            <h1>¡Descubre Todo lo que Necesitas en Nuestro Bazar!</h1>
-            <button class="btn">Ver más...</button>
-        </div>
-    </div>
-
-    <div class="slaide2">
-        <div class="info">
-            <h1>Accesorios que Definen Tu Estilo: Carteras, Cinturones y Más</h1>
-            <button class="btn">Ver más...</button>
-        </div>
-    </div>
-
-    <div class="slaide3">
-        <div class="info">
-            <h1>Transforma tus Ideas en Realidad con Nuestras Herramientas</h1>
-            <button class="btn">Ver más...</button>
-        </div>
-    </div>
-
-    <div class="slaide4">
-        <div class="info">
-            <h1>¡Equipos de Pesca: Desde Principiantes hasta Expertos!</h1>
-            <button class="btn">Ver más...</button>
-        </div>
-    </div>
+    {#if imagesBanner}
+        {#each imagesBanner as banner}
+            <div style="background-image: url({banner.src});" class="slider">
+                {#if banner.description}
+                    <div class="info">
+                        <h1>{banner.description}</h1>
+                        <button class="button">Ver más...</button>
+                    </div>
+                {/if}
+            </div>
+        {/each}
+    {/if}
 </Slaider>
 
 <style>
     /*SLAIDER      SLAIDER       SLAIDER       SLAIDER*/
 
-    .slaide1,
-    .slaide2,
-    .slaide3,
-    .slaide4 {
-        height: 250px;
+    .slider {
+        height: 300px;
         margin-top: 22px;
         text-align: center;
         width: 100%;
@@ -53,30 +66,13 @@
         background-repeat: no-repeat;
     }
 
-    .info{
+    .info {
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, 0.5);
         position: relative;
-        top:0;
+        top: 0;
         left: 0;
-
-    }
-
-    .slaide1 {
-        background-image: url("https://firebasestorage.googleapis.com/v0/b/cloud-image-361ff.appspot.com/o/images%2Fbaza%20banner.jpg?alt=media&token=ba313288-173a-4d91-bd8f-0380a0f81cba");
-    }
-
-    .slaide2 {
-        background-image: url("https://firebasestorage.googleapis.com/v0/b/cloud-image-361ff.appspot.com/o/images%2Fmarroquineria%20banner.jpg?alt=media&token=32e7222a-5b2a-4eb7-862c-7284a78c73ce");
-    }
-
-    .slaide3 {
-        background-image: url("https://firebasestorage.googleapis.com/v0/b/cloud-image-361ff.appspot.com/o/images%2Fherramientas%20banner.jpg?alt=media&token=b9f3bb77-8115-4554-a4e3-acd762375b92");
-    }
-
-    .slaide4 {
-        background-image: url("https://firebasestorage.googleapis.com/v0/b/cloud-image-361ff.appspot.com/o/images%2Fpesca%20banner.jpg?alt=media&token=27f17bac-be93-480b-9e1a-87e501cc78b9");
     }
 
     /*H1 Y PÁRRAFOS     *H1 Y PÁRRAFOS     *H1 Y PÁRRAFOS    *H1 Y PÁRRAFOS   */
@@ -85,11 +81,10 @@
         color: white;
         font-family: "Arial Narrow", Arial, sans-serif;
         padding-top: 35px;
-
     }
 
     /*BOTONES       BOTONES        BOTONES       BOTONES*/
-    .btn {
+    .button {
         border: 1px solid black;
         background-color: #0d706f;
         color: white;

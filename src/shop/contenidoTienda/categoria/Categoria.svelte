@@ -1,66 +1,33 @@
 <script>
     //Importaciones
-    import {navigate } from "svelte-routing";
     import Nav from "../nav/Nav.svelte";
     import Footer from "../footer/Footer.svelte";
     import { booleanPathName } from "../../../components/tools/pathName/pathName";
     import { onMount } from "svelte";
-    import {getProductByCategories} from "./categoria";
+    import { getParentCategories } from "./categoria";
+    import { Link } from "svelte-routing";
     let body;
-    let prds
     booleanPathName.set(false);
-    
-    onMount(async()=>{
-        const params = new URLSearchParams(window.location.search);
-        let category = params.get("category");
-        prds = await getProductByCategories(category);
-
-    })
-
+    let parentCategories;
+    onMount(async () => {
+        parentCategories = await getParentCategories();
+        console.log(parentCategories);
+    });
 </script>
 
 <div bind:this={body} class="body">
     <Nav />
-    <div class="category">
-        <h2>Categorias</h2>
-        <select name="" id="">
-            <!---Agrer aca las option de categoria que tiene los productos-->
-        </select>
-    </div>
-
-    <div class="products">
+    <div class="content">
         <div>
-            {#if prds}
-            {#if prds.content}
-                {#each prds.content as pro}
-                    <!-- svelte-ignore a11y-click-events-have-key-events -->
-                    <div
-                        class="div-prod"
-                        on:click={() => {
-                            navigate(`/description?id=` + pro.id);
-                        }}
-                    >
-                        <div>
-                            <h5>{pro.title}</h5>
-                            <div>
-                                <img
-                                    style="width:100%; border-radius: 5px;"
-                                    src={pro.image}
-                                    alt=""
-                                />
-                            </div>
-                            <div>
-                                <h5>{pro.selling_price}</h5>
-                            </div>
-                        </div>
-                        <div></div>
+            {#if parentCategories}
+                {#each parentCategories as category}
+                    <div>
+                        <Link style="text-decoration:none; color:white; font-size:20px" to="/childCategory?category={category.name}"><p>{category.name}</p></Link>
                     </div>
                 {/each}
-                {/if}
             {/if}
         </div>
     </div>
-
     <Footer />
 </div>
 
@@ -71,44 +38,15 @@
         left: 0;
         top: 0;
         width: 100%;
+        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         background-color: #09506a;
     }
-
-    .category {
-        background-color: #108ab7;
-        padding: 1em;
-        margin-top: 76px;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    h2 {
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
-        color: #d9d9d9; /* #f07423 (naranja) #f7ce26 (Amarillo) #0fb1ea(Azul)          */
-    }
-
-    .products {
-        width: 100%;
+    .content {
+        margin-top: 100px;
         display: flex;
         justify-content: center;
-        margin-top: 30px;
-    }
-
-    .div-prod {
-        width: 93%;
-        background-color: rgb(69, 172, 213);
-        padding: 1em;
-        color: white;
-        box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.5);
-        border-radius: 0.2em;
-        margin-bottom: 1em;
-        margin-left: 10px;
-        cursor: pointer;
-    }
-    .div-prod img {
-        border-radius: 0.1em;
     }
 </style>

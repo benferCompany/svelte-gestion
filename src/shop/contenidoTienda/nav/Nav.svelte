@@ -1,20 +1,47 @@
 <script>
     import { slide } from "svelte/transition";
     import { Link, navigate } from "svelte-routing";
-    import { getProduct, products } from "./search";
+    import { locationProducts } from "./search";
     import { login } from "../form/form";
     import { onMount } from "svelte";
+    import { getCategoriesProducts } from "../search/search";
+    import { URL } from "../../../components/tools/connections/url";
     let email;
     let customer;
     let Android;
+    export let loading = false;
+    export const filterProductsByCategory = async (ct, text, page, size) => {
+        loading = true;
+        try {
+            console.log(ct);
+            const response = await fetch(
+                `${URL}/products/category/${text}?page=${page}&size=${size}&category=${ct ? ct : ""}`,
+            );
+            const json = await response.json();
+            console.log(json);
+            locationProducts.update((current) => {
+                return { ...current, products:json }; // Actualizas la propiedad 'products'
+            });
+            console.log($locationProducts)
+            loading = false;
+            return json;
+        } catch (error) {
+            console.error(
+                "Hubo un error al intentar buscar productos por categoría",
+            );
+            loading = false;
+            return false;
+        }
+    };
+
     onMount(async () => {
         if (Android) {
             email = Android.getEmail();
             if (email) {
                 customer = await login(email);
             }
-        }else{
-           //navigate("https://play.google.com/store/apps/details?id=com.benfercompany.benfershop")
+        } else {
+            //navigate("https://play.google.com/store/apps/details?id=com.benfercompany.benfershop")
         }
     });
     $: {
@@ -142,9 +169,20 @@
     {#if inputSearch}
         <form
             on:submit|preventDefault={async (e) => {
-                products.set(await getProduct(e));
-                handleClick();
-                navigate("/search");
+                let response = await filterProductsByCategory(
+                    "",
+                    e.target.search.value,
+                    0,
+                    $locationProducts.size,
+                );
+                $locationProducts.desc = e.target.search.value;
+                $locationProducts.category = "";
+                if (response) {
+                    $locationProducts.categories =
+                        getCategoriesProducts(response);
+                    handleClick();
+                    navigate("/search");
+                }
             }}
             transition:slide
             style="display:flex; justify-content:center; width:100%; margin-top:1em;"

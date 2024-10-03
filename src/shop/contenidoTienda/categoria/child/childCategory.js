@@ -1,4 +1,4 @@
-import {URL} from "../../../components/tools/connections/url";
+import {URL} from "../../../../components/tools/connections/url";
 export const getCategoriesProducts = (data) => {
     const uniqueCategories = new Set();
     // Iterar sobre los productos y extraer categorías
