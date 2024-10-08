@@ -128,7 +128,7 @@
                         style="display: flex; justify-content:space-between;"
                     >
                         <p>Producto</p>
-                        <p>$299.999</p>
+                        <p>${detalle.total}</p>
                     </div>
                     <Link to="carrito">¿Cuál es el costo de envío?</Link> <br />
                     <Link to="carrito">ingresar código de cupón</Link>
@@ -138,7 +138,7 @@
                     >
                         <h5>Total</h5>
                         {#if detalle}
-                            <h5>{detalle.total}</h5>
+                            <h5>${detalle.total}</h5>
                         {/if}
                     </div>
                     <div class="mercado-pago">
