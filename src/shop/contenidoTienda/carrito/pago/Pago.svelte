@@ -27,7 +27,7 @@
             await getCompra(detalle);
             // Inicializa MercadoPago una vez que el script esté cargado
             const mp = new window.MercadoPago(
-                "APP_USR-47614bc3-a0d2-4220-998c-7e261aa1d7d8",
+                "APP_USR-9b776e89-9e92-46f3-b0a2-d24b3cc83f73",
                 {
                     locale: "es-AR", // Cambia el locale según sea necesario
                 },
