@@ -12,6 +12,7 @@
     import { carrito } from "../../carrito/carrito";
     import { navigate } from "svelte-routing";
     import { getDescriptionProduct } from "../../../../components/stores/products";
+    import Slaider from "../../slaider/Slaider.svelte";
     let product;
     let descripcion;
     let cantidadCarrito = 1;
@@ -44,25 +45,21 @@
             });
         }
     }
+
+    //props slaider
+    let duration = { duration: 5000, durationSiema: 1000, direction:"next" };
 </script>
 
 {#if product && descripcion}
     <div class="body">
         {#if images}
-            <div class="carrusel">
+            <Slaider bind:duration>
                 {#each images.src as img}
-                    <div class="fotos">
-                        <img
-                            src={img}
-                            style="  
-                width: 290px; 
-                flex: 1 0 auto;
-                padding-left: 1em;"
-                            alt="no soportado bot"
-                        />
+                    <div>
+                        <img style="max-width:100%; height:400px;" src={img} alt="">
                     </div>
                 {/each}
-            </div>
+            </Slaider>
         {/if}
         <div class="infor" style="margin: 0; padding:0;">
             <h6 class="sin-p-b"><s>${product.selling_price}</s></h6>
@@ -165,11 +162,6 @@
 {/if}
 
 <style>
-    .carrusel {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow: scroll;
-    }
 
     /*todos los h*/ /*todos los h*/
     h2 {

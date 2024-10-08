@@ -26,6 +26,9 @@
                 value="Confirmar"
             />
             <input
+                on:click={()=>{
+                    props.visible = !props.visible
+                }}
                 type="button"
                 value="Cancelar"
                 class="btn btn-danger btn-sm ms-1"

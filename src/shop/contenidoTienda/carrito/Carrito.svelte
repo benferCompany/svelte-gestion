@@ -42,7 +42,6 @@
             "carrito",
             JSON.stringify(detalle.detailProductList),
         );
-        console.log(detalle)
     }
 </script>
 
@@ -98,13 +97,12 @@
                             </div>
                             <div>
                                 {#if $carrito}
-                                    {#each $carrito as car}
-                                        <select bind:value={product.quality}>
-                                            {#each createSequentialArray(car.stock) as i}
+                                    <select bind:value={product.quality}>
+                                            {#each createSequentialArray(product.stock) as i}
                                                 <option value={i}>{i}</option>
                                             {/each}
-                                        </select>
-                                    {/each}
+                                        
+                                    </select>
                                 {/if}
                             </div>
                         </div>

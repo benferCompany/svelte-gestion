@@ -131,6 +131,13 @@
                                     >Categorias</button
                                 >
                                 <button
+                                    on:click={() => {
+                                        navigate("/imagesProduct?id=" + product.id);
+                                    }}
+                                    class="btn btn-primary btn-sm ms-1"
+                                    >Imagenes</button
+                                >
+                                <button
                                     type="button"
                                     class="btn btn-danger btn-sm ms-1"
                                     on:click={(e) => {

@@ -2,50 +2,61 @@
     //Importaciones
     import { navigate } from "svelte-routing";
     import Nav from "../../nav/Nav.svelte";
-    import {locationProducts} from "../../nav/search"
+    import { locationProducts } from "../../nav/search";
     import Footer from "../../footer/Footer.svelte";
     import { booleanPathName } from "../../../../components/tools/pathName/pathName";
     import Pagination from "./Pagination.svelte";
-    import Loading from "../../../../components/tools/loading/Loading.svelte"
+    import Loading from "../../../../components/tools/loading/Loading.svelte";
     import { onMount } from "svelte";
     import { getChildCategories } from "../categoria";
     let body;
     booleanPathName.set(false);
     let loading;
-    
+
     let filterProductsByCategory;
 
-    onMount(async()=>{
+    onMount(async () => {
         const param = new URLSearchParams(location.search);
         const category = param.get("category");
         const getCategories = await getChildCategories(category);
-        const categories =[]
+        const categories = [];
 
-        for(let cat of getCategories){
+        for (let cat of getCategories) {
             categories.push(cat.name);
         }
         $locationProducts.categories = categories;
         $locationProducts.category;
         $locationProducts.desc = " ";
         $locationProducts.size = 10;
-        $locationProducts.products = await filterProductsByCategory($locationProducts.category?$locationProducts.category:category, $locationProducts.desc, 0,$locationProducts.size);
-        console.log($locationProducts)
+        $locationProducts.products = await filterProductsByCategory(
+            $locationProducts.category ? $locationProducts.category : category,
+            $locationProducts.desc,
+            0,
+            $locationProducts.size,
+        );
+        console.log($locationProducts);
         console.log(category);
-    })    
+    });
 </script>
-<Loading bind:loading  />
+
+<Loading bind:loading />
 <div bind:this={body} class="body">
     <Nav bind:loading bind:filterProductsByCategory />
 
-    {#if $locationProducts.products && $locationProducts.products !=[]}
+    {#if $locationProducts.products && $locationProducts.products != []}
         {#if $locationProducts.products.content}
             <div class="category">
                 <h4>Categorías</h4>
                 <select
-                    on:change={async(e)=>{
+                    on:change={async (e) => {
                         $locationProducts.category = e.target.value;
-                        const response = await filterProductsByCategory($locationProducts.category, $locationProducts.desc, 0,$locationProducts.size);
-                        console.log(response)
+                        const response = await filterProductsByCategory(
+                            $locationProducts.category,
+                            $locationProducts.desc,
+                            0,
+                            $locationProducts.size,
+                        );
+                        console.log(response);
                     }}
                     bind:value={$locationProducts.category}
                     name=""
@@ -62,34 +73,33 @@
 
             <div class="products">
                 <div>
-                        {#each $locationProducts.products.content as pro}
-                            <!-- svelte-ignore a11y-click-events-have-key-events -->
-                            <div
-                                class="div-prod"
-                                on:click={() => {
-                                    navigate(`/description?id=` + pro.id);
-                                }}
-                            >
+                    {#each $locationProducts.products.content as pro}
+                        <!-- svelte-ignore a11y-click-events-have-key-events -->
+                        <div
+                            class="div-prod"
+                            on:click={() => {
+                                navigate(`/description?id=` + pro.id);
+                            }}
+                        >
+                            <div style="display:flex;">
                                 <div>
-                                    <h5>{pro.title}</h5>
-                                    <div>
-                                        <img
-                                            style="width:100%; border-radius: 5px;"
-                                            src={pro.image}
-                                            alt=""
-                                        />
-                                    </div>
-                                    <div>
-                                        <h5>{pro.selling_price}</h5>
-                                    </div>
+                                    <img
+                                        style="width:100%; border-radius: 5px;"
+                                        src={pro.image}
+                                        alt=""
+                                    />
                                 </div>
-                                <div></div>
+                                <div style=" padding:1em;">
+                                    <h5>{pro.title}</h5>
+                                    <h5>{pro.selling_price}</h5>
+                                </div>
                             </div>
-                        {/each}
+                            <div></div>
+                        </div>
+                    {/each}
                 </div>
             </div>
             <div class="pagination">
-
                 <Pagination bind:filterProductsByCategory />
             </div>
         {/if}
@@ -145,8 +155,8 @@
     .div-prod img {
         border-radius: 0.1em;
     }
-    .pagination{
-        width:100%;
+    .pagination {
+        width: 100%;
         display: flex;
         justify-content: center;
     }

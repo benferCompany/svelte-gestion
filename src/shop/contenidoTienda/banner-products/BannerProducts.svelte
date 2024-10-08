@@ -26,7 +26,7 @@
         <Slaider bind:duration>
             {#each products.content as product}
                 <div class="info">
-                    <img style="width:100%;" src={product.image} alt="no soportado" />
+                    <img style="height:300px; max-width:100%;" src={product.image} alt="" />
                     <h4>{product.title}</h4>
                     
                     <p class="precio">{product.selling_price}</p>
@@ -49,6 +49,7 @@
         margin-bottom:50px;
         background-color: rgba(255, 255, 255, 0.909);
         width: 80%;
+        height: 450px;
        
         text-align:center;
     }
