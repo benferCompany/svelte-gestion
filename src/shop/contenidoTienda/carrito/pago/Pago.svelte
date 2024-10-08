@@ -5,10 +5,10 @@
     booleanPathName.set(false);
     let id;
     const getCompra = async (dts) => {
-        let response = await fetch(`${URL}/mercadoPago`,{
+        let response = await fetch(`${URL}/mercadoPago`, {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(dts)
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(dts),
         });
         let json = await response.json();
         console.log(json);
@@ -17,7 +17,7 @@
 
     export let detalle;
     onMount(() => {
-        console.log(detalle)
+        console.log(detalle);
         const script = document.createElement("script");
         script.src = "https://sdk.mercadopago.com/js/v2";
         script.async = true;
@@ -32,16 +32,9 @@
                     locale: "es-AR", // Cambia el locale según sea necesario
                 },
             );
-            const bricksBuilder = mp.bricks();
-
             mp.bricks().create("wallet", "wallet_container", {
                 initialization: {
-                    preferenceId: id,
-                },
-                customization: {
-                    texts: {
-                        valueProp: "smart_option",
-                    },
+                    preferenceId:id,
                 },
             });
         };
@@ -49,5 +42,3 @@
 </script>
 
 <div id="wallet_container"></div>
-
-
