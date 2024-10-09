@@ -39,8 +39,6 @@
             email = Android.getEmail();
             if (email) {
                 customer = await login(email);
-            }else{
-                navigate("https://play.google.com/store/apps/details?id=com.benfercompany.benfershop")
             }
         } 
     });
