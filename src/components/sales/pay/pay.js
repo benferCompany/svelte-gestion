@@ -180,7 +180,7 @@ export const clickBoton = async (object, viewInvoice) => {
 
     if (object.customer && object.typeInvoice.type == "C") {
         let CAE = await getCAE(object);
-
+        console.log(CAE)
         object.CAE = CAE.CAE;
         object.CAEFchVto = convertToReadableDate(
             CAE.CAEFchVto + "",

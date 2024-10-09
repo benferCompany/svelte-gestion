@@ -110,7 +110,7 @@
             <div class="d-flex justify-content-center">
                 <div>
                     <h3>Total</h3>
-                    <h1 class="text-center">${$total - pago}</h1>
+                    <h1 class="text-center">${$total.total - pago}</h1>
                 </div>
             </div>
         </div>
@@ -126,10 +126,10 @@
                         products: $tdsStore,
                         company: $selectCompany,
                         typeInvoice: tpInv,
-                        total: $total,
+                        total: $total.total,
+                        discount: $total.discount,
                         costTotal: $costTotal
                     };
-                    console.log(object)
                     $salePdf = object;
                     await clickBoton(object, viewInvoice);
                 }}

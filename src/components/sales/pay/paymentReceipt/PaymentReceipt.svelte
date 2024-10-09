@@ -6,6 +6,7 @@
     export const viewInvoice = (detail) => {
         detailInvoice = detail;
         visible = !visible;
+        console.log(detail);
     };
     $: {
         arraysProducts = dividirArray(
@@ -26,6 +27,10 @@
         window.print();
         // Mostrar todos los elementos nuevamente después de imprimir
     }
+
+    const calcularDescuento = (precio, porcentaje) => {
+        return precio - (precio * porcentaje) / 100;
+    };
 
     import numeros from "numeros_a_palabras";
     import { dividirArray } from "../../../tools/dividirArray/dividirArray";
@@ -77,7 +82,9 @@
                         <div class="d-flex">
                             <div style="margin-left:2em;">
                                 <h3>{detailInvoice.typeInvoice.name}</h3>
-                                <h6>Nro. Comprobante: {detailInvoice.CbteDesde}</h6>
+                                <h6>
+                                    Nro. Comprobante: {detailInvoice.CbteDesde}
+                                </h6>
                                 <h6>Fecha de emisicón: 29-01-2024</h6>
                                 <div style="display:flex;">
                                     <p>Responsable Monotributo</p>
@@ -103,22 +110,23 @@
                 <div class="row">
                     <div class="col-8 d-flex justify-content-between">
                         <div class=" ms-1">
-                            <p>Cliente: {detailInvoice.customer.name}</p>
+                            <p>Cliente: {detailInvoice.customer.name?detailInvoice.customer.name:"Consumidor Final"}</p>
                             <p>
-                                Dirección: {detailInvoice.customer.address}
+                                Dirección: {detailInvoice.customer.address?detailInvoice.customer.address:"Resistencia"}
                             </p>
                         </div>
                         <div class="">
                             <p>
                                 Condición Fiscal: {detailInvoice.customer
-                                    .fiscal_status}
+                                    .fiscal_status?detailInvoice.customer
+                                    .fiscal_status:"Consumidor Final"}
                             </p>
-                            <p>Cuit: {detailInvoice.customer.idPersonal}</p>
+                            <p>Cuit: {detailInvoice.customer.idPersonal?detailInvoice.customer.idPersonal:""}</p>
                         </div>
                     </div>
                     <div class="col-4 text-end">
                         <p class="me-1">
-                            Condición de pago: {detailInvoice.paymentType}
+                            Condición de pago: {detailInvoice.paymentType?detailInvoice.paymentType:"Efectivo"}
                         </p>
                     </div>
                 </div>
@@ -128,6 +136,7 @@
                             <th class="text-center">Codigo</th>
                             <th>Descripción</th>
                             <th class="text-center">Cantidad</th>
+                            <th class="text-center">Descuento</th>
                             <th class="text-center">Precio Unit.</th>
                             <th class="text-center">Total</th>
                         </tr>
@@ -138,7 +147,8 @@
                                 <td class="text-center">{item.id}</td>
                                 <td>{item.product}</td>
                                 <td class="text-center">{item.count}</td>
-                                <td class="text-center">${item.pvp}</td>
+                                <td class="text-center">{item.discount}%</td>
+                                <td class="text-center">${calcularDescuento(item.pvp, item.discount)}</td>
                                 <td class="text-center">${item.subTotal}</td>
                             </tr>
                         {/each}
@@ -162,7 +172,10 @@
                                     <tr>
                                         <td class="text-start"
                                             >Descuento {detailInvoice.customer
-                                                .discount}%</td
+                                                .discount
+                                                ? detailInvoice.customer
+                                                      .discount
+                                                : detailInvoice.discount}%</td
                                         >
                                         <td
                                             >Total: ${parseFloat(
@@ -212,7 +225,9 @@
                                 <strong>CAE N°: {detailInvoice.CAE}</strong>
                             </div>
                             <div>
-                                <strong>Fecha de Vto. de CAE: {detailInvoice.CAEFchVto}</strong>
+                                <strong
+                                    >Fecha de Vto. de CAE: {detailInvoice.CAEFchVto}</strong
+                                >
                             </div>
                         </div>
                     </div>

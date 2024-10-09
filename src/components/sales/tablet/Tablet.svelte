@@ -3,32 +3,28 @@
     import { tdsStore } from "../../stores/cart";
     let ths = [
         "id",
+        "idInterno",
         "stock",
         "Producto",
         "Cantidad",
         "PVP",
-        "Cost",
         "Desc",
         "SubTotal",
-        "SubCostTotal",
         "delete",
     ];
     //export let $tdsStore= [];
 
     function updateSubtotal(item) {
-       
         item.subTotal = item.count * item.pvp * (1 - item.discount / 100);
-        item.subCostTotal = item.count * item.costo * (1 - item.discount / 100)
+        item.subCostTotal = item.count * item.costo * (1 - item.discount / 100);
         console.log(item);
     }
-
     $: {
         $tdsStore.forEach((td) => {
             if (td.count > 0) {
                 updateSubtotal(td);
             }
         });
-
     }
 
     const handleLink = (e) => {
@@ -51,17 +47,18 @@
             {#if $tdsStore.length > 0}
                 {#each $tdsStore as item}
                     <tr>
-                        <td>{item.id}</td>
+                        <td class="col-1">{item.id}</td>
+                        <td class="col-1">{item.idInternal}</td>
                         {#if item.stock - item.count < item.stock_min}
-                            <td class="bg-danger text-white"
+                            <td class="bg-danger text-white col-1"
                                 ><strong>{item.stock - item.count}</strong></td
                             >
                         {:else}
-                            <td class="bg-info text-white"
+                            <td class="bg-info text-white col-1"
                                 ><strong>{item.stock - item.count}</strong></td
                             >
                         {/if}
-                        <td>{item.product}</td>
+                        <td class="col-3">{item.product}</td>
                         <td class="col-1"
                             ><input
                                 on:change={(e) => {
@@ -91,7 +88,8 @@
                                 style="margin:auto"
                             /></td
                         >
-                        <td>{item.subTotal.toFixed(2)}</td>
+                        <td>{item.subTotal.toFixed(2)}</td
+                        >
                         <td>
                             <Link
                                 style="

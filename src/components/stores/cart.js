@@ -22,6 +22,7 @@ const store = () => {
                         ...tds,
                         {
                             id: item.id,
+                            idInternal: item.idInternal,
                             stock: item.stock,
                             stock_min: item.stock_min,
                             stock_max: item.stock_max,
@@ -64,7 +65,7 @@ const pay = () => {
 
 export const payStore = pay();
 
-export const total = writable(0)
+export const total = writable({total:0, discount:0})
 export const costTotal = writable(0)
 
 

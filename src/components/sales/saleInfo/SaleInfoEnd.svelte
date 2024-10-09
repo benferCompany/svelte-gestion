@@ -3,7 +3,7 @@
     import {costTotal, tdsStore, total} from "../../stores/cart";
     let subtotal = 0;
     let subCostTotal = 0;
-    let discount = 0;
+    
    
     $: {
         subtotal = 0; // Reinicializar subtotal en cada reevaluación
@@ -12,8 +12,8 @@
             subtotal += td.subTotal;
             subCostTotal += td.subCostTotal;
         });
-        $total = (subtotal * (1 - discount / 100)).toFixed(2);
-        $costTotal = (subCostTotal * (1 - discount / 100)).toFixed(2);
+        $total.total = (subtotal * (1 - $total.discount / 100)).toFixed(2);
+        $costTotal = (subCostTotal * (1 - $total.discount / 100)).toFixed(2);
         
     }
 </script>
@@ -32,7 +32,7 @@
                 <td class="col-1">
                     <input
                         class="col-12"
-                        bind:value={discount}
+                        bind:value={$total.discount}
                         style="margin:auto;"
                         type="text"
                     />
@@ -41,7 +41,7 @@
             <tr>
                 <th class="text-end">Total compra:</th>
                 <td>
-                    ${$total}
+                    ${$total.total}
                 </td>
             </tr>
         </thead>

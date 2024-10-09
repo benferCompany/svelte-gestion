@@ -13,6 +13,7 @@
             description: description.target.value,
         });
         products = products.content;
+        console.log(products)
     }, 300); // 300ms de tiempo de espera antes de realizar la búsqueda
 
     let stock;
@@ -54,11 +55,12 @@
                     {
                         imagen: product.image,
                         id: product.id,
+                        idInternal: product.idInternal,
                         stock,
                         stock_min,
                         stock_max,
                         stock_id,
-                        product: product.description,
+                        product: product.title,
                         costo: product.cost_price,
                         count: 1,
                         pvp: product.selling_price,
