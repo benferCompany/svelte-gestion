@@ -4,7 +4,6 @@
     import Footer from "./footer/Footer.svelte";
     import Nav from "./nav/Nav.svelte";
     
-   
 </script>
 
     <div class="index">

@@ -33,7 +33,9 @@
             return false;
         }
     };
-
+    if(!Android){
+        navigate("https://play.google.com/store/apps/details?id=com.benfercompany.benfershop")
+    }
     onMount(async () => {
         if (Android) {
             email = Android.getEmail();
