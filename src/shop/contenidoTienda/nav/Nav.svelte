@@ -38,10 +38,10 @@
     onMount(async () => {
         const params = new URLSearchParams(window.location.search);
         let collection_status =params.get("collection_status");
-        $carrito = [];
         if(collection_status){
             console.log(collection_status);
-            localStorage.setItem("carrito", "[]");
+            $carrito = [];
+            localStorage.setItem("carrito", []);
         }
         if (Android) {
             email = Android.getEmail();
