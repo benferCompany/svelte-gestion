@@ -38,7 +38,7 @@
     onMount(async () => {
         const params = new URLSearchParams(window.location.search);
         let collection_status =params.get("collection_status");
-        if(collection_status !=="null" && collection_status){
+        if(collection_status ==="approved"){
             console.log(collection_status);
             $carrito = [];
             localStorage.setItem("carrito", []);
