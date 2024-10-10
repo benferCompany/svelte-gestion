@@ -19,7 +19,7 @@
 
         dts.idStatePayment = id;
         const createdts = await createDetails(dts);
-        console.log(dts);
+        console.log(createdts);
         if (Android && createdts) {
             Android.getToastMessage("Se guardo la compra.");
         }
