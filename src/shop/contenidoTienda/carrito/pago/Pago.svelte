@@ -14,10 +14,10 @@
             body: JSON.stringify(dts),
         });
         let json = await response.json();
-        console.log(json);
         id = json.id;
-
-        dts.idStatePayment = id;
+        
+        dts.idStatePayment = await id;
+        console.log(id);
         const createdts = await createDetails(dts);
         console.log(createdts);
         if (Android && createdts) {
