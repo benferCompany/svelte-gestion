@@ -22,9 +22,9 @@
         console.log(createdts);
         if (Android && createdts) {
             Android.getToastMessage("Se guardo la compra.");
+            $carrito = [];
+            localStorage.setItem("carrito", []);
         }
-        $carrito = [];
-        localStorage.setItem("carrito", []);
     };
 
     export let detalle;
