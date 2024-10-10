@@ -2,6 +2,8 @@
     import { onMount } from "svelte";
     import { booleanPathName } from "../../../../components/tools/pathName/pathName";
     import { URL } from "../../../../components/tools/connections/url";
+    import { createDetails } from "./estadoPago";
+    import { carrito } from "../carrito";
     booleanPathName.set(false);
     let id;
     const getCompra = async (dts) => {
@@ -35,7 +37,7 @@
             );
             mp.bricks().create("wallet", "wallet_container", {
                 initialization: {
-                    preferenceId:id,
+                    preferenceId: id,
                 },
             });
         };
@@ -43,6 +45,16 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div on:click ={()=>{
-    booleanMercadoPago = false;
-}} id="wallet_container"></div>
+<!-- svelte-ignore missing-declaration -->
+<div
+    on:click={async () => {
+        booleanMercadoPago = false;
+        const response = await createDetails(detalle);
+        if (Android && response) {
+            Android.getToastMessage("Se guardo la compra.");
+            $carrito = [];
+            localStorage.setItem("carrito", []);
+        }
+    }}
+    id="wallet_container"
+></div>
