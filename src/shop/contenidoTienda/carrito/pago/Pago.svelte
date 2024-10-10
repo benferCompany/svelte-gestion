@@ -16,8 +16,8 @@
         let json = await response.json();
         id = json.id;
         
-        dts.idStatePayment = await id;
-        console.log(id);
+        dts.idStatePayment = id;
+        console.log(dts);
         const createdts = await createDetails(dts);
         console.log(createdts);
         if (Android && createdts) {
