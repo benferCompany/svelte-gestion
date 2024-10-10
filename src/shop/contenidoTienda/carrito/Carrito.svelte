@@ -153,7 +153,7 @@
                         {/if}
                         {#if booleanMercadoPago}
                             <div>
-                                <Pago bind:detalle />
+                                <Pago bind:booleanMercadoPago bind:detalle />
                             </div>
                         {/if}
                     </div>

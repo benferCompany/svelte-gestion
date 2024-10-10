@@ -11,11 +11,11 @@
             body: JSON.stringify(dts),
         });
         let json = await response.json();
-        console.log(json);
         id = json.id;
     };
 
     export let detalle;
+    export let booleanMercadoPago;
     onMount(() => {
         console.log(detalle);
         const script = document.createElement("script");
@@ -41,4 +41,7 @@
     });
 </script>
 
-<div id="wallet_container"></div>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div on:click ={()=>{
+    booleanMercadoPago = false;
+}} id="wallet_container"></div>
