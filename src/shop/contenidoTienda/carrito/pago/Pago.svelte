@@ -11,6 +11,7 @@
             body: JSON.stringify(dts),
         });
         let json = await response.json();
+        console.log(json);
         id = json.id;
     };
 
