@@ -5,6 +5,7 @@
     import { createDetails } from "./estadoPago";
     import { carrito } from "../carrito";
     booleanPathName.set(false);
+    let Android;
     let id;
     const getCompra = async (dts) => {
         let response = await fetch(`${URL}/mercadoPago`, {
