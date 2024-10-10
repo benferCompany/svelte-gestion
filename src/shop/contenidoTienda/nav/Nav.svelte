@@ -36,7 +36,7 @@
     };
     
     onMount(async () => {
-        const params = URLSearchParams(window.location.search);
+        const params = new URLSearchParams(window.location.search);
         let collection_status =params.get("collection_status");
         $carrito = [];
         if(collection_status){
