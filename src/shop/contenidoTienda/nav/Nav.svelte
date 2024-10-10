@@ -6,6 +6,7 @@
     import { onMount } from "svelte";
     import { getCategoriesProducts } from "../search/search";
     import { URL } from "../../../components/tools/connections/url";
+    import { carrito } from "../carrito/carrito";
     let email;
     let customer;
     let Android;
@@ -35,6 +36,13 @@
     };
     
     onMount(async () => {
+        const params = URLSearchParams(window.location.search);
+        let collection_status =params.get("collection_status");
+        $carrito = [];
+        if(collection_status){
+            console.log(collection_status);
+            localStorage.setItem("carrito", "[]");
+        }
         if (Android) {
             email = Android.getEmail();
             if (email) {
