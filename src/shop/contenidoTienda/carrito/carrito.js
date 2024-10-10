@@ -4,6 +4,7 @@ let datosCarrito = localStorage.getItem("carrito") ? JSON.parse(localStorage.get
 export const carrito = writable(datosCarrito);
 
 export const datos = {
+    "id": 1,
     "cae": "",
     "caeFchVto": null,
     "salesPerson": {
