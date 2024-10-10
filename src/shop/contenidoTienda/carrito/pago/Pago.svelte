@@ -15,6 +15,15 @@
         let json = await response.json();
         console.log(json);
         id = json.id;
+
+        dts.idStatePayment = id;
+        const createdts = await createDetails(dts);
+        console.log(dts);
+        if (Android && createdts) {
+            Android.getToastMessage("Se guardo la compra.");
+        }
+        $carrito = [];
+        localStorage.setItem("carrito", []);
     };
 
     export let detalle;
@@ -45,17 +54,9 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<!-- svelte-ignore missing-declaration -->
 <div
     on:click={async () => {
         booleanMercadoPago = false;
-        detalle.idStatePayment = id;
-        const response = await createDetails(detalle);
-        if (Android && response) {
-            Android.getToastMessage("Se guardo la compra.");
-            $carrito = [];
-            localStorage.setItem("carrito", []);
-        }
     }}
     id="wallet_container"
 ></div>
