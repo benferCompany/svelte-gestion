@@ -52,5 +52,6 @@ export const datos = {
     "total": 650.0,
     "totalCost": 625.0,
     "discount": null,
-    "date": "27/08/2024 19:18"
+    "date": "27/08/2024 19:18",
+    "idStatePayment": ""
 }

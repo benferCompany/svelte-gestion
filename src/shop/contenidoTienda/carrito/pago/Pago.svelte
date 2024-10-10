@@ -49,6 +49,7 @@
 <div
     on:click={async () => {
         booleanMercadoPago = false;
+        detalle.idStatePayment = id.id;
         const response = await createDetails(detalle);
         if (Android && response) {
             Android.getToastMessage("Se guardo la compra.");
