@@ -5,17 +5,17 @@ export const getPago = async (id) => {
     console.log(json)
 }
 
-export const createDetails = async (details) => {
-    try {
-        const response = await fetch(`${URL}/details`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(details)
+export const createPaymentOder = async(paymentOrder)=>{
+    try{
+        const response = await fetch(`${URL}/mercadopago/payments`,{
+            method:"POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(paymentOrder)
         })
         const json = await response.json();
         return json;
-    } catch (error) {
-        console.error("Hubo un error al intentar crear detalles de compra", error);
-        return false;
+    }catch(error){
+        console.error("Hubo un problema al crear una orden de pago", error);
+        return false
     }
 }

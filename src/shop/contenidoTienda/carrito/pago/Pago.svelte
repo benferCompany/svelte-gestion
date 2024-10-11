@@ -2,11 +2,10 @@
     import { onMount } from "svelte";
     import { booleanPathName } from "../../../../components/tools/pathName/pathName";
     import { URL } from "../../../../components/tools/connections/url";
-    import { createDetails } from "./estadoPago";
-    import { carrito } from "../carrito";
+    import {createPaymentOder} from "./estadoPago";
     booleanPathName.set(false);
-    let Android;
     let id;
+    let items;
     const getCompra = async (dts) => {
         let response = await fetch(`${URL}/mercadoPago`, {
             method: "POST",
@@ -15,16 +14,9 @@
         });
         let json = await response.json();
         id = json.id;
+        items = json.items;
         
-        dts.idStatePayment = id;
-        console.log(dts);
-        const createdts = await createDetails(dts);
-        console.log(createdts);
-        if (Android && createdts) {
-            Android.getToastMessage("Se guardo la compra.");
-            $carrito = [];
-            localStorage.setItem("carrito", []);
-        }
+       
     };
 
     export let detalle;
@@ -35,7 +27,7 @@
         script.src = "https://sdk.mercadopago.com/js/v2";
         script.async = true;
         document.head.appendChild(script);
-
+        
         script.onload = async () => {
             await getCompra(detalle);
             // Inicializa MercadoPago una vez que el script esté cargado
@@ -52,12 +44,24 @@
             });
         };
     });
+
+    const getToastMessage=()=>{
+        if(Android){
+            Android.getToastMessage("Se guardo la orden de compra.");
+        }
+    }
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
     on:click={async () => {
         booleanMercadoPago = false;
-    }}
+        const paymentOrder = await createPaymentOder({id,items})  
+        if(paymentOrder){
+            getToastMessage();
+        }
+        console.log(paymentOrder);
+            
+            }}
     id="wallet_container"
 ></div>

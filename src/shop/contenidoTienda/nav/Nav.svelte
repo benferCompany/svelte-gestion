@@ -1,7 +1,7 @@
 <script>
     import { slide } from "svelte/transition";
     import { Link, navigate } from "svelte-routing";
-    import { locationProducts } from "./search";
+    import { AndroidPhone, locationProducts } from "./search";
     import { login } from "../form/form";
     import { onMount } from "svelte";
     import { getCategoriesProducts } from "../search/search";
@@ -45,6 +45,7 @@
         }
         if (Android) {
             email = Android.getEmail();
+            AndroidPhone.set(Android);
             if (email) {
                 customer = await login(email);
             }

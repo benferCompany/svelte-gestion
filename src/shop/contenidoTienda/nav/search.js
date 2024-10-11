@@ -22,3 +22,5 @@ export const getProduct = async(e,page,size) =>{
     }
 }
 
+export const AndroidPhone = writable(false);
+

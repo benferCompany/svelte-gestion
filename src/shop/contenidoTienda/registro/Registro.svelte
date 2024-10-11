@@ -1,13 +1,15 @@
 <script>
     import { Link, navigate } from "svelte-routing";
     import { onMount } from "svelte";
-    import { updateCustomer, createCustomer, deletecount } from "./customer";
+    import { updateCustomer, createCustomer, deletecount,customer } from "./customer";
     import Overlay from "../../../components/tools/overlay/Overlay.svelte"
     let user;
     let email;
     onMount(async () => {
         if (Android.getEmail()) {
             user = await createCustomer(Android.getEmail());
+            customer.set(user);
+            localStorage.setItem("customer", JSON.stringify($customer));
             email = Android.getEmail();
         }
     });
