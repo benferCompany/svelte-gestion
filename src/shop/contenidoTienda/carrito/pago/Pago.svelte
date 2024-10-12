@@ -3,7 +3,6 @@
     import { booleanPathName } from "../../../../components/tools/pathName/pathName";
     import { URL } from "../../../../components/tools/connections/url";
     import {createPaymentOder} from "./estadoPago";
-    import { customer } from "../../registro/customer";
     booleanPathName.set(false);
     let id;
     let items;

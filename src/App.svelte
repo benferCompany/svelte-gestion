@@ -31,6 +31,7 @@
 	import InfoTienda from "./shop/contenidoTienda/info-tienda/InfoTienda.svelte";
     import Categories from "./components/products/sidelbar/components/categories/Categories.svelte";
     import ChildCategory from "./shop/contenidoTienda/categoria/child/ChildCategory.svelte";
+    import MisCompras from "./shop/contenidoTienda/miscompras/MisCompras.svelte";
 
     
 	let booleanNav;
@@ -148,5 +149,8 @@
 	</Route>
 	<Route path= "/childCategory">
 		<ChildCategory/>
+	</Route>
+	<Route path="/miscompras">
+		<MisCompras/>
 	</Route>
 </Router>

@@ -160,7 +160,7 @@
                 >
             </li>
             <li>
-                <Link to="/" style={styleUlA}
+                <Link to="/miscompras" style={styleUlA}
                     ><i class="fas fa-qrcode"></i>Compras</Link
                 >
             </li>
