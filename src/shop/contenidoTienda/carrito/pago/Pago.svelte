@@ -15,6 +15,7 @@
         let json = await response.json();
         id = json.id;
         items = json.items;
+        console.log(json);
         
        
     };
