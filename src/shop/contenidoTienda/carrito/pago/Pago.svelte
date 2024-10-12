@@ -3,6 +3,7 @@
     import { booleanPathName } from "../../../../components/tools/pathName/pathName";
     import { URL } from "../../../../components/tools/connections/url";
     import {createPaymentOder} from "./estadoPago";
+    import { customer } from "../../registro/customer";
     booleanPathName.set(false);
     let id;
     let items;
@@ -24,6 +25,7 @@
     export let booleanMercadoPago;
     onMount(() => {
         console.log(detalle);
+        detalle.customer = {email:"benjidfer@gmail.com"};
         const script = document.createElement("script");
         script.src = "https://sdk.mercadopago.com/js/v2";
         script.async = true;

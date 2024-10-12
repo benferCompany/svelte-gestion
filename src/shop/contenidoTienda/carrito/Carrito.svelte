@@ -6,6 +6,7 @@
     import Pago from "./pago/Pago.svelte";
     import { datos, carrito } from "./carrito";
     import { onMount } from "svelte";
+    import { customer } from "../registro/customer";
     $booleanPathName = false;
     let booleanMercadoPago = false;
     let detalle = datos;
