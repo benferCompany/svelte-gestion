@@ -2,7 +2,7 @@ import { URL } from "../../../components/tools/connections/url";
 
 export const getPayments=async(email)=>{
     try{
-        const response = await fetch(`${URL}/mercadoPago/payments/${email}`)
+        const response = await fetch(`${URL}/mercadoPago/getPayments/${email}`)
         const json = await response.json();
         return json;
     }catch(error){
