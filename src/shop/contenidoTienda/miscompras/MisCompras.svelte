@@ -1,13 +1,11 @@
 <script>
     import { onMount } from "svelte";
-    import { getPayments } from "./misCompras";
+    import { getPayments, getShippingStatus } from "./misCompras";
     import { formatDateMercadoPago } from "../../../components/tools/mercadopago/date/formatDate";
-
     let misCompras;
     let currentPage = 0; // Página actual (comienza en 0)
     let pageSize = 10; // Tamaño de página, por ejemplo 10 pagos por página
     let totalPages = 0; // Total de páginas disponibles
-
     const fetchPayments = async (page = 0, size = 10) => {
         const response = await getPayments("benjidfer@gmail.com", page, size);
         console.log(response);
@@ -64,7 +62,18 @@
 
     const status = (status) => {
         if (status === "approved") {
-            return "<p style='color:green'>Aprobado</p>";
+            return "<strong class='color-oferta'>Aprobado</strong>";
+        } else if ("pending") {
+            return "<strong class='color-tertiary'>Pendiente</strong>";
+        }
+        return status;
+    };
+
+    const statusShiping = (id) => {
+        if (getShippingStatus(id)) {
+            return "<strong class='color-oferta'>Entregado</strong>";
+        } else if ("pending") {
+            return "<strong class='color-tertiary'>Pendiente</strong>";
         }
         return status;
     };
@@ -76,13 +85,13 @@
     {#if misCompras}
         <div>
             {#each misCompras.content as compra}
-                <div class="content">
+                <div class="content background-quaternary">
                     <div style="display:flex; justify-content:space-between;">
                         <p>ID: {compra.id}</p>
                         <p>Fecha:{formatDateMercadoPago(compra.dateCreated)}</p>
                     </div>
                     <p>Detalle:</p>
-                    <div class="content-table">
+                    <div class="content-table background-secondary">
                         <table>
                             <thead>
                                 <tr>
@@ -127,7 +136,11 @@
                             <p>Esta de pago:</p>
                             {@html status(compra.status)}
                         </div>
-                        <p>Total:$ {compra.transactionAmount}</p>
+                        <strong>Total:$ {compra.transactionAmount}</strong>
+                    </div>
+                    <div style="display:flex; gap:0.5em;">
+                        <p>Esta de envio:</p>
+                        {@html statusShiping(compra.id)}
                     </div>
                 </div>
             {/each}
@@ -136,19 +149,19 @@
 
     <div style="display:flex; justify-content:center;">
         <button
-            class="button"
+            class="button background-tertiary"
             on:click={goToPreviousPage}
             disabled={currentPage === 0}>Anterior</button
         >
         {#each Array(totalPages) as _, index}
             <button
-                class="button"
+                class="button background-tertiary"
                 on:click={() => goToPage(index)}
                 disabled={index === currentPage}>{index + 1}</button
             >
         {/each}
         <button
-            class="button"
+            class="button background-tertiary"
             on:click={goToNextPage}
             disabled={currentPage === totalPages - 1}>Siguiente</button
         >
@@ -157,8 +170,8 @@
 
 <style>
     .content {
-        background: rgb(185, 183, 183);
-        color: gray;
+        color: rgb(212, 212, 212);
+        text-shadow: 0.05em 0.05em 0.05em rgba(0, 0, 0, 0.3);
         padding: 0.5em;
         border-radius: 0.5em;
         margin: 0.5em;
@@ -168,7 +181,6 @@
         width: 100%;
         display: flex;
         justify-content: center;
-        background: rgb(236, 234, 234);
         padding: 0.5%em;
         border-radius: 0.5em;
         box-shadow: 0.1em 0.1em 0.1em rgba(0, 0, 0, 0.3);
@@ -184,5 +196,9 @@
     }
     .button {
         margin: 1em;
+        border: none;
+        color: #f07423;
+        font-weight: bold;
+        box-shadow: 0.1em 0.1em 0.1em rgba(0, 0, 0, 0.3);
     }
 </style>

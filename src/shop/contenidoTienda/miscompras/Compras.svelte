@@ -6,7 +6,7 @@
     booleanPathName.set(false);
 </script>
 
-<div class="index">
+<div class="index background-primary">
     <Nav />
     <div style="margin-top:100px;">
         <MisCompras />

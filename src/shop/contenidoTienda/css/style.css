@@ -1,0 +1,34 @@
+.background-primary{
+    background: #094459;
+}
+.background-secondary{
+    background: #0fb1ea;
+}
+
+.background-tertiary{
+    background: #f7ce26;
+}
+
+.background-quaternary{
+    background: #f07423;
+}
+
+
+.color-primary{
+    color: #094459;
+}
+.color-secondary{
+    color: #0fb1ea;
+}
+
+.color-tertiary{
+    color: #f7ce26;
+}
+
+.color-quaternary{
+    color: #f07423;
+}
+
+.color-oferta{
+    color: #17d641;
+}

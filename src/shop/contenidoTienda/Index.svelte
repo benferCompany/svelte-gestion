@@ -3,7 +3,7 @@
     import Banner from "./banner/Banner.svelte";
     import Footer from "./footer/Footer.svelte";
     import Nav from "./nav/Nav.svelte";
-    
+    import "./css/style.css";
 </script>
 
     <div class="index">
