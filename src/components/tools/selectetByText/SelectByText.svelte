@@ -17,7 +17,6 @@
             // Aquí puedes hacer algo con el elemento seleccionado
             select = data[indiceSeleccionado];
             visible=false;
-            console.log("Elemento seleccionado:", data[indiceSeleccionado]);
         }
     }
 
@@ -33,7 +32,6 @@
 
     $: {
         data = dts? dts.content:null
-        console.log(data);
     }
 </script>
 

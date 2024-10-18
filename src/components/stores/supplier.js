@@ -4,7 +4,8 @@ export const showSupplier = async (URL) => {
         const datosJson = await datos.json();
         return datosJson;
     } catch (error) {
-        console.log( "Al parecer hubo un error de tipo: ",error)
+        console.error( "Al parecer hubo un error de tipo: ",error)
+        return false;
     }
 
 }

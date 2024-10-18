@@ -20,13 +20,12 @@
                 ...imagesProduct, // Mantenemos el resto de propiedades de imagesProduct
                 src: [...imagesProduct.src, image], // Reasignamos el array para que Svelte detecte el cambio
             };
-            console.log(imagesProduct.src);
             image = null;
         }
     };
     const deleteImage = (src) => {
         imagesProduct.src = imagesProduct.src.filter((sc) => sc != src);
-        console.log(imagesProduct.src);
+        
     };
     onMount(async () => {
         idProd;
@@ -86,7 +85,6 @@
                 value="Actualizar imagenes"
                 class="btn btn-warning m-1"
                 on:click={async () => {
-                    console.log(imagesProduct);
                     if (!imagesProduct.idProd) {
                         imagesProduct.idProd = idProd;
                     }

@@ -26,18 +26,16 @@
         let id;
         const params = new URLSearchParams(window.location.search);
         id = params.get("id");
-        console.log(id);
         descripcion = await getDescriptionProduct(id);
         product = await getProduct(id);
         images = await getImagesProduct(id);
-        console.log(product);
+        
     });
 
     let selectedOption = "";
 
     $: {
         if ($carrito && product) {
-            console.log(product);
             $carrito.forEach((p) => {
                 if (p.id === product.id) {
                     estadoCarrito = p.quality;

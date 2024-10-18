@@ -26,7 +26,8 @@ export const createCustomer=async (customer)=>{
         const data = await response.json();
         return response;
     } catch (error) {
-        console.log(error);
-        console.log("Error al crear cliente");
+      
+        console.error("Error al crear cliente");
+        return false;
     }
 }

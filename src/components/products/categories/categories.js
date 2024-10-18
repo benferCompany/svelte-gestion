@@ -8,7 +8,7 @@ export const getCategories = async () => {
 
     } catch (error) {
 
-        console.log("Hubo un error al importar las categorias desde la base de datos", error)
+        console.error("Hubo un error al importar las categorias desde la base de datos", error)
         return false;
     }
 }

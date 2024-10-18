@@ -6,7 +6,7 @@ export const getPayments = async (email) => {
         const json = await response.json();
         return json;
     } catch (error) {
-        console.log("Hubo un error al intentar obtener los pagos", error);
+        console.error("Hubo un error al intentar obtener los pagos", error);
         return false;
     }
 }

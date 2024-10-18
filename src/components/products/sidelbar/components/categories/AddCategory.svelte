@@ -12,7 +12,6 @@
         visible: false,
         categories,
         action: async (category) => {
-            console.log(category);
         },
     };
 

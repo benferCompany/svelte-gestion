@@ -13,7 +13,6 @@
             description: description.target.value,
         });
         products = products.content;
-        console.log(products)
     }, 300); // 300ms de tiempo de espera antes de realizar la búsqueda
 
     let stock;

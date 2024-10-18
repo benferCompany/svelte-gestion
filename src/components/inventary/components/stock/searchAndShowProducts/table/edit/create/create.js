@@ -37,8 +37,8 @@ const sendStore = async (object) => {
         let response = sendStore.json();
         return response;
     } catch (error) {
-        console.log("Al parecer hubo un error al crear el stock")
-        console.log(error)
+        console.error("Al parecer hubo un error al crear el stock", error)
+        return false;
     }
 }
 
@@ -53,7 +53,6 @@ export const validaData = (e, getData) => {
     }
 
     let company = JSON.parse(object.company)
-    console.log(getData.stores)
     getData.stores?.forEach((st) => {
         if (st.company.id == company.id) {
             boolean = false

@@ -77,7 +77,6 @@
                 "
                 class="btn btn-warning"
                 on:click={() => {
-                    console.log(object);
                 }}>Procesar</button
             >
         </div>

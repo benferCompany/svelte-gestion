@@ -23,8 +23,9 @@ export const searchProduct = async (url, datos) => {
         const data = await response.json();
         return await data
     } catch (error) {
-        console.log(error)
+        
         console.error("Error fetching data:", error);
+        return false;
     }
 }
 
@@ -41,8 +42,8 @@ export const createProduct = async (dts) => {
         const data = await response.json();
         return await data;
     } catch (error) {
-        console.log(error);
         console.error("Error fetching data:", error);
+        return false;
     }
 };
 

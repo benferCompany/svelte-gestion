@@ -15,7 +15,6 @@ export const getProduct = async(e,page,size) =>{
             body: JSON.stringify(description)
         })
         const json = await response.json();
-        console.log(json)
         return json;
     }catch(error){
         console.error("Error inesperado en la busqueda de productos",error)

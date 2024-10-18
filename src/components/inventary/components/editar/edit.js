@@ -59,8 +59,9 @@ const updateStore = async (object) => {
         const data = await response.json();
         return data;
     } catch (error) {
-        console.log(error);
-        console.log("Error al crear cliente");
+    
+        console.error("Error al crear cliente",error);
+        return false;
     }
 
 

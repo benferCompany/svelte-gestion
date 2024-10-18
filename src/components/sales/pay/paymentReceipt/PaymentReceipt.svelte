@@ -6,7 +6,7 @@
     export const viewInvoice = (detail) => {
         detailInvoice = detail;
         visible = !visible;
-        console.log(detail);
+        
     };
     $: {
         arraysProducts = dividirArray(

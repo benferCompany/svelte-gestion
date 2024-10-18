@@ -9,7 +9,6 @@
     onMount(async () => {
         
         pendingPayments = await getPendingPayments();
-        console.log(pendingPayments)
         elementsMessageOptimized.objects = pendingPayments;
     });
 

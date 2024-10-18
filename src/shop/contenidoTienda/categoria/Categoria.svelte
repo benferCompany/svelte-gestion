@@ -11,7 +11,6 @@
     let parentCategories;
     onMount(async () => {
         parentCategories = await getParentCategories();
-        console.log(parentCategories);
     });
 </script>
 

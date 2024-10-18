@@ -6,7 +6,7 @@
     export let data = [];
     export let thead = [];
     export let handleDelete = (e) => {
-       console.log(e);
+       console.log("Falta codigo",e);
     };
     let alertMessage;
     let keys = Object.keys(data[0]);

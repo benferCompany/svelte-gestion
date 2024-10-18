@@ -24,7 +24,6 @@
     
     onMount(async () => {
         categories.set( await getCategories());
-        console.log($categories);
         props.action = (category) => {
             categories.set([...$categories, category]);
         };

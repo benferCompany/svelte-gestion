@@ -7,6 +7,7 @@
     import { booleanPathName } from "../../../components/tools/pathName/pathName";
     import Pagination from "./Pagination.svelte";
     import Loading from "../../../components/tools/loading/Loading.svelte";
+    import { generarWhatsAppLink } from "../javascript/js";
     let body;
     booleanPathName.set(false);
     let loading;
@@ -60,6 +61,7 @@
                         <div
                             class="div-prod"
                             on:click={() => {
+                                if(pro.stores[0].stock > 0)
                                 navigate(`/description?id=` + pro.id);
                             }}
                         >
@@ -71,37 +73,67 @@
                                         alt=""
                                     />
                                 </div>
+
                                 <div
                                     style="width:60%; display:flex; justify-content:end; background:#f07423; padding:1em;"
                                 >
-                                    <div style="width:90%; text-align:center;">
-                                        <div>
-                                            <p>{pro.title}</p>
-                                        </div>
+                                    {#if pro.stores[0].stock > 0}
+                                        <div
+                                            style="width:90%; text-align:center;"
+                                        >
+                                            <div>
+                                                <p>{pro.title}</p>
+                                            </div>
 
-                                        <div>
-                                            <p class="oferta">
-                                                Descuento por comprar online
-                                            </p>
-                                            <div style="display:flex; justify-content:center;">
-                                                <div style="display:flex;">
-                                                    <p class="tachar pe-1">
-                                                        ${pro.selling_price}
-                                                    </p>
-                                                    <p> - </p>
-                                                    <p
-                                                        style="text-align:right;"
-                                                        class="oferta ps-1"
-                                                    >
-                                                        ${getDescount(
-                                                            pro.selling_price,
-                                                            10,
-                                                        )}
-                                                    </p>
+                                            <div>
+                                                <p class="oferta">
+                                                    Descuento por comprar online
+                                                </p>
+                                                <div
+                                                    style="display:flex; justify-content:center;"
+                                                >
+                                                    <div style="display:flex;">
+                                                        <p class="tachar pe-1">
+                                                            ${pro.selling_price}
+                                                        </p>
+                                                        <p>-</p>
+                                                        <p
+                                                            style="text-align:right;"
+                                                            class="oferta ps-1"
+                                                        >
+                                                            ${getDescount(
+                                                                pro.selling_price,
+                                                                10,
+                                                            )}
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    {:else}
+                                        <div>
+                                            <p>
+                                                ¡En este momento no contamos con
+                                                stock de este árticulo! Mandanos
+                                                un mensaje y consulta
+                                                cuando recibimos devuelta.
+                                            </p>
+
+                                            <a
+                                                class="animate whatsapp"
+                                                href={generarWhatsAppLink(
+                                                    "543624230777",
+                                                    `Hola quiero saber cuando vuelven a tener este producto:${pro.id} ${pro.title}`,
+                                                )}
+                                            >
+                                                <i
+                                                    class="fa-brands fa-whatsapp"
+                                                    id="wap"
+                                                >
+                                                </i>
+                                            </a>
+                                        </div>
+                                    {/if}
                                 </div>
                             </div>
                             <div></div>
@@ -170,11 +202,31 @@
         justify-content: center;
     }
     .oferta {
-        color:#51f043;
+        color: #51f043;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
         font-weight: bold;
     }
     .tachar {
         text-decoration: line-through;
+    }
+
+    .whatsapp {
+        color: #25d366;
+        font-size: 2em;
+        display: flex;
+        justify-content: center;
+        
+    }
+    .animate {
+        animation: escalar 1s infinite;
+    }
+    @keyframes escalar {
+        0%,
+        100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
     }
 </style>

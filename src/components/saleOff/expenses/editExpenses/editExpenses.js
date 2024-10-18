@@ -22,6 +22,6 @@ const editExpensesService = async (object) => {
         let json = await response.json();
         return json;
     } catch (error) {
-        console.log(error);
+        console.error("Hubo un error al editar expensas.",error);
     }
 }

@@ -8,7 +8,6 @@
     let totalPages = 0; // Total de páginas disponibles
     const fetchPayments = async (page = 0, size = 10) => {
         const response = await getPayments("benjidfer@gmail.com", page, size);
-        console.log(response);
         if (response && response.content) {
             misCompras = {
                 content: response.content.map((element) => {

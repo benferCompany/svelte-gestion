@@ -1,6 +1,6 @@
 <script>
     import { Link, navigate } from "svelte-routing";
-    
+
     import { slide } from "svelte/transition";
     let booleanDetail = false;
 </script>
@@ -10,17 +10,26 @@
     <h4>Contactos</h4>
     <ul>
         <li>
-            <a class="a-f" href="https://www.facebook.com/profile.php?id=100010204693381&mibextid=ZbWKwL">
+            <a
+                class="a-f"
+                href="https://www.facebook.com/profile.php?id=100010204693381&mibextid=ZbWKwL"
+            >
                 <i class="fa-brands fa-facebook-f" id="fa"></i>Facebook
             </a>
         </li>
         <li>
-            <a class="a-i" href="https://www.instagram.com/benfer55?igsh=MXVheDRrOTIydXVzZw%3D%3D">
+            <a
+                class="a-i"
+                href="https://www.instagram.com/benfer55?igsh=MXVheDRrOTIydXVzZw%3D%3D"
+            >
                 <i class="fa-brands fa-instagram" id="ig"></i>Instagram
             </a>
         </li>
         <li class="w">
-            <i class="fa-brands fa-whatsapp" id="wap"></i><a on:click={()=>{navigate("https://api.whatsapp.com/send/?phone=543624230777&text&type=phone_number&app_absent=0")}} class="a-w" href="#">WhatsApp</a>
+            <i class="fa-brands fa-whatsapp" id="wap"></i><a
+                href="https://api.whatsapp.com/send/?phone=543624230777&text&type=phone_number&app_absent=0"
+                class="a-w">WhatsApp</a
+            >
         </li>
     </ul>
 
@@ -35,13 +44,19 @@
     {#if booleanDetail}
         <div transition:slide>
             <p class="p">
-                © 2024 BenferShop Todos los derechos reservados. BenferShop
-                se compromete a proteger la privacidad de sus usuarios. Para más
-                detalles, por favor consulte nuestra <Link to="/politicadeprivacidad">Política de privacidad</Link>.
+                © 2024 BenferShop Todos los derechos reservados. BenferShop se
+                compromete a proteger la privacidad de sus usuarios. Para más
+                detalles, por favor consulte nuestra <Link
+                    to="/politicadeprivacidad">Política de privacidad</Link
+                >.
             </p>
         </div>
     {/if}
-    <h4><Link to="/porquecompraraqui" style ="color: white; margin-top: 5px;">¿Por que comprar en BenferShop?</Link></h4>
+    <h4>
+        <Link to="/porquecompraraqui" style="color: white; margin-top: 5px;"
+            >¿Por que comprar en BenferShop?</Link
+        >
+    </h4>
 </div>
 
 <style>
@@ -88,12 +103,12 @@
         color: rgb(0, 89, 255);
     }
     #ig {
-        background: linear-gradient(45deg, #833AB4, #E1306C, #F77737, #FCAF45);
+        background: linear-gradient(45deg, #833ab4, #e1306c, #f77737, #fcaf45);
         -webkit-background-clip: text;
-         color: transparent;
+        color: transparent;
         border-radius: 3px;
     }
-    
+
     #wap {
         color: rgb(29, 230, 29);
     }

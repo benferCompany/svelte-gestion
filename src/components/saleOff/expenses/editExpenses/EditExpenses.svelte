@@ -21,7 +21,6 @@
             top: position.top,
             bottom: position.bottom,
         };
-        console.log(exportElement.outFlows);
     }, 1);
 
     //Exportaciones

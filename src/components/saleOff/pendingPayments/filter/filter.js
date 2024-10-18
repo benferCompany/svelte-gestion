@@ -7,6 +7,8 @@ export const getPendingPayments = async () => {
         let json = await response.json();
         return json;
     } catch (error) {
-        console.log("Hubo un problema al obtener pendingPayments", error)
+        console.error("Hubo un problema al obtener pendingPayments", error)
+        return false;
+        
     }
 } 

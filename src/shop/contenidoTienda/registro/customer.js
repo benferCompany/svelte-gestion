@@ -5,7 +5,6 @@ import { writable } from "svelte/store";
 
 
 export const updateCustomer = async (e) => {
-    console.log(e.target.name.value)
     const user = {
         id: e.target.id.value,
         name: e.target.name.value,

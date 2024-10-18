@@ -32,7 +32,7 @@
         propsCateg.action = async (category) => {
             let isCategory = false;
             if (categories && categories.length > 0) {
-                console.log(categories);
+                
                 categories.forEach((c) => {
                     if (c.id === category.id) {
                         isCategory = true;

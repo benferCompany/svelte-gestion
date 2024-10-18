@@ -14,16 +14,13 @@
     export const filterProductsByCategory = async (ct, text, page, size) => {
         loading = true;
         try {
-            console.log(ct);
             const response = await fetch(
                 `${URL}/products/category/${text}?page=${page}&size=${size}&category=${ct ? ct : ""}`,
             );
             const json = await response.json();
-            console.log(json);
             locationProducts.update((current) => {
-                return { ...current, products:json }; // Actualizas la propiedad 'products'
+                return { ...current, products: json }; // Actualizas la propiedad 'products'
             });
-            console.log($locationProducts)
             loading = false;
             return json;
         } catch (error) {
@@ -34,12 +31,11 @@
             return false;
         }
     };
-    
+
     onMount(async () => {
         const params = new URLSearchParams(window.location.search);
-        let collection_status =params.get("collection_status");
-        if(collection_status ==="approved"){
-            console.log(collection_status);
+        let collection_status = params.get("collection_status");
+        if (collection_status === "approved") {
             $carrito = [];
             localStorage.setItem("carrito", []);
         }
@@ -49,7 +45,7 @@
             if (email) {
                 customer = await login(email);
             }
-        } 
+        }
     });
     $: {
         customer;

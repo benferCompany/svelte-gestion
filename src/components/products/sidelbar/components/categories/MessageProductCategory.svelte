@@ -4,7 +4,7 @@
     export let props = {
         visible: false,
         action: async (product) => {
-            console.log(product);
+            
         },
         product: null,
     };

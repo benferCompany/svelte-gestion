@@ -9,15 +9,17 @@
     import Loading from "../../../../components/tools/loading/Loading.svelte";
     import { onMount } from "svelte";
     import { getChildCategories } from "../categoria";
+    import { aplicarDescuento, generarWhatsAppLink } from "../../javascript/js";
     let body;
     booleanPathName.set(false);
     let loading;
-
+    let category;
     let filterProductsByCategory;
 
     onMount(async () => {
+        $locationProducts = {};
         const param = new URLSearchParams(location.search);
-        const category = param.get("category");
+        category = param.get("category");
         const getCategories = await getChildCategories(category);
         const categories = [];
 
@@ -34,8 +36,6 @@
             0,
             $locationProducts.size,
         );
-        console.log($locationProducts);
-        console.log(category);
     });
 </script>
 
@@ -49,14 +49,14 @@
                 <h4>Categorías</h4>
                 <select
                     on:change={async (e) => {
-                        $locationProducts.category = e.target.value;
+                        $locationProducts.category =
+                            e.target.value !== "" ? e.target.value : category;
                         const response = await filterProductsByCategory(
                             $locationProducts.category,
                             $locationProducts.desc,
                             0,
                             $locationProducts.size,
                         );
-                        console.log(response);
                     }}
                     bind:value={$locationProducts.category}
                     name=""
@@ -78,20 +78,79 @@
                         <div
                             class="div-prod"
                             on:click={() => {
-                                navigate(`/description?id=` + pro.id);
+                                if (pro.stores[0].stock > 0)
+                                    navigate(`/description?id=` + pro.id);
                             }}
                         >
                             <div style="display:flex;">
-                                <div>
+                                <div style=" width:40%; padding:1em;">
                                     <img
-                                        style="width:100%; border-radius: 5px;"
+                                        style="border-radius: 5px; max-width:100%; width:300px;"
                                         src={pro.image}
                                         alt=""
                                     />
                                 </div>
-                                <div style=" padding:1em;">
-                                    <h5>{pro.title}</h5>
-                                    <h5>{pro.selling_price}</h5>
+
+                                <div
+                                    style="width:60%; display:flex; justify-content:end; background:#f07423; padding:1em;"
+                                >
+                                    {#if pro.stores[0].stock > 0}
+                                        <div
+                                            style="width:90%; text-align:center;"
+                                        >
+                                            <div>
+                                                <p>{pro.title}</p>
+                                            </div>
+
+                                            <div>
+                                                <p class="oferta">
+                                                    Descuento por comprar online
+                                                </p>
+                                                <div
+                                                    style="display:flex; justify-content:center;"
+                                                >
+                                                    <div style="display:flex;">
+                                                        <p class="tachar pe-1">
+                                                            ${pro.selling_price}
+                                                        </p>
+                                                        <p>-</p>
+                                                        <p
+                                                            style="text-align:right;"
+                                                            class="oferta ps-1"
+                                                        >
+                                                            ${aplicarDescuento(
+                                                                pro.selling_price,
+                                                                10,
+                                                            )}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {:else}
+                                        <div>
+                                            <p>
+                                                ¡En este momento no contamos con
+                                                stock de este árticulo! Mandanos
+                                                un mensaje y consulta cuando
+                                                recibimos devuelta.
+                                            </p>
+
+                                            <a
+                                                class="animate whatsapp"
+                                                href={generarWhatsAppLink(
+                                                    "543624230777",
+                                                    `Hola quiero saber cuando vuelven a tener este producto:${pro.id} ${pro.title}`,
+                                                )}
+                                            >
+                                                <i
+                                                    class="fa-brands fa-whatsapp"
+                                                    id="wap"
+                                                >
+                                                </i>
+                                            </a>
+                                        </div>
+                                    {/if}
                                 </div>
                             </div>
                             <div></div>
@@ -144,7 +203,6 @@
     .div-prod {
         width: 93%;
         background-color: rgb(69, 172, 213);
-        padding: 1em;
         color: white;
         box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.5);
         border-radius: 0.2em;
@@ -159,5 +217,33 @@
         width: 100%;
         display: flex;
         justify-content: center;
+    }
+    .oferta {
+        color: #51f043;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+        font-weight: bold;
+    }
+    .tachar {
+        text-decoration: line-through;
+    }
+
+    .whatsapp {
+        color: #25d366;
+        font-size: 2em;
+        display: flex;
+        justify-content: center;
+        text-decoration: none;
+    }
+    .animate {
+        animation: escalar 1s infinite;
+    }
+    @keyframes escalar {
+        0%,
+        100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
     }
 </style>

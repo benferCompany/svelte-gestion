@@ -7,9 +7,10 @@ export const deletependingPayments = async (id) => {
         }
         )
         let json = await response.json();
-        console.log(json)
+       
         return json;
     } catch (error) {
-        console.log("Algo salio mal", error)
+        console.error("Algo salio mal", error)
+        return false;
     }
 }

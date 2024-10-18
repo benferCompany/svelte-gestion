@@ -26,7 +26,8 @@ export const createSupplier=async (supplier)=>{
         const data = await response.json();
         return response;
     } catch (error) {
-        console.log(error);
-        console.log("Error al crear proveedor");
+        
+        console.error(-"Error al crear proveedor",error);
+        return false;
     }
 }

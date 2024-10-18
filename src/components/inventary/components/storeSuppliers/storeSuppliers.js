@@ -12,8 +12,9 @@ export const searchByText = async (text, url) => {
         return await response.json();
 
     } catch (error) {
-        console.log(error);
+        
         console.error("Error fetching data:", error);
+        return false;
     }
 }
 
@@ -87,8 +88,8 @@ const updateStore = async (object) => {
         const data = await response.json();
         return data;
     } catch (error) {
-        console.log(error);
-        console.log("Error al crear cliente");
+        
+        console.error("Error al crear cliente", error);
     }
 
 

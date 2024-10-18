@@ -15,7 +15,6 @@ export let options = {
 
 
 export const objectInvoice = (object)=>{
-    console.log(object)
     return {
         "numberInvoice": "1111",
         "supplier": {"id": 1,},

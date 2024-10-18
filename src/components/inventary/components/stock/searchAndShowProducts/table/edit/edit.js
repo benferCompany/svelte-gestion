@@ -46,8 +46,9 @@ const sendStore = async (object) => {
         let response = sendStore.json();
         return response;
     } catch (error) {
-        console.log("Al parecer hubo un error al actualizar el stock")
-        console.log(error)
+        console.error("Al parecer hubo un error al actualizar el stock", error)
+        return false;
+        
     }
 }
 
@@ -59,7 +60,7 @@ export const deleteObject = async (id) => {
        
         
     } catch (error) {
-        console.log("Al parecer hubo un error")
-        console.log(error);
+        console.error("Al parecer hubo un error", error)
+        return false;
     }
 }

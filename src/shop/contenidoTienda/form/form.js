@@ -79,7 +79,7 @@ export const IniciaSesion = async (e) => {
     const getIdToken = await response.user.getIdToken();
 
     const resLogin = await login(getIdToken);
-    console.log(resLogin);
+
 
     return resLogin;
   } catch (error) {

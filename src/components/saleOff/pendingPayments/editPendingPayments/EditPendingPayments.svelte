@@ -37,7 +37,6 @@
                         let response = await editPendingPayments(e);
                         if (response) {
                             pendingPayments = [response];
-                            console.log(pendingPayments);
                             elementsMessage.alertMessage = {
                                 alertStyle: "alert-warning",
                                 message: "El gasto fijo se actualizó con éxito",

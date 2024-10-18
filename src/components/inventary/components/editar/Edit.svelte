@@ -21,7 +21,7 @@
         visible = !visible;
     };
     export let handleSubmit = (e) => {
-        console.log(e.target);
+        console.log("falta codigo",e.target);
     };
 </script>
 <Message {alertMessage} bind:showAndHideAlert />

@@ -34,8 +34,9 @@
                 addInternal = response+1;
         
         } catch (error) {
-            console.log(error);
             addInternal=1
+            console.error("Hubo un error", error);
+            return false;
         }
         idInternal = addInternal;
     });

@@ -6,7 +6,8 @@ export const getOutFlows = async () => {
         let json = await response.json()
         return json;
     } catch (error) {
-        console.log("Algo salio mal a la hora de obtener OutFlows", error);
+        console.error("Algo salio mal a la hora de obtener OutFlows", error);
+        return false;
     }
 }
 

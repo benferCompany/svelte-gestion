@@ -121,7 +121,6 @@ export const createInvoice = async (invoice) => {
 
 
 const jsonInvoice = (invoice) => {
-    console.log(invoice)
     return {
         "cae": invoice.CAE,
         "caeFchVto": invoice.CAEFchVto,
@@ -180,7 +179,6 @@ export const clickBoton = async (object, viewInvoice) => {
 
     if (object.customer && object.typeInvoice.type == "C") {
         let CAE = await getCAE(object);
-        console.log(CAE)
         object.CAE = CAE.CAE;
         object.CAEFchVto = convertToReadableDate(
             CAE.CAEFchVto + "",
@@ -194,7 +192,6 @@ export const clickBoton = async (object, viewInvoice) => {
             return;
         }
     }
-    console.log("pas")
     object.CAE = ""
     object.CAEFchVto = ""
     object.CbteDesde = "F-" + object.typeInvoice.type + " 12"

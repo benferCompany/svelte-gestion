@@ -63,7 +63,6 @@
                                         elementsMessage.visible =
                                             !elementsMessage.visible;
 
-                                        console.log(elementsMessage);
                                     }
                                 }}
                                 type="button"

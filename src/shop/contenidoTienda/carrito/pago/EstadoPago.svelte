@@ -29,7 +29,6 @@
         merchant_account_id: params.get('merchant_account_id')
       };
       getPago(paymentData.payment_id);
-      console.log(paymentData); // Imprimir para verificar los datos
 
 
     });

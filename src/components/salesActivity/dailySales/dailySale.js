@@ -7,7 +7,8 @@ const getClosingNow=async()=>{
         let json = await response.json();
         return json;
     }catch(e){
-        console.log("algo salio mal",e)
+        console.error("algo salio mal",e)
+        return false;
     }
 }
 
@@ -34,10 +35,9 @@ export function getDateNow() {
 export const closing =async()=>{
     const closingNow = await getClosingNow();
     closingNow.active.value_store = await getValueStore();
-    console.log(closingNow);
+    
     for (let i = 0; i < closingNow.movements.details.length; i++) {
         let item = closingNow.movements.details[i];
-        console.log(item);
         if (item.paymentType === "Efectivo") {
             closingNow.active.cash = closingNow.active.cash + item.total;
         } else if (item.paymentType === "Cuenta Corriente") {

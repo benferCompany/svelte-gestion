@@ -16,10 +16,8 @@
   onMount(async () => {
     const params = new URLSearchParams(window.location.search);
     id = params.get("id");
-    console.log(id);
     let response = await getDescriptionProduct(id);
     product = await getProduct(id);
-    console.log(response);
     if (!response.error) {
       if (!description) {
         description = response;
@@ -40,14 +38,12 @@
   const handleClick = async (description, content) => {
     description.content = content;
     description.product = product;
-    console.log(description);
     const response = await fetch(`${URL}/descriptionProduct`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(description),
     });
     const json = await response.json();
-    console.log(json);
     if (json) {
       showAndHideAlert();
       volver = true;

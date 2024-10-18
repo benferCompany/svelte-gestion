@@ -17,10 +17,8 @@
     let showAndHideAlert;
 
     const deleteObjectById = async (id) => {
-        console.log(id);
         const response = await elementsMessage.deleteObject(id);
         
-        console.log(response);
         if (response) {
             showAndHideAlert();
             elementsMessage.objects = elementsMessage.objects.filter(

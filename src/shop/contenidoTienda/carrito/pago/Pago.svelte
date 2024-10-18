@@ -14,16 +14,12 @@
         });
         let json = await response.json();
         id = json.id;
-        items = json.items;
-        console.log(json);
-        
-       
+        items = json.items;       
     };
 
     export let detalle;
     export let booleanMercadoPago;
     onMount(() => {
-        console.log(detalle);
         detalle.customer = {email:"benjidfer@gmail.com"};
         const script = document.createElement("script");
         script.src = "https://sdk.mercadopago.com/js/v2";
@@ -61,9 +57,7 @@
         const paymentOrder = await createPaymentOder({id,items})  
         if(paymentOrder){
             getToastMessage();
-        }
-        console.log(paymentOrder);
-            
+        }   
             }}
     id="wallet_container"
 ></div>

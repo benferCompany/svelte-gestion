@@ -1,7 +1,6 @@
 import { URL } from "../../../tools/connections/url";
 import { getCurrentDate } from "../../../tools/dataNow/DataNow"
 export const editPendingPayments = async (e) => {
-    console.log(e.target.salesPerson.value)
     let object = {
         "id": e.target.id.value,
         "description": e.target.description.value,
@@ -26,6 +25,7 @@ const editPendingPaymentsService = async (object) => {
         let json = await response.json();
         return json;
     }catch(error){
-        console.log("Algo salio mal con createPendingPayments",error);
+        console.error("Algo salio mal con createPendingPayments",error);
+        return false;
     }
 }

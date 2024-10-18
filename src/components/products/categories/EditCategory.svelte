@@ -9,7 +9,6 @@
         category = cat;
         if (!parentCategory) {
             parentCategory = cat.parentCategory;
-            console.log(parentCategory);
         }
     };
 </script>

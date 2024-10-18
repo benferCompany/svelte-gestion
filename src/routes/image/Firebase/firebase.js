@@ -39,7 +39,6 @@ export const handleImageUpload = async (file, fileName, isValidType) => {
         if(isValidType){
 
             await uploadBytes(storageRef, file);
-            console.log("File uploaded successfully!");
     
             let url = await getDownloadURL(storageRef);
             let jsonImage = {

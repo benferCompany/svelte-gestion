@@ -16,12 +16,11 @@ export const getCategoriesProducts = (data) => {
 
 export const filterProductsByCategory = async (ct) => {
     try {
-        console.log(ct)
+        
         const response = await fetch(
             `${URL}/products/category/e?page=0&size=1&category=${ct ? ct : ""}`,
         );
         const json = await response.json();
-        console.log(json);
         prds = json;
         return json;
     } catch (error) {

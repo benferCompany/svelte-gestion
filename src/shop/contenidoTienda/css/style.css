@@ -32,3 +32,6 @@
 .color-oferta{
     color: #17d641;
 }
+.tachado{
+    text-decoration: line-through;
+}

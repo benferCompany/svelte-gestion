@@ -1,8 +1,14 @@
 import { URL } from "../../../../components/tools/connections/url";
 export const getPago = async (id) => {
-    let response = await fetch(`${URL}/mercadoPago/pago/${id}`)
-    let json = await response.json();
-    console.log(json)
+    try{
+
+        let response = await fetch(`${URL}/mercadoPago/pago/${id}`)
+        let json = await response.json();
+        return json;
+    }catch(error){
+        console.error("Hubo un error al obtener el pago por id:",error)
+        return false;
+    }
 }
 
 export const createPaymentOder = async(paymentOrder)=>{

@@ -27,13 +27,15 @@ export  async function fetchDataFromAPI() {
         const data = await response.json();
         // Almacenar los nombres de las columnas de la base de datos
         
-        console.log("Datos obtenidos desde la API:", data);
+        
         return data;
       } else {
         console.error("Error en la llamada a la API:", response.statusText);
+        return false;
       }
     } catch (error) {
       console.error("Error en la llamada a la API:", error);
+      return false;
     }
   }
 
@@ -52,7 +54,6 @@ export  async function fetchDataFromAPI() {
         
         jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 }); // Asignar los datos a jsonData
 
-        console.log("Datos importados desde el archivo Excel:", jsonData)
         
         
       };

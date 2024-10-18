@@ -99,10 +99,9 @@
                             <div>
                                 {#if $carrito}
                                     <select bind:value={product.quality}>
-                                            {#each createSequentialArray(product.stock) as i}
-                                                <option value={i}>{i}</option>
-                                            {/each}
-                                        
+                                        {#each createSequentialArray(product.stock) as i}
+                                            <option value={i}>{i}</option>
+                                        {/each}
                                     </select>
                                 {/if}
                             </div>
@@ -146,7 +145,6 @@
                         {#if !booleanMercadoPago}
                             <button
                                 on:click={() => {
-                                    console.log("boton");
                                     booleanMercadoPago = !booleanMercadoPago;
                                 }}
                                 class="btn-com">Continuar compra</button

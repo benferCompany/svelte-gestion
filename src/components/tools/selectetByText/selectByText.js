@@ -46,6 +46,6 @@ const setSelection = (inputs, index, elements) => {
 
 const selectedItem = (e, index, elements) => {
     if (e.key == "Enter") {
-        console.log(elements[index])
+        console.log("Falta codigo:",elements[index])
     }
 }

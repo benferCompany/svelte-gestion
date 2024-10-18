@@ -27,7 +27,7 @@
         <form
             on:submit|preventDefault={async (e) => {
                 const response = await createCategory(e, parentCategory);
-                console.log(response)
+                
                 if (response.status) {
                     props.action(response.entity);
                 } else {

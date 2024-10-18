@@ -25,7 +25,6 @@
     export let viewInvoice;
 
     $: {
-        console.log($tdsStore)
         salePerson = $globalSalePerson;
         fiscalstatus =
             customer && customer.fiscal_status ? customer.fiscal_status : "";

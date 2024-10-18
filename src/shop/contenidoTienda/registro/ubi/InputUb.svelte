@@ -41,7 +41,6 @@
       `https://atlas.microsoft.com/search/address/json?api-version=1.0&query=${encodeURIComponent(query)}&subscription-key=${apiKey}`,
     );
     let json = await response.json();
-    console.log(json.results);
     streets = json.results;
   }, 1000);
 
@@ -49,11 +48,9 @@
     e.target.parentNode.style = "background:rgba(0,0,0,0.2);";
 
     if (inputFind) {
-      console.log(st.address.freeformAddress);
       inputFind.value = st.address.freeformAddress;
     }
     getMap();
-    console.log(st);
     let position = st.position;
     cambioDeLugar(position.lat, position.lon);
     ubicacion.ub =st;
