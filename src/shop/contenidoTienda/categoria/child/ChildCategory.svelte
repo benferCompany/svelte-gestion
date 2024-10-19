@@ -62,7 +62,7 @@
                     name=""
                     id=""
                 >
-                    <option value="" selected>seleccionar todas</option>
+                    <option value={category} selected>seleccionar todas</option>
                     {#if $locationProducts.categories}
                         {#each $locationProducts.categories as pr}
                             <option value={pr}>{pr}</option>

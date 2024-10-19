@@ -13,6 +13,7 @@
     import { navigate } from "svelte-routing";
     import { getDescriptionProduct } from "../../../../components/stores/products";
     import Slaider from "../../slaider/Slaider.svelte";
+    import { generarWhatsAppLink } from "../../javascript/js";
     let product;
     let descripcion;
     let cantidadCarrito = 1;
@@ -29,7 +30,6 @@
         descripcion = await getDescriptionProduct(id);
         product = await getProduct(id);
         images = await getImagesProduct(id);
-        
     });
 
     let selectedOption = "";
@@ -45,7 +45,13 @@
     }
 
     //props slaider
-    let duration = { duration: 5000, durationSiema: 1000, direction:"next" };
+    let duration = { duration: 5000, durationSiema: 1000, direction: "next" };
+
+    //props de comment
+    let props = {
+        visible: false,
+        returnComment: null,
+    };
 </script>
 
 {#if product && descripcion}
@@ -54,7 +60,11 @@
             <Slaider bind:duration>
                 {#each images.src as img}
                     <div>
-                        <img style="max-width:100%; height:400px;" src={img} alt="">
+                        <img
+                            style="max-width:100%; height:400px;"
+                            src={img}
+                            alt=""
+                        />
                     </div>
                 {/each}
             </Slaider>
@@ -145,22 +155,34 @@
         <div class="descriptions">
             {@html descripcion.content}
         </div>
-        <h4 style="text-align: center; padding-bottom: 10px;">
-            Agregar un comentario
-        </h4>
-        <div class="comentarios">
-            <input
-                type="text"
-                placeholder="agrega tu comentario"
-                class="caja-coment"
-            />
-            <button class="button">enviar</button>
+        <div>
+            <hr />
+            <p style="text-align:center">Consultar sobre este árticulo</p>
+            <div style="display:flex; justify-content:center;">
+                <button
+                    on:click={() => {
+                        const whatsAppURL = generarWhatsAppLink(
+                            "543624230777",
+                            `Hola necesito mas información sobre este árticulo id: ${product.id} Descripción: ${product.title}`,
+                        );
+                        navigate(whatsAppURL);
+                    }}
+                    style= "width:95%; border:none; box-shadow:0.05em 0 1em rgba(0,0,0,0.2);"
+                    class="whatsapp_background"
+                >
+                    <i
+                        style="color:white; font-size:2em;"
+                        class="fa-brands fa-whatsapp"
+                        id="wap"
+                    >
+                    </i>
+                </button>
+            </div>
         </div>
     </div>
 {/if}
 
 <style>
-
     /*todos los h*/ /*todos los h*/
     h2 {
         color: rgba(0, 0, 0, 0.828);
@@ -175,10 +197,6 @@
     .h3 {
         color: rgb(55, 51, 51);
         text-align: start;
-    }
-
-    h4 {
-        color: rgba(25, 25, 25, 0.769);
     }
 
     h5 {
@@ -201,7 +219,7 @@
         padding: 0;
     }
 
-    input[type="radio"] {
+    .inpts input[type="radio"] {
         margin-left: 5px;
         appearance: none;
         -webkit-appearance: none;
@@ -295,13 +313,15 @@
         border-radius: 3px;
         height: 20px;
         margin-top: 25px;
+        height: 2em;
+        font-size: 1em;
     }
 
     .btns {
         text-align: center;
     }
 
-    button {
+    .btns button {
         color: white;
         width: 95%;
         height: 40px;
@@ -320,31 +340,4 @@
     }
 
     /*CAJA DE COMENTARIOS*/ /*CAJA DE COMENTARIOS*/
-
-    .comentarios {
-        display: flex;
-        text-align: center;
-        width: 100%;
-        height: 20px;
-    }
-
-    .caja-coment {
-        margin-left: 5px;
-        width: 80%;
-        height: 30px;
-        border: 1px solid black;
-        border-top-left-radius: 3px;
-        border-bottom-left-radius: 3px;
-    }
-
-    .button {
-        margin-top: 0;
-        width: 50px;
-        height: 32px;
-        color: black;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-    }
 </style>
