@@ -6,7 +6,6 @@
     import Pago from "./pago/Pago.svelte";
     import { datos, carrito } from "./carrito";
     import { onMount } from "svelte";
-    import { customer } from "../registro/customer";
     $booleanPathName = false;
     let booleanMercadoPago = false;
     let detalle = datos;
@@ -84,7 +83,7 @@
                                     >
                                         Eliminar
                                     </p>
-                                    <Link to="/carrito">Modificar</Link>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -130,8 +129,7 @@
                         <p>Producto</p>
                         <p>${detalle.total}</p>
                     </div>
-                    <Link to="carrito">¿Cuál es el costo de envío?</Link> <br />
-                    <Link to="carrito">ingresar código de cupón</Link>
+                    <Link to="/envios">¿Cuál es el costo de envío?</Link> <br />
                     <div
                         class="total"
                         style="display: flex; justify-content:space-between; margin-top:1em;"

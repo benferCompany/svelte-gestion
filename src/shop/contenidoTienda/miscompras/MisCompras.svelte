@@ -2,12 +2,14 @@
     import { onMount } from "svelte";
     import { getPayments, getShippingStatus } from "./misCompras";
     import { formatDateMercadoPago } from "../../../components/tools/mercadopago/date/formatDate";
+    import { customer } from "../registro/customer";
     let misCompras;
+    let email = $customer.email;
     let currentPage = 0; // Página actual (comienza en 0)
     let pageSize = 10; // Tamaño de página, por ejemplo 10 pagos por página
     let totalPages = 0; // Total de páginas disponibles
     const fetchPayments = async (page = 0, size = 10) => {
-        const response = await getPayments("benjidfer@gmail.com", page, size);
+        const response = await getPayments(email, page, size);
         if (response && response.content) {
             misCompras = {
                 content: response.content.map((element) => {

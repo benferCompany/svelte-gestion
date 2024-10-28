@@ -32,7 +32,8 @@
     import Categories from "./components/products/sidelbar/components/categories/Categories.svelte";
     import ChildCategory from "./shop/contenidoTienda/categoria/child/ChildCategory.svelte";
     import Compras from "./shop/contenidoTienda/miscompras/Compras.svelte";
-
+    import Envio from "./shop/contenidoTienda/info-tienda/Envio.svelte";
+	
     
 	let booleanNav;
 	$: booleanNav = $booleanPathName;
@@ -152,5 +153,8 @@
 	</Route>
 	<Route path="/miscompras">
 		<Compras/>
+	</Route>
+	<Route path = "/envios">
+		<Envio/>
 	</Route>
 </Router>

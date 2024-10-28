@@ -74,6 +74,6 @@
     <p>Nos reservamos el derecho de actualizar esta Política de Privacidad cuando sea necesario. Te notificaremos sobre cualquier cambio a través de la aplicación o nuestro sitio web.</p>
   
     <h2>Contacto</h2>
-    <p>Si tienes alguna pregunta o inquietud sobre nuestra Política de Privacidad, no dudes en contactarnos a través de <a href="mailto:benjidfer@gmail.com">benjidfer@gmai.com</a>.</p>
+    <p>Si tienes alguna pregunta o inquietud sobre nuestra Política de Privacidad, no dudes en contactarnos a través de <strong>benjidfer@gmai.com</strong>.</p>
   </div>
   

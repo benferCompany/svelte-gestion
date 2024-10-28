@@ -11,24 +11,22 @@
     <ul>
         <li>
             <a
-                class="a-f"
                 href="https://www.facebook.com/profile.php?id=100010204693381&mibextid=ZbWKwL"
             >
-                <i class="fa-brands fa-facebook-f" id="fa"></i>Facebook
-            </a>
+                <i class="fa-brands fa-facebook-f" id="fa"></i></a
+            >
         </li>
         <li>
             <a
-                class="a-i"
                 href="https://www.instagram.com/benfer55?igsh=MXVheDRrOTIydXVzZw%3D%3D"
             >
-                <i class="fa-brands fa-instagram" id="ig"></i>Instagram
-            </a>
+                <i class="fa-brands fa-instagram" id="ig"></i></a
+            >
         </li>
-        <li class="w">
-            <i class="fa-brands fa-whatsapp" id="wap"></i><a
+        <li>
+            <a
                 href="https://api.whatsapp.com/send/?phone=543624230777&text&type=phone_number&app_absent=0"
-                class="a-w">WhatsApp</a
+                class="a-w"><i class="fa-brands fa-whatsapp" id="wap"></i></a
             >
         </li>
     </ul>
@@ -73,7 +71,12 @@
     }
 
     ul {
+        padding: 0;
+        margin: 0;
         list-style-type: none; /* Quita los puntos */
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
     }
 
     ul li {
@@ -82,13 +85,9 @@
         margin-bottom: 10px;
     }
 
-    .w {
-        margin-left: 20px;
-    }
-
+    
     ul li i {
-        margin-right: 15px;
-        margin-left: 15px;
+        font-size: 2em;
     }
     /* Quita los puntos */ /* Quita los puntos */
 
@@ -113,15 +112,4 @@
         color: rgb(29, 230, 29);
     }
 
-    .a-f {
-        color: white;
-    }
-
-    .a-i {
-        color: white;
-    }
-
-    .a-w {
-        color: white;
-    }
 </style>
